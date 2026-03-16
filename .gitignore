@@ -17,11 +17,11 @@
 # user/hardware-configuration.nix
 
 # ---- Ignore local configurations ----
-home/
-bspwm/
-niri/
-hyprland/
-development/
+/home/
+/bspwm/
+/niri/
+/hyprland/
+/development/
 
 # ---- System & Editor junk ----
 *~
