@@ -55,7 +55,7 @@
   in
   {
     # custom packages Accessible through 'nix build', 'nix shell', etc
-    packages  = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+    packages  = forAllSystems (system: import ./lib/pkgs nixpkgs.legacyPackages.${system});
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
     # NixOS funcion : host { arch; username; extraModules; wsl; darwin; }
