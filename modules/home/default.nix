@@ -15,7 +15,6 @@ in
     ./virtmanager
     ./serpl.nix # tui find and replace tool, good for integratinng with terminal editors
     ./btop.nix
-    ./suckless
     ./wezterm
     ./git.nix
     ./helix
