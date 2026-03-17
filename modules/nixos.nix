@@ -1,3 +1,4 @@
+{ ... }:
 {
   # services.protonmail-bridge.enable = true;
   # Add ~/.local/bin to PATH
