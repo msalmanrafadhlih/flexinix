@@ -1,28 +1,20 @@
-{ pkgs, ... }: let
-  isDarwin = pkgs.stdenv.isDarwin;
-  isLinux = pkgs.stdenv.isLinux;
-in
+{ ... }:
 {
-  config._module.args = {
-    isDarwin  = isDarwin;
-    isLinux   = isLinux;
-  };
-
   imports = [
     ./variables.nix
     ./starship.nix
     ./lazygit.nix
-    ./virtmanager
+    ./virtmanager/default.nix
     ./serpl.nix # tui find and replace tool, good for integratinng with terminal editors
     ./btop.nix
-    ./wezterm
+    ./wezterm/default.nix
     ./git.nix
-    ./helix
-    ./shell
-    ./yazi
-    ./tmux
+    ./helix/default.nix
+    ./shell/default.nix
+    ./yazi/default.nix
+    ./tmux/default.nix
 
-    # ./zellij
+    # ./zellij/default.nix
   ];
   
   # Disabled for now since we mismatch our versions. See flake.nix for details.

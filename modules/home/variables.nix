@@ -1,8 +1,5 @@
-{ pkgs, ... }:
-
+{ pkgs, isDarwin, ... }:
 let
-  isDarwin = pkgs.stdenv.isDarwin;
-
   # For our MANPAGER env var
   # https://github.com/sharkdp/bat/issues/1145
   manpager = (pkgs.writeShellScriptBin "manpager" (if isDarwin then ''

@@ -21,7 +21,7 @@ set-option -g command-alias[99] 'main-menu=display-menu -T "#[align=centre] 󰍜
 set-option -g command-alias[104] 'launch=display-menu -T "#[align=centre] ^ Launch " -x C -y C \
   "-"                  -  "" \
   "file-manager"       1  "ranger" \
-  "find & Replace"     2  "serpl"
+  "find & Replace"     2  "serpl" \
   "Scratchpad L"       3  "scratchpad" \
   "Scratchpad XL"      4  "scratchpad2" \
   "Youtube Downloader" 5  "xytz" \

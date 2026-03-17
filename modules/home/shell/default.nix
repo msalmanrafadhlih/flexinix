@@ -4,7 +4,7 @@
     ./bash.nix  # enable bash too just so home-manager can manage it
     ./zsh.nix
   ] ++ lib.optionals isDarwin [
-    ./fish
+    ./fish.nix
   ];
 
   # shell completion 
