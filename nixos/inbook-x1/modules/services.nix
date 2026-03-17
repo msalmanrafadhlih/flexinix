@@ -1,3 +1,5 @@
+{ ... }:
+
 {
   # optimize nix-daemon resource usage
   systemd.services.nix-daemon.serviceConfig = {
