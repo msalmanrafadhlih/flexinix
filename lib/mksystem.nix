@@ -18,7 +18,7 @@ let
   # The config files for this Machine, OS, and Users(HomeManager)
   machineConfig = ../nixos/${hostname}/configuration.nix;
   userOSConfig = ../modules ;
-  userHMConfig =  [ ../modules/home ] ++ extraModules;
+  userHMConfig =  [ ../modules/home ] ++ extraModules { inherit system username hostname flakeRoot isWSL; rootInputs = inputs; };
 
   # overlays modules
   overlays = import ./overlays { inherit inputs; };
@@ -29,18 +29,6 @@ let
 in systemFunc rec {
   inherit system;
   modules = [
-    # We expose some extra arguments so that our modules can parameterize
-    # better based on these values.
-    {
-      config_module.args = {
-        system    = system;
-        hostname  = hostname;
-        username  = username;
-        isWSL     = isWSL;
-        inputs    = inputs;
-        flakeRoot = flakeRoot;
-      };
-    }
     # Apply our overlays. Overlays are keyed by system type so we have
     # to go through and apply our system type. We do this first so
     # the overlays are available globally.
@@ -61,9 +49,21 @@ in systemFunc rec {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.backupFileExtension = "backup";
-      home-manager.extraSpecialArgs = { inherit system username hostname flakeRoot isWSL; rootInputs = inputs; };
+      # home-manager.extraSpecialArgs = { inherit system username hostname flakeRoot isWSL; rootInputs = inputs; };
       home-manager.users = {
         ${username} = { imports = userHMConfig; };
+      };
+    }
+    # We expose some extra arguments so that our modules can parameterize
+    # better based on these values.
+    {
+      config_module.args = {
+        system    = system;
+        hostname  = hostname;
+        username  = username;
+        isWSL     = isWSL;
+        inputs    = inputs;
+        flakeRoot = flakeRoot;
       };
     }
   ];
