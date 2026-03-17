@@ -1,5 +1,4 @@
-{ isDarwin }:
-{ lib }:
+{ isDarwin, lib, ... }:
 {
   imports = [
     ./bash.nix  # enable bash too just so home-manager can manage it
