@@ -37,8 +37,8 @@
 
     # home-manager configurations
     racooonfig = {
-      url = "github:msalmanrafadhlih/racooonfig";
-      # url = "path:./development"; # for local testing
+      # url = "github:msalmanrafadhlih/racooonfig";
+      url = "path:./development"; # for local testing
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
