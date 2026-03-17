@@ -1,6 +1,7 @@
 ###################################
 ## ⚡ Nix Daemon & Build Optimization
 ###################################
+{ ... }:
 {
   nix.settings = {
     extra-experimental-features = ["nix-command" "flakes"];
