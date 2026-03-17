@@ -22,12 +22,16 @@ let
 
   # overlays modules
   overlays = import ./overlays { inherit inputs; };
+  args =  { inherit system hostname username isWSL inputs flakeRoot };
 
   # NixOS vs nix-darwin functionst
   systemFunc = if darwin then inputs.darwin.lib.darwinSystem else nixpkgs.lib.nixosSystem;
   homeManager = if darwin then inputs.home-manager.darwinModules else inputs.home-manager.nixosModules;
-in systemFunc rec {
-  inherit system;
+in systemFunc {
+  # We expose some extra arguments so that our modules can parameterize
+  # better based on these values.
+  specialArgs = args;
+
   modules = [
     # Apply our overlays. Overlays are keyed by system type so we have
     # to go through and apply our system type. We do this first so
@@ -54,17 +58,15 @@ in systemFunc rec {
         ${username} = { imports = userHMConfig; };
       };
     }
-    # We expose some extra arguments so that our modules can parameterize
-    # better based on these values.
-    {
-      config_module.args = {
-        system    = system;
-        hostname  = hostname;
-        username  = username;
-        isWSL     = isWSL;
-        inputs    = inputs;
-        flakeRoot = flakeRoot;
-      };
-    }
+    # {
+    #   config_module.args = {
+    #     system    = system;
+    #     hostname  = hostname;
+    #     username  = username;
+    #     isWSL     = isWSL;
+    #     inputs    = inputs;
+    #     flakeRoot = flakeRoot;
+    #   };
+    # }
   ];
 }
