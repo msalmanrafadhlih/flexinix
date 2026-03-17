@@ -18,16 +18,17 @@ let
   # The config files for this Machine, OS, and Users(HomeManager)
   machineConfig = ../nixos/${hostname}/configuration.nix;
   userOSConfig = ../modules ;
-  userHMConfig = [ ../modules/home ] ++ extraModules; 
+  userHMConfig = [ ../modules/home ] ++ extraModules ; 
 
   # overlays modules
   overlays = import ./overlays { inherit inputs; };
-  args =  { inherit system hostname username isWSL inputs flakeRoot; };
+  args =  { inherit hostname username isWSL inputs flakeRoot; };
 
   # NixOS vs nix-darwin functionst
   systemFunc = if darwin then inputs.darwin.lib.darwinSystem else nixpkgs.lib.nixosSystem;
   homeManager = if darwin then inputs.home-manager.darwinModules else inputs.home-manager.nixosModules;
 in systemFunc {
+  inherit system;
   # We expose some extra arguments so that our modules can parameterize
   # better based on these values.
   specialArgs = args;
@@ -58,15 +59,15 @@ in systemFunc {
         ${username} = { imports = userHMConfig; };
       };
     }
-    # {
-    #   config_module.args = {
-    #     system    = system;
-    #     hostname  = hostname;
-    #     username  = username;
-    #     isWSL     = isWSL;
-    #     inputs    = inputs;
-    #     flakeRoot = flakeRoot;
-    #   };
-    # }
+    {
+      config._module.args = {
+        system    = system;
+        hostname  = hostname;
+        username  = username;
+        isWSL     = isWSL;
+        inputs    = inputs;
+        flakeRoot = flakeRoot;
+      };
+    }
   ];
 }
