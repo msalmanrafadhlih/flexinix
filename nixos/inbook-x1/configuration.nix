@@ -1,4 +1,5 @@
-{ inputs, lib, config, ... }:
+{ inputs, ... }:
+{ lib, config, ... }:
 {
   imports = [
     ./modules/audio.nix
