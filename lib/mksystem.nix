@@ -59,15 +59,15 @@ in systemFunc {
         ${username} = { imports = userHMConfig; };
       };
     }
-    {
-      config._module.args = {
-        system    = system;
-        hostname  = hostname;
-        username  = username;
-        isWSL     = isWSL;
-        inputs    = inputs;
-        flakeRoot = flakeRoot;
-      };
-    }
+    # {
+    #   config._module.args = {
+    #     system    = system;
+    #     hostname  = hostname;
+    #     username  = username;
+    #     isWSL     = isWSL;
+    #     inputs    = inputs;
+    #     flakeRoot = flakeRoot;
+    #   };
+    # }
   ];
 }
