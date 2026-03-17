@@ -58,7 +58,7 @@ in systemFunc rec {
     # We expose some extra arguments so that our modules can parameterize
     # better based on these values.
     {
-      config._module.args = {
+      _module.args = {
         system    = system;
         hostname  = hostname;
         username  = username;
