@@ -488,11 +488,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1773731466,
-        "narHash": "sha256-vqf0C94sGw8sdCCc2bZUJNeCEbZp7y7Lu6hj2YOa9Dw=",
+        "lastModified": 1773738431,
+        "narHash": "sha256-fI3nzXjSfXH+tra40IFvMLSlXjI+DMYxC1eQy5dnrDU=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "c2aa025d2f8a826d0fe12ebedd78fa97566a6243",
+        "rev": "e036c1d78e694496039cd3b3430d1a808383a824",
         "type": "github"
       },
       "original": {
@@ -546,18 +546,14 @@
         "zjstatus": "zjstatus"
       },
       "locked": {
-        "lastModified": 1773709647,
-        "narHash": "sha256-Ii+kKzcF3AaysrmGjkKIyqOIbXkOzyAjM1510cWM8os=",
-        "owner": "msalmanrafadhlih",
-        "repo": "racooonfig",
-        "rev": "b697c91baaf7e16f602057849f10f8711664816e",
-        "type": "github"
+        "path": "./development",
+        "type": "path"
       },
       "original": {
-        "owner": "msalmanrafadhlih",
-        "repo": "racooonfig",
-        "type": "github"
-      }
+        "path": "./development",
+        "type": "path"
+      },
+      "parent": []
     },
     "rip": {
       "inputs": {
@@ -918,11 +914,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1773695806,
-        "narHash": "sha256-HYmp4Ym/dlkRIPap7GFznNUNuDTTW0iIcOtHmhRzl3w=",
+        "lastModified": 1773737882,
+        "narHash": "sha256-P6k0BtT1/idYveVRdcwAZk8By9UjZW8XOMhSoS6wTBY=",
         "owner": "0xc000022070",
         "repo": "zen-browser-flake",
-        "rev": "ced61240cc38dee9e659a7ced0cd9a839c6085d3",
+        "rev": "a7f1db35d74faf04e5189b3a32f890186ace5c28",
         "type": "github"
       },
       "original": {

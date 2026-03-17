@@ -12,26 +12,24 @@ hostname:
 
 let
   isWSL = wsl;
-  # isDarwin = darwin;
+  isDarwin = darwin;
   isLinux = !darwin && !isWSL;
+    
 
   # The config files for this Machine, OS, and Users(HomeManager)
   machineConfig = ../nixos/${hostname}/configuration.nix;
-  userOSConfig = ../modules ;
-  userHMConfig = [ ../modules/home ] ++ extraModules ; 
+  userOSConfig  = ../modules ;
+  userHMConfig  = [ ../modules/home ] ++ extraModules ; 
 
   # overlays modules
   overlays = import ./overlays { inherit inputs; };
-  args =  { inherit hostname username isWSL inputs flakeRoot; };
 
   # NixOS vs nix-darwin functionst
   systemFunc = if darwin then inputs.darwin.lib.darwinSystem else nixpkgs.lib.nixosSystem;
   homeManager = if darwin then inputs.home-manager.darwinModules else inputs.home-manager.nixosModules;
 in systemFunc {
   inherit system;
-  # We expose some extra arguments so that our modules can parameterize
-  # better based on these values.
-  specialArgs = args;
+  specialArgs = { inherit system hostname username inputs flakeRoot isWSL isDarwin isLinux; };
 
   modules = [
     # Apply our overlays. Overlays are keyed by system type so we have
@@ -54,20 +52,16 @@ in systemFunc {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.backupFileExtension = "backup";
-      home-manager.extraSpecialArgs = { inherit system username hostname flakeRoot isWSL; rootInputs = inputs; };
+      home-manager.extraSpecialArgs = { inherit system username hostname flakeRoot isWSL isDarwin isLinux;
+        rootInputs = inputs;
+        inputs = inputs.racooonfig.inputs;
+      };
       home-manager.users = {
         ${username} = { imports = userHMConfig; };
       };
     }
-    # {
-    #   config._module.args = {
-    #     system    = system;
-    #     hostname  = hostname;
-    #     username  = username;
-    #     isWSL     = isWSL;
-    #     inputs    = inputs;
-    #     flakeRoot = flakeRoot;
-    #   };
-    # }
+    # We expose some extra arguments so that our modules can parameterize
+    # better based on these values.
+    # { config._module.args = { }; }
   ];
 }
