@@ -1,3 +1,5 @@
+<samp>
+
 <p align="center">
   <img src="https://i.imgur.com/X5zKxvp.png" width="200px">
 </p>
@@ -130,3 +132,5 @@ This configuration is a result of standing on the shoulders of giants in the Nix
 <p align="center">
   <i>This system is configured. So is the life behind it.</i>
 </p>
+
+</samp>
