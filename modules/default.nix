@@ -1,11 +1,5 @@
 # ./configuration.nix
-{ isWSL, system, ... }:
-{ lib, pkgs, ... }:
-
-let
-  isDarwin = pkgs.stdenv.isDarwin;
-  isLinux = pkgs.stdenv.isLinux;
-in
+{ isWSL, isLinux, isDarwin, lib, ... }:
 {
   imports = [
     # ./nginx.nix
@@ -16,11 +10,11 @@ in
     ./darwin.nix
 
   ] ++ lib.optionals (isLinux && !isWSL) [
+    # ./kanata.nix
     ./nixos.nix
     ./virtualisation.nix
     ./locale.nix
     ./shell.nix
-    ./fileSystems.nix
     ./settings.nix
     ./users.nix
     ./openssh.nix
@@ -28,11 +22,14 @@ in
     ./fonts.nix
     ./sudo.nix
 
-    # ./kanata.nix
+    # My Specialisation config use `nixos-rebuild --specialisation (bspwm / hyprland / niri)`
     ./specialisations/bspwm.nix
+    ./specialisations/hyprland.nix
+    ./specialisations/niri.nix
   ];
 
-  nixpkgs.hostPlatform = system;
-  system.stateVersion = "25.11";
-  security.rtkit.enable = true;
+  environment.pathsToLink = [ 
+    "/share/applications" 
+    "/share/xdg-desktop-portal" 
+  ];
 }

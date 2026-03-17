@@ -10,6 +10,9 @@ in
 {
   services.getty.autologinUser = "gamemode";
   users.mutableUsers = false;
+
+  users.groups.service = {};
+
   users.users = {
 
     # developer (root)
@@ -61,8 +64,8 @@ in
 
     # container
     service = {
-      isNormalUser = false;
       isSystemUser = true;
+      group = "service";
       description = "Server/Container";
       extraGroups = [
         "docker"

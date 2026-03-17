@@ -1,15 +1,8 @@
 # ./modules/programs.nix
 # programs & system packages
-{ isWSL}:
-{ pkgs, lib, ... }:
+{ isWSL, pkgs, lib, isDarwin, isLinux, ... }:
 
-let
-  isDarwin = pkgs.stdenv.isDarwin;
-  isLinux = pkgs.stdenv.isLinux;
-in
 {
-  nixpkgs.config.allowUnfree = true;
-
   programs = {
     git.enable = true;
 

@@ -1,13 +1,10 @@
 # System Zsh Configuration
-{ pkgs, ... }:
-let
-  isDarwin = pkgs.stdenv.isDarwin;
-  isLinux = pkgs.stdenv.isLinux;
-in {
+{ pkgs, isDarwin, ... }:
+{
 
 	users.defaultUserShell = pkgs.zsh;
 	
-	program = {
+	programs = {
   	bash = {
   		enable = true;
   		shellAliases = import ./aliases.nix;

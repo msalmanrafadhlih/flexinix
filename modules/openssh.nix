@@ -1,5 +1,4 @@
-{ username, ... }:
-{ lib, ... }:
+{ username, lib, ... }:
 {
   # 2. Tailscale Tanpa Flag SSH (Gunakan OpenSSH saja)
   services.tailscale = {

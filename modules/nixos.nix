@@ -1,9 +1,14 @@
-{ ... }:
+{ system, ... }:
 {
   # services.protonmail-bridge.enable = true;
   # Add ~/.local/bin to PATH
   environment.localBinInPath = true;
 
   # External pkgs Manager
-  services.nix-snapd = false;
+  # services.nix-snapd = false;
+  nixpkgs.hostPlatform = system;
+  security.rtkit.enable = true;
+
+
+  system.stateVersion = "25.11";
 }

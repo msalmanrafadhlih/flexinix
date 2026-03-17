@@ -1,8 +1,4 @@
-{ pkgs,  ... }:
-let
-  isDarwin = pkgs.stdenv.isDarwin;
-  isLinux = pkgs.stdenv.isLinux;
-in
+{ isDarwin, isLinux, pkgs, ... }:
 {
   programs.direnv = {
     enable = true;
