@@ -1,4 +1,5 @@
 # home row mod configuration using kanata
+{ ... }:
 {
   services.kanata = {
     enable = true;
