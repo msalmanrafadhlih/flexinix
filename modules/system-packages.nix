@@ -1,13 +1,17 @@
 # ./modules/programs.nix
 # programs & system packages
-{ isWSL, isDarwin, isLinux, pkgs, lib, ... }:
+{ isWSL}:
+{ pkgs, lib, ... }:
+
+let
+  isDarwin = pkgs.stdenv.isDarwin;
+  isLinux = pkgs.stdenv.isLinux;
+in
 {
   nixpkgs.config.allowUnfree = true;
 
   programs = {
     git.enable = true;
-    jujutsu.enable = !isDarwin; # Smart Git
-    atuin.enable = true; # smart command shell histories
 
   } // (if isLinux then {
     # firefox.enable = true;
@@ -38,6 +42,7 @@
     btop          # Resource monitor
     tree          # Directory tree viewer
     tmux          # Terminal multiplexer
+    atuin      # smart command shell histories
 
     # ======= UTILITIES
     nixpkgs-fmt   # Nix formatter
@@ -76,16 +81,20 @@
     cachix        # Nix binary cache client
     gettext       # GNU gettext utilities (often missing on macOS)
 
+  ]) ++ (lib.optionals (!isWSL) [
+
+    # ======= Linux & wsl
+    jujutsu # Smart Git
+
   ]) ++ (lib.optionals (isLinux && !isWSL) [
 
     # ======= LINUX ONLY
-
     acpi          # Show battery / ACPI power information
     psmisc        # Process utilities (killall, pstree)
     inetutils     # Networking utilities (telnet, ftp, etc)
     iputils       # Network utilities (ping, arping)
 
-    # ======= ARCHIVES
+    # ======= ARCHIVESkkkkkk
     gnutar        # GNU tar archiver
     p7zip         # 7z compression utility
     unzip         # Extract .zip archives
