@@ -1,3 +1,4 @@
+{ ... }:
 {
   # tool otomatis untuk mengatur
   # konsumsi daya hardware di Linux.
