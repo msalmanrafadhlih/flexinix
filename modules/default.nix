@@ -1,17 +1,12 @@
 # ./configuration.nix
-{ isWSL, system, lib, pkgs, ... }:
+{ isWSL, system, ... }:
+{ lib, pkgs, ... }:
 
 let
   isDarwin = pkgs.stdenv.isDarwin;
   isLinux = pkgs.stdenv.isLinux;
- 
 in
 {
-  config._module.args = {
-    isDarwin  = isDarwin;
-    isLinux   = isLinux;
-  };
-
   imports = [
     # ./nginx.nix
     ./system-packages.nix
@@ -27,7 +22,6 @@ in
     ./shell.nix
     ./fileSystems.nix
     ./settings.nix
-    ./hardware.nix
     ./users.nix
     ./openssh.nix
     ./nix-ld.nix
