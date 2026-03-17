@@ -22,7 +22,7 @@ let
 
   # overlays modules
   overlays = import ./overlays { inherit inputs; };
-  args =  { inherit system hostname username isWSL inputs flakeRoot };
+  args =  { inherit system hostname username isWSL inputs flakeRoot; };
 
   # NixOS vs nix-darwin functionst
   systemFunc = if darwin then inputs.darwin.lib.darwinSystem else nixpkgs.lib.nixosSystem;
