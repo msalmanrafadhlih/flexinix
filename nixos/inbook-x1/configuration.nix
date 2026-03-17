@@ -1,5 +1,7 @@
-{ inputs, ... }:
-{ lib, config, ... }:
+{ inputs, lib, config, ... }:
+let
+    flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
+in
 {
   imports = [
     ./modules/audio.nix
@@ -11,13 +13,12 @@
     ./modules/services.nix
     # ./modules/power.nix
     ./modules/touchpad.nix
+    ./modules/fileSystems.nix
     
     ./hardware-configuration.nix
   ];
 
-  nix = let
-    flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
-  in {
+  nix = {
     # Opinionated: disable channels from `nix-channel --list`,
     # use flake inputs instead
     channel.enable = false; 
@@ -31,8 +32,6 @@
       flake-registry        = "";                    # Disable Global Registry
       nix-path              = config.nix.nixPath;    # Workaround for https://github.com/NixOS/nix/issues/9574
     };
+    
   };
-
-  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "25.11";
 }
