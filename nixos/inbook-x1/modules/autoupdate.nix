@@ -1,10 +1,10 @@
 # ./modules/autoupdate.nix
-{ flakePath, ... }:
+{ flakeRoot, ... }:
 {
   system.autoUpgrade = {
     enable = true;
 
-    flake = flakePath;
+    flake = flakeRoot;
 
     flags = [
       "--update-input" "nixpkgs"
