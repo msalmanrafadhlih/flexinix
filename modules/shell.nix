@@ -1,7 +1,10 @@
 # System Zsh Configuration
-{ isDarwin, pkgs, ... }:
+{ pkgs, ... }:
+let
+  isDarwin = pkgs.stdenv.isDarwin;
+  isLinux = pkgs.stdenv.isLinux;
+in {
 
-{
 	users.defaultUserShell = pkgs.zsh;
 	
 	program = {
