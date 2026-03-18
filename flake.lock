@@ -546,14 +546,18 @@
         "zjstatus": "zjstatus"
       },
       "locked": {
-        "path": "./development",
-        "type": "path"
+        "lastModified": 1773749357,
+        "narHash": "sha256-6u1IJHQ09frfwhPEBBL1hofnILsQ9aNggaAXX73zGP0=",
+        "owner": "msalmanrafadhlih",
+        "repo": "racooonfig",
+        "rev": "f0cbe42ea3c1858b902b63a2cf8b0f109d8f1b30",
+        "type": "github"
       },
       "original": {
-        "path": "./development",
-        "type": "path"
-      },
-      "parent": []
+        "owner": "msalmanrafadhlih",
+        "repo": "racooonfig",
+        "type": "github"
+      }
     },
     "rip": {
       "inputs": {
