@@ -1,4 +1,4 @@
-{ pkgs }: {
+{ pkgs, ... }: {
 
  	security.pam.services.i3lock.enable = true;
 	security.pam.services.i3lock = { };
