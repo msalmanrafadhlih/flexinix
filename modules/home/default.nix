@@ -1,7 +1,6 @@
 { ... }:
 {
   imports = [
-    ./xdg-portal.nix
     ./variables.nix
     ./starship.nix
     ./lazygit.nix
