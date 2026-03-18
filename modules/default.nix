@@ -5,6 +5,7 @@
     # ./nginx.nix
     ./system-packages.nix
     ./devenv.nix
+    ./shell
 
   ] ++ lib.optionals isDarwin [
     ./darwin.nix
@@ -14,7 +15,6 @@
     ./nixos.nix
     ./virtualisation.nix
     ./locale.nix
-    ./shell.nix
     ./settings.nix
     ./users.nix
     ./openssh.nix
@@ -23,9 +23,9 @@
     ./sudo.nix
 
     # My Specialisation config use `nixos-rebuild --specialisation (bspwm / hyprland / niri)`
-    ./specialisations/bspwm.nix
-    ./specialisations/hyprland.nix
-    ./specialisations/niri.nix
+    ./specialisations/bspwm
+    ./specialisations/hyprland
+    ./specialisations/niri
   ];
 
   environment.pathsToLink = [ 

@@ -1,18 +1,19 @@
 { ... }:
 {
   imports = [
+    ./xdg-portal.nix
     ./variables.nix
     ./starship.nix
     ./lazygit.nix
-    ./virtmanager/default.nix
+    ./virtmanager
     ./serpl.nix # tui find and replace tool, good for integratinng with terminal editors
     ./btop.nix
-    ./wezterm/default.nix
+    ./wezterm
     ./git.nix
-    ./helix/default.nix
-    ./shell/default.nix
-    ./yazi/default.nix
-    ./tmux/default.nix
+    ./helix
+    ./shell
+    ./yazi
+    ./tmux
 
     # ./zellij/default.nix
   ];
