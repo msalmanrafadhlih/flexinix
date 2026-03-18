@@ -2,7 +2,7 @@
 { ... }:
 {
 	specialisation.bspwm.configuration = {
-		inports = [
+		imports = [
 			./packages.nix
 			./services.nix
 			./xdg-portal.nix
