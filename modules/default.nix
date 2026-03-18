@@ -27,6 +27,7 @@
     ./specialisations/bspwm
     ./specialisations/hyprland
     ./specialisations/niri
+
   ];
 
   environment.pathsToLink = [ 
