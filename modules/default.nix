@@ -16,6 +16,7 @@
     ./virtualisation.nix
     ./locale.nix
     ./settings.nix
+    ./thunar.nix
     ./users.nix
     ./openssh.nix
     ./nix-ld.nix
