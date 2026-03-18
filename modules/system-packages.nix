@@ -9,10 +9,6 @@
   } // (if isLinux then {
     # firefox.enable = true;
     thunderbird.enable = true;
-    # # to use gamemode with steam edit launch options inside
-    # # game -> general -> launch options -> `gamemoderun %command%`
-    # steam.enable = true;
-    gamemode.enable = true;
   } else {});
 
 
@@ -74,9 +70,9 @@
     cachix        # Nix binary cache client
     gettext       # GNU gettext utilities (often missing on macOS)
 
-  ]) ++ (lib.optionals (!isWSL) [
+  ]) ++ (lib.optionals isWSL [
 
-    # ======= Linux & wsl
+    # ======= wsl only
     jujutsu # Smart Git
 
   ]) ++ (lib.optionals (isLinux && !isWSL) [
@@ -87,7 +83,7 @@
     inetutils     # Networking utilities (telnet, ftp, etc)
     iputils       # Network utilities (ping, arping)
 
-    # ======= ARCHIVESkkkkkk
+    # ======= ARCHIVES
     gnutar        # GNU tar archiver
     p7zip         # 7z compression utility
     unzip         # Extract .zip archives
