@@ -18,24 +18,26 @@ let
   # LINUX ONLY ALIASES
   linuxOnly = if isLinux then {
 
-    NIXOS = "cd ~/.dotfiles/system && ls";
-    HOME = "cd ~/.dotfiles/$XDG_CURRENT_DESKTOP && ls";
     RUNNING = "systemctl --user list-units --state=running";
     SYSRUNNING = "systemctl list-units --state=running";
     USAGELOG = "sudo journalctl --disk-usage";
     SYSTEMD = "systemctl list-unit-files --type=service";
+    BASHSAVE = "source ~/.bashrc && dunstify 'BASHRC saved'";
+    ZSHSAVE = "source ~/.zshrc && dunstify 'ZSHRC saved'";
 
     ## SYSTEM CONFIGURATIONS
-    USER = "hx ~/.dotfiles/system/modules/users.nix";
-    ALIAS = "hx ~/.dotfiles/system/modules/aliases.nix";
-    SYSINSTALL = "hx ~/.dotfiles/system/modules/system-packages.nix";
-    NIX = "hx ~/.dotfiles/system/nixos/$HOST/configuration.nix";
-    HNIX = "bat ~/.dotfiles/system/nixos/$HOST/hardware-configuration.nix";
-    FLAKE = "hx ~/.dotfiles/system/flake.nix";
-    LOCK = "bat ~/.dotfiles/system/flake.lock";
-    SYSMDL = "yazi ~/.dotfiles/system/modules";
+    NIXOS = "cd /etc/nixos/system && ls";
+    USER = "hx /etc/nixos/system/modules/users.nix";
+    ALIAS = "hx /etc/nixos/system/modules/shell/aliases.nix";
+    SYSINSTALL = "hx /etc/nixos/system/modules/system-packages.nix";
+    NIX = "hx /etc/nixos/system/nixos/$HOST/configuration.nix";
+    HNIX = "bat /etc/nixos/system/nixos/$HOST/hardware-configuration.nix";
+    FLAKE = "hx /etc/nixos/system/flake.nix";
+    LOCK = "bat /etc/nixos/system/flake.lock";
+    SYSMDL = "yazi /etc/nixos/system/modules";
 
     ## USER CONFIGURATIONS {EDIT}
+    HOME = "cd ~/.dotfiles/$XDG_CURRENT_DESKTOP && ls";
     DOTS = "yazi ~/.dotfiles/$XDG_CURRENT_DESKTOP/configs";
     INSTALL = "hx ~/.dotfiles/$XDG_CURRENT_DESKTOP/users/$USER/packages.nix";
     HOMEFLAKE = "cd ~/.dotfiles/$XDG_CURRENT_DESKTOP && ls && hx ~/.dotfiles/$XDG_CURRENT_DESKTOP/flake.nix";
@@ -48,9 +50,6 @@ let
     # ... ads your config raws here
 
     ##  OTHER
-    BASHSAVE = "source ~/.bashrc && dunstify 'BASHRC saved'";
-    ZSHSAVE = "source ~/.zshrc && dunstify 'ZSHRC saved'";
-
     OLD = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
     GBGOLD = "sudo nix-env -p /nix/var/nix/profiles/system --delete-generations +3";
     GBG = "sudo nix-collect-garbage";
@@ -68,7 +67,7 @@ let
     CONFSAVE = "mv config.h config.h.bak";
     CONFDEL = "cp config.h.bak config.h";
     MAKE = "make clean && make && make install PREFIX=$HOME/.local";
-    SUCKLESS = "hx ~/.dotfiles/system/system/modules/suckless.nix";
+    SUCKLESS = "hx ~/.dotfiles/$XDG_CURRENT_DESKTOP/configs/suckless/default.nix";
 
     # NIXOS Aliases
     PKG = "nix search nixpkgs";
