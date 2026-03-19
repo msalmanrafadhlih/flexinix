@@ -258,18 +258,12 @@ SAVEFLAKE() {
   if [[ "$res" == "y" ]]; then
     cd "$HOME/.dotfiles/system" || { echo "❌ Directory system tidak ditemukan!"; return 1 }
 
-    # =========================
-    # 🔹 PILIH HOST (POPUP)
-    # =========================
-    local host=$(tmux_fzf "infinix\nwsl\nmacbook" "Pilih host: ")
+    local host=$(tmux_fzf "infinix\nwsl\nmacbook" "Pilih host (ctrl-c to cancel): ")
     tmux delete-buffer
 
     [[ -z "$host" ]] && { echo "🛑 Rebuild dibatalkan, host tidak dipilih."; return 1 }
 
-    # =========================
-    # 🔹 PILIH SPECIALISATION (POPUP)
-    # =========================
-    local spec=$(tmux_fzf "bspwm\nniri\nhyprland" "Specialisation: ")
+    local spec=$(tmux_fzf "bspwm\nniri\nhyprland" "Specialisation: (ctrl-c to cancel)")
     tmux delete-buffer
 
     [[ "$spec" == "none" ]] && spec=""
