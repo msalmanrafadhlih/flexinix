@@ -3,10 +3,10 @@
 {
   programs.git = {
     enable = true;
-    signing = {
-      key = "523D5DC389D273BC";
-      signByDefault = true;
-    };
+    # signing = {
+    #   key = "523D5DC389D273BC";
+    #   signByDefault = true;
+    # };
     settings = {
       user.name = "msalmanrafadhlih";
       user.email = "141149698+msalmanrafadhlih@users.noreply.github.com";

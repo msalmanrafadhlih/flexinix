@@ -221,81 +221,64 @@ DPLAYLIST() {
 SAVEFLAKE() {
   local dir="$HOME/.dotfiles/$XDG_CURRENT_DESKTOP"
   local timestamp=$(date "+%Y-%m-%d %H:%M")
-  local base_msg="${1:-""}"
-
-  cd "$dir" || { echo "❌ Directory tidak ditemukan!"; return 1 }
-
-  local current_branch=$(git branch --show-current)
-  local target_branch=${2:-$current_branch}
-
-  # Ambil file yang berubah (safe dengan spasi)
-  local files=("${(@f)$(git status --porcelain | awk '{print $2}')}")
   
-  if [[ ${#files[@]} -eq 0 ]]; then
-    echo "ℹ️ Tidak ada perubahan"
-  else
-    echo "📂 Pilih file yang mau di-commit (TAB untuk multi-select):"
-    local selected=("${(@f)$(printf "%s\n" "${files[@]}" | fzf -m)}")
+  # Set default pesan commit dari Argumen 1, branch dari Argumen 2
+  local sys_msg="${1:-"Update dotfiles via SAVEFLAKE"}"
+  local current_branch=$(git branch --show-current)
+  local target_branch="${2:-$current_branch}"
 
-    if [[ ${#selected[@]} -eq 0 ]]; then
-      echo "❌ Tidak ada file dipilih"
-    else
-      for file in "${selected[@]}"; do
-        echo "\n📌 File: $file"
+  cd "$dir" || { echo "❌ Directory $dir tidak ditemukan!"; return 1 }
 
-        # Pilih commit type
-        local type=$(printf "feat\nfix\nchore\nrefactor\ndocs\nstyle\ntest" | fzf --prompt="Type: ")
-        [[ -z "$type" ]] && type="chore"
-
-        # Scope optional (pakai nama folder/file)
-        local scope=$(echo "$file" | cut -d/ -f1)
-
-        # Short message
-        read "desc?Deskripsi singkat: "
-
-        local commit_msg="$type($scope): $desc"
-
-        # Optional tambahan
-        if [[ -n "$base_msg" ]]; then
-          commit_msg="$commit_msg [$base_msg]"
-        fi
-
-        git add "$file"
-        git commit -m "$commit_msg"
-      done
-
-      git push origin "$target_branch"
-      echo "✅ Semua commit berhasil di-push ke $target_branch"
-    fi
-  fi
-
-  # 🔧 Rebuild System
-  read "res?Lanjut rebuild system? (y/n) "
-  [[ "$res" != "y" ]] && return
-
-  cd "$HOME/.dotfiles/system" || return
-
-  local sys_msg="${1:-"system update via SAVEFLAKE"}"
-
-  echo "Pilih host:"
-  local host=$(printf "bspwm\nniri\nhyprland" | fzf --prompt="Host: ")
-
-  echo "Pilih specialisation (optional):"
-  local spec=$(printf "bspwm\nniri\nhyprland" | fzf --prompt="Specialisation: ")
-
-  [[ -z "$host" ]] && { echo "❌ Host kosong"; return }
-
-  nix flake update
-
+  # 1. Commit dan Push untuk Desktop Dotfiles
+  echo "🚀 Memproses dotfiles di $dir..."
   if [[ -n $(git status --porcelain) ]]; then
+    # Menggunakan git add -A agar file baru (untracked) juga ikut ter-commit
+    git diff --name-only | xargs -I{} sh -c "git add '{}' && git commit -m '$timestamp | Update {}: $sys_msg'"
     git add .
-    git commit -m "chore(system): $sys_msg"
+    git commit -m "$timestamp | $sys_msg"
+    git push origin "$target_branch"
+    echo "✅ Changes pushed to $target_branch dengan pesan: $sys_msg"
+  else
+    echo "⚡ Tidak ada perubahan di $dir."
   fi
 
-  if [[ -z "$spec" ]]; then
-    sudo nixos-rebuild switch --flake ".#$host"
+  # 2. Rebuild System Logic
+  echo -n "\nLanjut rebuild system? (y/n) "
+  read -k 1 res
+  echo
+
+  if [[ "$res" == "y" ]]; then
+    cd "$HOME/.dotfiles/system" || { echo "❌ Directory system tidak ditemukan!"; return 1 }
+    
+    echo "Pilih host yang ingin direbuild:"
+    local host=$(printf "infinix\nwsl\nmacbook" | fzf --prompt="Pilih host: ")
+    
+    # Jika fzf dibatalkan (Esc), batalkan proses
+    [[ -z "$host" ]] && { echo "🛑 Rebuild dibatalkan, host tidak dipilih."; return 1 }
+    
+    echo "Pilih Specialisation (Pilih 'none' jika tidak pakai):"
+    local spec=$(printf "none\nbspwm\nniri\nhyprland" | fzf --prompt="Specialisation: ")
+    [[ "$spec" == "none" ]] && spec="" # Kosongkan variabel jika pilih none
+
+    echo "🔄 Updating Nix flake..."
+    nix flake update
+
+    # 3. Commit perubahan di system (seperti flake.lock)
+    if [[ -n $(git status --porcelain) ]]; then
+      git add -A
+      git commit -m "$timestamp | Rebuild system ($host): $sys_msg"
+    fi
+
+    # 4. Rebuild NixOS
+    echo "🚀 Rebuilding NixOS untuk $host..."
+    if [[ -z "$spec" ]]; then
+      sudo nixos-rebuild switch --flake .#"$host"
+    else
+      sudo nixos-rebuild switch --flake .#"$host" --specialisation "$spec"
+    fi
+    echo "✅ System rebuild selesai!"
   else
-    sudo nixos-rebuild switch --flake ".#$host" --specialisation "$spec"
+    echo "🛑 Rebuild dibatalkan."
   fi
 }
 
