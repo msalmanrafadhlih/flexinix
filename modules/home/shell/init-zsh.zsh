@@ -218,14 +218,20 @@ DPLAYLIST() {
         "$url"
 }
 
-
 tmux_fzf() {
   local input="$1"
   local prompt="$2"
+  local tmp=$(mktemp)
 
-  tmux display-popup -E "$SHELL -ic 'printf \"$input\" | fzf --prompt=\"$prompt\" | tmux load-buffer -b pickbuf -'"
-  local result=$(tmux save-buffer -b pickbuf -)
-  tmux delete-buffer -b pickbuf
+printf "%s" "$input" | fzf \
+  --prompt="$prompt" \
+  --height=100% \
+  --preview="echo {}" \
+  --border > "$tmp"
+
+  local result=""
+  [[ -f "$tmp" ]] && result=$(cat "$tmp")
+  rm -f "$tmp"
 
   echo "$result"
 }
@@ -258,13 +264,23 @@ SAVEFLAKE() {
   if [[ "$res" == "y" ]]; then
     cd "/etc/nixos/system" || { echo "❌ Directory system tidak ditemukan!"; return 1 }
 
-    local host=$(tmux_fzf "infinix\nwsl\nmacbook\nvm-aarch64" "Pilih host (ctrl-c to cancel): ")
-    tmux delete-buffer
+    # === host selection ===
+    local host=$(tmux_fzf "$(printf "%s\n" \
+      "$(hostname)" \
+      "infinix" \
+      "wsl" \
+      "macbook" \
+      "vm-aarch64" | sort -u)" \
+      "Pilih host (ctrl-c to cancel): ")
 
     [[ -z "$host" ]] && { echo "🛑 Rebuild dibatalkan, host tidak dipilih."; return 1 }
 
-    local spec=$(tmux_fzf "bspwm\nniri\nhyprland" "Specialisation: (ctrl-c to cancel)")
-    tmux delete-buffer
+    # === specialisation ===
+    local spec=$(tmux_fzf "$(printf "%s\n" \
+      "bspwm" \
+      "niri" \
+      "hyprland")" \
+      "Specialisation (ctrl-c to cancel): ")
 
     [[ "$spec" == "none" ]] && spec=""
     
