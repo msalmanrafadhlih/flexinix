@@ -236,7 +236,7 @@ printf "%s" "$input" | fzf \
   echo "$result"
 }
 
-SAVEFLAKE() {
+RACOOON() {
   local dir="$HOME/.dotfiles/$XDG_CURRENT_DESKTOP"
   local timestamp=$(date "+%Y-%m-%d %H:%M")
   
@@ -262,7 +262,7 @@ SAVEFLAKE() {
   echo
 
   if [[ "$res" == "y" ]]; then
-    cd "/etc/nixos/system" || { echo "❌ Directory system tidak ditemukan!"; return 1 }
+    cd /etc/nixos/system || { echo "❌ Directory system tidak ditemukan!"; return 1 }
 
     # === host selection ===
     local host=$(tmux_fzf "$(printf "%s\n" \
@@ -285,7 +285,7 @@ SAVEFLAKE() {
     [[ "$spec" == "none" ]] && spec=""
     
     echo "🔄 Updating Nix flake..."
-    nix flake update
+    nix flake update racooonfig
 
     if [[ -n $(git status --porcelain) ]]; then
       git diff --name-only | xargs -I{} sh -c "git add '{}' && git commit -m '$timestamp | $sys_msg: {}'"
