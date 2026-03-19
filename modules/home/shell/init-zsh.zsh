@@ -219,56 +219,83 @@ DPLAYLIST() {
 }
 
 SAVEFLAKE() {
-  local dir="$HOME/.dotfiles/bspwm"
+  local dir="$HOME/.dotfiles/$XDG_CURRENT_DESKTOP"
   local timestamp=$(date "+%Y-%m-%d %H:%M")
-  
+  local base_msg="${1:-""}"
+
   cd "$dir" || { echo "❌ Directory tidak ditemukan!"; return 1 }
 
-  # 1. Tambahkan perubahan ke staging
-  git add .
+  local current_branch=$(git branch --show-current)
+  local target_branch=${2:-$current_branch}
 
-  # 2. Cek apakah ada perubahan yang perlu di-commit
-  if git diff --cached --quiet; then
-    echo "info: Tidak ada perubahan untuk di-commit di bspwm."
+  # Ambil file yang berubah (safe dengan spasi)
+  local files=("${(@f)$(git status --porcelain | awk '{print $2}')}")
+  
+  if [[ ${#files[@]} -eq 0 ]]; then
+    echo "ℹ️ Tidak ada perubahan"
   else
-    # 3. AUTO-GENERATE MESSAGE (Jika $1 kosong)
-    local msg="$1"
-    if [[ -z "$msg" ]]; then
-      # Mengambil daftar file yang berubah sebagai pesan
-      local files=$(git diff --cached --name-only | tr '\n' ',' | sed 's/,$//')
-      msg="chore: update configs ($files)"
+    echo "📂 Pilih file yang mau di-commit (TAB untuk multi-select):"
+    local selected=("${(@f)$(printf "%s\n" "${files[@]}" | fzf -m)}")
+
+    if [[ ${#selected[@]} -eq 0 ]]; then
+      echo "❌ Tidak ada file dipilih"
+    else
+      for file in "${selected[@]}"; do
+        echo "\n📌 File: $file"
+
+        # Pilih commit type
+        local type=$(printf "feat\nfix\nchore\nrefactor\ndocs\nstyle\ntest" | fzf --prompt="Type: ")
+        [[ -z "$type" ]] && type="chore"
+
+        # Scope optional (pakai nama folder/file)
+        local scope=$(echo "$file" | cut -d/ -f1)
+
+        # Short message
+        read "desc?Deskripsi singkat: "
+
+        local commit_msg="$type($scope): $desc"
+
+        # Optional tambahan
+        if [[ -n "$base_msg" ]]; then
+          commit_msg="$commit_msg [$base_msg]"
+        fi
+
+        git add "$file"
+        git commit -m "$commit_msg"
+      done
+
+      git push origin "$target_branch"
+      echo "✅ Semua commit berhasil di-push ke $target_branch"
     fi
-
-    local current_branch=$(git branch --show-current)
-    local target_branch=${2:-$current_branch}
-
-    # Commit dan Push
-    git commit -m "$timestamp | $msg" && git push origin "$target_branch"
-    echo "✅ Changes pushed to $target_branch dengan pesan: $msg"
   fi
 
-  # 4. Rebuild System Logic
-  echo -n "Lanjut rebuild system? (y/n) "
-  read -k 1 res
-  echo
-  if [[ "$res" == "y" ]]; then
-    cd "$HOME/.dotfiles/system" || return
-    # Tambahkan file system sebelum commit
+  # 🔧 Rebuild System
+  read "res?Lanjut rebuild system? (y/n) "
+  [[ "$res" != "y" ]] && return
+
+  cd "$HOME/.dotfiles/system" || return
+
+  local sys_msg="${1:-"system update via SAVEFLAKE"}"
+
+  echo "Pilih host:"
+  local host=$(printf "bspwm\nniri\nhyprland" | fzf --prompt="Host: ")
+
+  echo "Pilih specialisation (optional):"
+  local spec=$(printf "bspwm\nniri\nhyprland" | fzf --prompt="Specialisation: ")
+
+  [[ -z "$host" ]] && { echo "❌ Host kosong"; return }
+
+  nix flake update
+
+  if [[ -n $(git status --porcelain) ]]; then
     git add .
-    
-    # Re-use pesan dari bspwm atau buat baru
-    local sys_msg="${1:-"rebuild system: update via SAVEFLAKE"}"
-    
-    echo "Pilih host yang ingin direbuild:"
-    local host=$(printf "bspwm\nniri\nhyprland" | fzf --prompt="Pilih host: ") && echo $host    
-    
-    if [[ -n "$host" ]]; then
-      nix flake update $host
-      git commit -m "$sys_msg | $timestamp"
-      sudo nixos-rebuild switch --flake .#$host
-    else
-      echo "Rebuild dibatalkan, host tidak dipilih."
-    fi
+    git commit -m "chore(system): $sys_msg"
+  fi
+
+  if [[ -z "$spec" ]]; then
+    sudo nixos-rebuild switch --flake ".#$host"
+  else
+    sudo nixos-rebuild switch --flake ".#$host" --specialisation "$spec"
   fi
 }
 
