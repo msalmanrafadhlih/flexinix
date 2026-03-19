@@ -218,21 +218,30 @@ DPLAYLIST() {
         "$url"
 }
 
+
+tmux_fzf() {
+  local input="$1"
+  local prompt="$2"
+
+  tmux display-popup -E "$SHELL -ic 'printf \"$input\" | fzf --prompt=\"$prompt\" | tmux load-buffer -b pickbuf -'"
+  local result=$(tmux save-buffer -b pickbuf -)
+  tmux delete-buffer -b pickbuf
+
+  echo "$result"
+}
+
 SAVEFLAKE() {
   local dir="$HOME/.dotfiles/$XDG_CURRENT_DESKTOP"
   local timestamp=$(date "+%Y-%m-%d %H:%M")
   
-  # Set default pesan commit dari Argumen 1, branch dari Argumen 2
   local sys_msg="${1:-"Update via SAVEFLAKE"}"
   local current_branch=$(git branch --show-current)
   local target_branch="${2:-$current_branch}"
 
   cd "$dir" || { echo "❌ Directory $dir tidak ditemukan!"; return 1 }
 
-  # 1. Commit dan Push untuk Desktop Dotfiles
   echo "🚀 Memproses dotfiles di $dir..."
   if [[ -n $(git status --porcelain) ]]; then
-    # Menggunakan git add -A agar file baru (untracked) juga ikut ter-commit
     git diff --name-only | xargs -I{} sh -c "git add '{}' && git commit -m '$timestamp | $sys_msg: {}'"
     git add .
     git commit -m "$timestamp | $sys_msg"
@@ -242,41 +251,45 @@ SAVEFLAKE() {
     echo "⚡ Tidak ada perubahan di $dir."
   fi
 
-  # 2. Rebuild System Logic
   echo -n "\nLanjut rebuild system? (y/n) "
   read -k 1 res
   echo
 
   if [[ "$res" == "y" ]]; then
     cd "$HOME/.dotfiles/system" || { echo "❌ Directory system tidak ditemukan!"; return 1 }
-    
-    echo "Pilih host yang ingin direbuild:"
-    local host=$(printf "infinix\nwsl\nmacbook" | fzf --prompt="Pilih host: ")
-    
-    # Jika fzf dibatalkan (Esc), batalkan proses
-    [[ -z "$host" ]] && { echo "🛑 Rebuild dibatalkan, host tidak dipilih."; return 1 }
-    
-    echo "Pilih Specialisation (Pilih 'none' jika tidak pakai):"
-    local spec=$(printf "bspwm\nniri\nhyprland" | fzf --prompt="Specialisation: ")
-    [[ "$spec" == "none" ]] && spec="" # Kosongkan variabel jika pilih none
 
+    # =========================
+    # 🔹 PILIH HOST (POPUP)
+    # =========================
+    local host=$(tmux_fzf "infinix\nwsl\nmacbook" "Pilih host: ")
+    tmux delete-buffer
+
+    [[ -z "$host" ]] && { echo "🛑 Rebuild dibatalkan, host tidak dipilih."; return 1 }
+
+    # =========================
+    # 🔹 PILIH SPECIALISATION (POPUP)
+    # =========================
+    local spec=$(tmux_fzf "bspwm\nniri\nhyprland" "Specialisation: ")
+    tmux delete-buffer
+
+    [[ "$spec" == "none" ]] && spec=""
+    
     echo "🔄 Updating Nix flake..."
     nix flake update
 
-    # 3. Commit perubahan di system (seperti flake.lock)
     if [[ -n $(git status --porcelain) ]]; then
       git diff --name-only | xargs -I{} sh -c "git add '{}' && git commit -m '$timestamp | $sys_msg: {}'"
       git add .
       git commit -m "$timestamp | Rebuild system ($host): $sys_msg"
     fi
 
-    # 4. Rebuild NixOS
     echo "🚀 Rebuilding NixOS untuk $host..."
     if [[ -z "$spec" ]]; then
       sudo nixos-rebuild switch --flake .#"$host"
     else
       sudo nixos-rebuild switch --flake .#"$host" --specialisation "$spec"
     fi
+
     echo "✅ System rebuild selesai!"
   else
     echo "🛑 Rebuild dibatalkan."
