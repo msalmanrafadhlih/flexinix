@@ -223,7 +223,7 @@ SAVEFLAKE() {
   local timestamp=$(date "+%Y-%m-%d %H:%M")
   
   # Set default pesan commit dari Argumen 1, branch dari Argumen 2
-  local sys_msg="${1:-"Update dotfiles via SAVEFLAKE"}"
+  local sys_msg="${1:-"Update via SAVEFLAKE"}"
   local current_branch=$(git branch --show-current)
   local target_branch="${2:-$current_branch}"
 
@@ -233,7 +233,7 @@ SAVEFLAKE() {
   echo "🚀 Memproses dotfiles di $dir..."
   if [[ -n $(git status --porcelain) ]]; then
     # Menggunakan git add -A agar file baru (untracked) juga ikut ter-commit
-    git diff --name-only | xargs -I{} sh -c "git add '{}' && git commit -m '$timestamp | Update {}: $sys_msg'"
+    git diff --name-only | xargs -I{} sh -c "git add '{}' && git commit -m '$timestamp | $sys_msg: {}'"
     git add .
     git commit -m "$timestamp | $sys_msg"
     git push origin "$target_branch"
@@ -257,7 +257,7 @@ SAVEFLAKE() {
     [[ -z "$host" ]] && { echo "🛑 Rebuild dibatalkan, host tidak dipilih."; return 1 }
     
     echo "Pilih Specialisation (Pilih 'none' jika tidak pakai):"
-    local spec=$(printf "none\nbspwm\nniri\nhyprland" | fzf --prompt="Specialisation: ")
+    local spec=$(printf "bspwm\nniri\nhyprland" | fzf --prompt="Specialisation: ")
     [[ "$spec" == "none" ]] && spec="" # Kosongkan variabel jika pilih none
 
     echo "🔄 Updating Nix flake..."
@@ -265,7 +265,8 @@ SAVEFLAKE() {
 
     # 3. Commit perubahan di system (seperti flake.lock)
     if [[ -n $(git status --porcelain) ]]; then
-      git add -A
+      git diff --name-only | xargs -I{} sh -c "git add '{}' && git commit -m '$timestamp | $sys_msg: {}'"
+      git add .
       git commit -m "$timestamp | Rebuild system ($host): $sys_msg"
     fi
 
