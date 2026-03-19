@@ -38,14 +38,6 @@ in
       ];
     };
 
-    # Gaming Hardcore
-    gamemode = {
-      isNormalUser = true;
-      description = "Tquilla - Gamemode";
-      shell = pkgs.zsh;
-      extraGroups = [ "networkmanager" "video" "audio" "input" ];
-    };
-
     # virtMachine
     tquilla-vm = {
       isNormalUser = true;
@@ -60,21 +52,6 @@ in
     	#     sha256 = "sha256:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
     	#   })
     	# ];
-    };
-
-    # container
-    service = {
-      isSystemUser = true;
-      group = "service";
-      description = "Server/Container";
-      extraGroups = [
-        "docker"
-        "podman"
-        "acme"
-        "postgres"
-        "redis"
-        "prometheus"
-      ];
     };
   };
 }
