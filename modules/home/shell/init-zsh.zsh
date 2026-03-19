@@ -256,9 +256,9 @@ SAVEFLAKE() {
   echo
 
   if [[ "$res" == "y" ]]; then
-    cd "$HOME/.dotfiles/system" || { echo "❌ Directory system tidak ditemukan!"; return 1 }
+    cd "/etc/nixos/system" || { echo "❌ Directory system tidak ditemukan!"; return 1 }
 
-    local host=$(tmux_fzf "infinix\nwsl\nmacbook" "Pilih host (ctrl-c to cancel): ")
+    local host=$(tmux_fzf "infinix\nwsl\nmacbook\nvm-aarch64" "Pilih host (ctrl-c to cancel): ")
     tmux delete-buffer
 
     [[ -z "$host" ]] && { echo "🛑 Rebuild dibatalkan, host tidak dipilih."; return 1 }
