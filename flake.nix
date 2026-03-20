@@ -68,17 +68,17 @@
 
     nixosConfigurations.vm-aarch64 = mkSystem "vm-aarch64" {
       system   = "aarch64-linux";
-      username = "tquilla-vm";
+      username = "tquilla";
     };
 
     nixosConfigurations.vm-aarch64-prl = mkSystem "vm-aarch64-prl" {
       system   = "aarch64-linux";
-      username = "tquilla-vm";
+      username = "tquilla";
     };
 
     nixosConfigurations.vm-aarch64-utm = mkSystem "vm-aarch64-utm" {
       system   = "aarch64-linux";
-      username = "tquilla-vm";
+      username = "tquilla";
     };
 
     nixosConfigurations.wsl = mkSystem "wsl" {
