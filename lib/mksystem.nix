@@ -18,8 +18,8 @@ let
 
   # The config files for this Machine, OS, and Users(HomeManager)
   machineConfig = ../nixos/${hostname}/configuration.nix;
-  userOSConfig  = ../modules ;
-  userHMConfig  = [ ../modules/home ] ++ extraModules ; 
+  userOSConfig  = ../modules/core ;
+  userHMConfig  = [ ../modules/home-manager ] ++ extraModules ; 
 
   # overlays modules
   overlays = import ./overlays { inherit inputs; };
