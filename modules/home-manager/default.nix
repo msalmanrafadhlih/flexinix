@@ -14,7 +14,7 @@
     ./yazi
     ./tmux
 
-    ./zellij
+    # ./zellij
   ];
   
   # Disabled for now since we mismatch our versions. See flake.nix for details.

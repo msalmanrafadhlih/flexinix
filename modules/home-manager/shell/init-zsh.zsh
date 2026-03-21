@@ -262,7 +262,7 @@ RACOOON() {
   echo
 
   if [[ "$res" == "y" ]]; then
-    cd "/etc/nixos/system" || { echo "❌ Directory system tidak ditemukan!"; return 1 }
+    cd "/etc/nixos" || { echo "❌ Directory system tidak ditemukan!"; return 1 }
 
     # === host selection ===
     local host=$(tmux_fzf "$(printf "%s\n" \
