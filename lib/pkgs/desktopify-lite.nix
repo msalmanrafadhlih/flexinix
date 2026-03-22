@@ -8,10 +8,10 @@ buildGoModule rec {
     owner = "miniguys";
     repo = "desktopify-lite";
     rev = "2c0d77217257d122278593bc2be0f425f9317802";
-    hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+    hash = "sha256-AipUGhxwL3kyw08fEP1iXLwG2PxIIcqNaoU69LIfnGk=";
   };
 
-  vendorHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+  vendorHash = "sha256-AipUGhxwL3kyw08fEP1iXLwG2PxIIcqNaoU69LIfnGk=";
 
   subPackages = [ "." ];
 
