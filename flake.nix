@@ -24,12 +24,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     
-    ## ------ Overlays
-    Bloodrage-plymouth = {
-      url = "github:TQ-See/NixPlymouth-Bloodrage";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
