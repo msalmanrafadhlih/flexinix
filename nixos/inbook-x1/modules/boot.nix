@@ -14,7 +14,7 @@
 			# THEMES = details, glow, script, spinfinity, Bloodrage,
 			# spinner, breeze, fade-in, nixos, solar, text, tribar
 			theme = "Bloodrage"; 
-			themePackages = [ pkgs.Bloodrage-plymouth ];
+			themePackages = [ pkgs.bloodrage-plymouth ];
 			extraConfig = "";
 			# logo = pkgs.fetchurl {
 			# 	url = "https://raw.githubusercontent.com/Melkor333/nixos-boot/refs/heads/main/src/evil-nixos.png";
