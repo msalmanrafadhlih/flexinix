@@ -29,6 +29,5 @@ in [
   additions
   modifications
   stable-packages
-  inputs.Bloodrage-plymouth.overlays.default
   inputs.nur.overlays.default
 ]
