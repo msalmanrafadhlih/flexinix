@@ -20,7 +20,7 @@
 	      autoRepeatDelay = 300;
 	      autoRepeatInterval = 35;
 	      displayManager = {
-	      	# startx.enable = true; # disable if set lightdm to true
+	      	startx.enable = true; # disable if set lightdm to true
 	      	lightdm = {
 	      		enable = true;
 		        background = builtins.fetchurl {
