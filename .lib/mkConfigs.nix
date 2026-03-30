@@ -1,88 +1,95 @@
-{ inputs, self, ... }@args: let
+{ inputs, self, ... }@args:
 
-	flakeRoot = self;
-in
+hostname:
+stability:
 {
-	nixos = hostname: { username, stability ? "stable", system ? "x86_64-linux", extraModules ? [], wsl ? false }: let
-		isWSL   = wsl;
-		isLinux = !isWSL;
-		
-		selecFlake  = stable: unstable: { inherit stable unstable; }.${stability};
-		nixpkgs     = selecFlake inputs.nixos-stable inputs.nixos-unstable;
-		homeManager = selecFlake inputs.home-manager-stable.nixosModules inputs.home-manager-unstable.nixoModules;
-		
-	  userConfig    = ../nixos/${hostname}/configuration.nix; # Spesific Configs for Current system/Machine (ex Hardware, Utilities etc)
- 	  sharedConfig  = ../nixos/shared ;                       # Global Configs for AllSystem.
+  system,
+  username,
+  extraModules ? [ ],
+  extraHomeModules ? [ ], 
+  nixOnDroid ? false,
+  darwin ? false,
+  home ? false,
+  wsl ? false
+}:
 
-		in nixpkgs.lib.nixosSystem {
-			specialArgs = { inherit inputs system hostname username nixpkgs homeManager extraModules isWSL isLinux flakeRoot; };
-			modules = [
+let
+  isWSL = wsl;
+  isHome = home;
+  isDarwin = darwin;
+  isAndroid = nixOnDroid;
+  isLinux = !isDarwin && !isWSL && !isAndroid && !isHome;
 
-		    # Bring in WSL if this is a WSL build
-		    (if isWSL then inputs.nixos-wsl.nixosModules.wsl else {})
+  flakeRoot = self;
+  selectFlake = stable: unstable: if stability == "stable" then stable else unstable;
 
-		    # Snapd on Linux
-		    (if isLinux then inputs.nix-snapd.nixosModules.default else {})
+  # --- NIXOS (LINUX & WSL) ---
+  nixosConfig = let
+    pkgsIn = selectFlake inputs.nixos-stable inputs.nixos-unstable;
+    hmModule = selectFlake inputs.home-manager-stable.nixosModules.home-manager inputs.home-manager-unstable.nixosModules.home-manager;
+  in if (isLinux || isWSL) then pkgsIn.lib.nixosSystem {
+    specialArgs = { inherit inputs system hostname username pkgsIn flakeRoot extraHomeModules isWSL isLinux isDarwin; };
+    modules = [
+      ../nixos/${hostname}/configuration.nix # Spesific Configs for Current system/Machine (ex Hardware, Utilities etc)
+      ../nixos/share                         # Global Configs for AllSystem 
+      hmModule
+    ] ++ (if isWSL then [ inputs.wsl.nixosModules.wsl ] else [ inputs.nix-snapd.nixosModules.default ])
+      ++ extraModules; 
+  } else { };
 
-				userConfig
-				sharedConfig
-			];
-		};
+  # --- DARWIN ---
+  darwinConfig = let
+    pkgsIn = selectFlake inputs.nix-darwin-stable inputs.nix-darwin-unstable;
+    hmModule = selectFlake inputs.home-manager-stable.darwinModules.home-manager inputs.home-manager-unstable.darwinModules.home-manager;
+  in if isDarwin then pkgsIn.lib.darwinSystem {
+    specialArgs = { inherit inputs system hostname username flakeRoot extraHomeModules isWSL isLinux isDarwin; };
+    modules = [ 
+      ../darwin/${hostname}/configuration.nix # Spesific Configs for Current system/Machine (ex Hardware, Utilities etc)
+      ../darwin/shared                        # Global Configs for AllSystem 
+      hmModule 
+    ] ++ extraModules;
+  } else { };
 
-	darwin = hostname: { username, stability ? "stable", system ? "aarch64-darwin", extraModules ? [] }: let
-		selecFlake  = stable: unstable: { inherit stable unstable; }.${stability};
-		nixpkgs     = selecFlake inputs.darwin-stable inputs.darwin-unstable;
-		homeManager = selecFlake inputs.home-manager-stable.darwinModules inputs.home-manager-unstable.darwinModules;
-		
-	  userConfigs   = ../darwin/${hostname}/configuration.nix; # Spesific Configs for Current system/Machine (ex Hardware, Utilities etc)
- 	  sharedConfigs = ../darwin/shared ;                       # Global Configs for AllSystem.
+  # --- HOME-MANAGER STANDALONE ---
+  hmConfig = let
+    pkgsIn = selectFlake inputs.nixos-stable inputs.nixos-unstable;
+    hmLib = selectFlake inputs.home-manager-stable inputs.home-manager-unstable;
+  in if isHome then hmLib.lib.homeManagerConfiguration {
+    pkgs = pkgsIn.legacyPackages.${system};
+    extraSpecialArgs = { inherit system hostname username pkgsIn flakeRoot extraHomeModules isWSL isLinux isDarwin; 
+      rootInputs = inputs;
+    };
+    # Global Home-manager Config,
+    # extraHomeModules: for Specific/personal configurations (ex dotfiles)  
+    modules = [ ../home/shared ] ++ extraHomeModules; 
+  } else { };
 
-		in inputs.nix-darwin.lib.darwinSystem {
-			specialArgs = { inherit inputs system hostname username nixpkgs homeManager extraModules flakeRoot; };
-			modules = [ userConfigs sharedConfigs userHMConfig ];
-		};
+  # --- LOGIKA NIX-ON-DROID ---
+  androidConfig = let
+    pkgsIn   = selectFlake inputs.nixos-stable inputs.nixos-unstable;
+    hmModule = selectFlake inputs.home-manager-stable.nixosModules.home-manager inputs.home-manager-unstable.nixosModules.home-manager;
+  in if isAndroid then inputs.nix-on-droid.lib.nixOnDroidConfiguration {
+    pkgs = import pkgsIn {
+      inherit system;
+      overlays = [ (import ./overlays args).default inputs.nix-on-droid.overlays.default ];
+      config   = (import ./nixpkgs args).config;
+    };
+    extraSpecialArgs = { inherit inputs system hostname username pkgsIn flakeRoot isWSL isLinux isDarwin; };
+    modules = [
+      ../android/shared.nix # Global Configs for AllSystem 
+      hmModule
+      {
+        home-manager = {
+          useGlobalPkgs       = true;
+          useUserPackages     = true;
+          backupFileExtension = "hm-bak";
+          # Global Home-manager Config,
+          # extraHomeModules: for Specific/personal configurations (ex dotfiles)  
+          config              = { imports = [ ../home/shared ] ++ extraHomeModules; }; 
+        };
+      }
+    ] ++ extraModules;
+  } else { };
 
-	home = username: { stability ? "stable", system, extraHomeModules ? [] }: let
-		selecFlake  = stable: unstable: { inherit stable unstable; }.${stability};
-		nixpkgs     = selecFlake inputs.nixos-stable inputs.nixos-unstable;
-		homeManager = selecFlake inputs.home-manager-stable inputs.home-manager-unstable;
-		
-		userHMConfig  = ../home/shared; # Global Home-manager Config, extraHomeModules: for Specific/personal configurations (ex dotfiles) 
-
-		in homeManager.lib.homeManagerConfiguration {
-			pkgs = nixpkgs.legacyPackages.${system};
-			extraSpecialArgs = { inherit system username nixpkgs homeManager extraHomeModules flakeRoot; };
-			modules = [ userHMConfig extraHomeModules ];
-		};
-
-
-	nixOnDroid = hostname: { username, stability ? "stable", system ? "aarch64-linux", extraHomeModules ? [] }: let
-		selecFlake  = stable: unstable: { inherit stable unstable; }.${stability};
-		nixpkgs     = selecFlake inputs.nixos-stable inputs.nixos-unstable;
-		homeManager = selecFlake inputs.home-manager-stable inputs.home-manager-unstable;
-		
- 	  sharedConfigs = ../android/shared.nix ;                # Global Configs for AllSystem.
-		userHMConfig  = [ ../home/shared ] ++ extraHomeModules;   # Global Home-manager Config, extraHomeModules: for Specific/personal configurations (ex dotfiles) 
-
-		in inputs.nix-on-droid.lib.nixOnDroidConfiguration {
-			pkgs = import nixpkgs {
-				inherit system;
-				overlays = [ ( import ./overlays args ).default inputs.nix-on-droid.overlays.default ];
-				config = ( import ./nixpkgs args ).config;
-			};
-			extraSpecialArgs = { inherit system hostname username nixpkgs homeManager extraHomeModules flakeRoot; };
-			home-manager-path = homeManager.outPath;
-			modules = [
-				sharedConfigs
-				{
-				  home-manager = {
-				    useGlobalPkgs = true;
-				    useUserPackages = true;
-				    backupFileExtension = "hm-bak";
-				    config = userHMConfig;
-				  };			
-				}
-			];
-		};
-
-}
+in
+nixosConfig // darwinConfig // hmConfig // androidConfig
