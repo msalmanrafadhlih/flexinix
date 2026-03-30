@@ -1,4 +1,4 @@
-{ self, ... }: {
+{ inputs, self, ... }: {
   # NixOS funcion : hostname { arch; username; extraModules; wsl; darwin; }
   # sudo nixos-rebuild (switch | build-vm) --flake ./#( infinix | wsl | mac ... )
   infinix = self.mkHost "stable" {
