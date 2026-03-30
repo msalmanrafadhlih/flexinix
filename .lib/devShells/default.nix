@@ -9,6 +9,8 @@ in lib.genAttrs
       overlays = [ (import ../overlays inputs).default ];
     };
   in {
+    
+    # Defaul
     default = inputs.devenv.lib.mkShell {
       inherit inputs pkgs;
       modules = [
@@ -21,10 +23,13 @@ in lib.genAttrs
         }
       ];
     };
+
+    # Flutter
     flutter = inputs.devenv.lib.mkShell {
       inherit inputs pkgs;
       modules = [
         ./flutter.nix
       ];
     };
+
   })
