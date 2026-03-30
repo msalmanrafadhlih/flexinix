@@ -9,20 +9,24 @@
     };
   in {
     # set your profile systems here!
-    stateVersion = "25.11";
-    timezone = "Asia/Jakarta";
+    timezone     = "Asia/Jakarta";
+    locale       = "en_US.UTF-8";
+    stateVersion = {
+      linux  = "25.11";
+      darwin = 4;
+    };
 
+    schemas                  = mylibs.schemas;        # not merged yet: https://github.com/NixOS/nix/pull/8892
     overlays                 = mylibs.overlays;       # overlays.default is the sum of all the overlays
     packages                 = mylibs.packages;       # custom packages built against nixpkgs
     devShells                = mylibs.devShells;
+    systemConfigs            = mylibs.systemConfig;
     legacyPackages           = mylibs.legacyPackages; # applies overlays.default to nixpkgs.legacyPackages
-    systemConfigs            = mylibs.systemConfigs;
-    schemas                  = mylibs.schemas;        # not merged yet: https://github.com/NixOS/nix/pull/8892
 
-    nixosConfigurations      = import ./nixosConfigurations      { inherit inputs; inherit (mylibs) mkConfigs; };
-    homeConfigurations       = import ./homeConfigurations       { inherit inputs; inherit (mylibs) mkConfigs; };
-    darwinConfigurations     = import ./darwinConfigurations     { inherit inputs; inherit (mylibs) mkConfigs; };
-    nixOnDroidConfigurations = import ./nixOnDroidConfigurations { inherit inputs; inherit (mylibs) mkConfigs; }; # nix-on-droid switch --flake github:msalmanrafadhlih/flexinix
+    nixosConfigurations      = import ./nixos      { inherit inputs; inherit (mylibs) mkConfigs; };
+    homeConfigurations       = import ./home       { inherit inputs; inherit (mylibs) mkConfigs; };
+    darwinConfigurations     = import ./darwin     { inherit inputs; inherit (mylibs) mkConfigs; };
+    nixOnDroidConfigurations = import ./android    { inherit inputs; inherit (mylibs) mkConfigs; }; # nix-on-droid switch --flake github:msalmanrafadhlih/flexinix
   };
 
   inputs = {
@@ -45,11 +49,11 @@
     home-manager-stable      = { url = "github:nix-community/home-manager"; inputs.nixpkgs.follows = "nixos-stable-lib"; };
     home-manager-unstable    = { url = "github:nix-community/home-manager"; inputs.nixpkgs.follows = "nixos-unstable-lib"; };
     # - Nix-Darwin
-    nix-darwin               = { url = "github:lnl7/nix-darwin/master"; inputs.nixpkgs.follows = "nixos-stable-lib"; };
+    nix-darwin               = { url = "github:nix-darwin/nix-darwin/master"; inputs.nixpkgs.follows = "nixos-stable-lib"; };
     darwin-stable.url        = "github:NixOS/nixpkgs/nixpkgs-25.11-darwin";
     darwin-unstable.url      = "github:NixOS/nixpkgs/nixpkgs-unstable"; # darwin-unstable for now (https://github.com/NixOS/nixpkgs/issues/107466)
     # - Nix-WSL
-    wsl                      = { url = "github:nix-community/NixOS-WSL"; inputs.nixpkgs.follows = "nixos-stable-lib"; };
+    nixos-wsl                = { url = "github:nix-community/NixOS-WSL"; inputs.nixpkgs.follows = "nixos-stable-lib"; };
     # - Nix-on-Droid
     nix-on-droid             = { url = "github:nix-community/nix-on-droid/master";
       inputs                 = { nixpkgs.follows = "nixos-stable-lib";
@@ -62,7 +66,10 @@
     flake-utils.url          = "github:numtide/flake-utils"; # MultiSystem helper 
     flake-compat             = { url = "github:edolstra/flake-compat"; flake = false; }; # tool = nonflake 
     flake-parts              = { url = "github:hercules-ci/flake-parts"; inputs.nixpkgs-lib.follows = "nixos-stable-lib"; }; # tool = Modular Flake 
-    
+    system-manager           = { url = "github:numtide/system-manager";
+      inputs.nixpkgs.follows = "nixos-stable";
+    };   
+
     # /// development_tools ////////////////////////////////////////////
     devshell                 = { url = "github:numtide/devshell"; inputs.nixpkgs.follows = "nixos-stable-lib"; };
     devenv                   = { url = "github:cachix/devenv";
@@ -76,5 +83,13 @@
 
     # /// package_managers /////////////////////////////////////////////
     nur.url                  = "github:nix-community/NUR";
+    nix-snapd                = { url = "github:nix-community/nix-snapd"; inputs.nixpkgs.follows = "nixos-stable-lib"; };
+
+    # home-manager configurations
+    racooonfig = {
+      url = "github:msalmanrafadhlih/racooonfig";
+      # url = "path:./development"; # for local testing
+      inputs.nixpkgs.follows = "nixos-stable-lib";
+    };
   };
 }
