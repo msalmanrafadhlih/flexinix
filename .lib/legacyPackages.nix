@@ -1,11 +1,12 @@
 inputs: let
   lib = inputs.nixos-stable.lib;
-in lib.genAttrs 
-  lib.systems.flakeExposed
-  (system:
+  forAllSystems = lib.genAttrs lib.systems.flakeExposed;
+in forAllSystems (
+  system:
     import inputs.nixpkgs {
       inherit system;
       overlays = [ (import ./overlays inputs).default ];
       config = (import ./nixpkgs inputs).config;
     }
   )
+  
