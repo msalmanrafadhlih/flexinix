@@ -24,10 +24,5 @@
     ./fonts.nix
     ./sudo.nix
     # ./kanata.nix
-
-    # My Specialisation config use `nixos-rebuild --specialisation (bspwm / hyprland / niri)`
-    ./specialisations/bspwm
-    ./specialisations/hyprland
-    ./specialisations/niri
   ];
 }

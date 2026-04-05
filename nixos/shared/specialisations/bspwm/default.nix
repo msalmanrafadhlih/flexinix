@@ -5,8 +5,6 @@
 	system,
 	hostname,
 	flakeRoot,
-	isWSL,
-	isLinux,
   ...
 }: let
 	
@@ -51,14 +49,14 @@ in {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.backupFileExtension = "backup";
-      home-manager.extraSpecialArgs = { inherit system username hostname flakeRoot isWSL isLinux;
+      home-manager.extraSpecialArgs = { inherit system username hostname flakeRoot;
         rootInputs = inputs;
         inputs = inputs.racooonfig.inputs;
       };
       home-manager.users = {
         ${username} = {
         	imports = [
-        		../../../../home/shared
+        		../../../../home/shared/nixos.nix
         		inputs.racooonfig.default
         	];
         };

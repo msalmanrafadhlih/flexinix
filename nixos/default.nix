@@ -1,10 +1,19 @@
-{ inputs, self, ... }: {
+{ inputs, mkConfigs, ... }: {
+
   # NixOS funcion : hostname { arch; username; extraModules; wsl; darwin; }
   # sudo nixos-rebuild (switch | build-vm) --flake ./#( infinix | wsl | mac ... )
-  infinix = self.mkHost "stable" {
-    hostname     = "infinix";
+
+  infinix = mkConfigs.nixos "stable" {
+    hostname     = "inbook-x1";
     username     = "tquilla";
     system       = "x86_64-linux";
-    extraModules = [ inputs.racooonfig.homeModules.default ];
+    extraModules = [];
+  };
+
+  wsl = mkConfigs.nixos "stable" {
+    hostname = "wsl";
+    system   = "x86_64-linux";
+    username = "tquilla";
+    wsl      = true;
   };
 }

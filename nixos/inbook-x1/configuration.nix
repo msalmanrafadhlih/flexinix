@@ -16,6 +16,11 @@ in
     ./modules/fileSystems.nix
     
     ./hardware-configuration.nix
+
+    # My Specialisation config use `nixos-rebuild --specialisation (bspwm / hyprland / niri)`
+    ../shared/specialisations/bspwm
+    ../shared/specialisations/hyprland
+    ../shared/specialisations/niri
   ];
 
   nix = {
