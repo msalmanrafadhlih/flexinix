@@ -1,6 +1,14 @@
 { flakeRoot, ... }:
 
 {
+
+  _module.args = {
+    isDarwin  = false;
+    isLinux   = true;
+    isWSL     = false;
+    isAndroid = false;
+  };
+
   imports = [
     ./virtmanager.nix
     ./variables.nix
