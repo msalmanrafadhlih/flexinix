@@ -10,20 +10,11 @@
   };
 
   imports = [
-    ./virtmanager.nix
-    ./variables.nix
-    ./starship.nix
-    ./lazygit.nix
-    ./wezterm.nix
-    ./serpl.nix # tui find and replace tool, good for integratinng with terminal editors
-    ./btop.nix
-    ./git.nix
-    ./helix
-    ./shell
-    ./yazi
-    ./tmux
-
-    # ./zellij
+    ./shared/serpl.nix # tui find and replace tool, good for integratinng with terminal editors
+    ./shared/git.nix
+    ./shared/helix
+    ./shared/shell
+    ./shared/yazi
   ];
   
   # insert home-manager config

@@ -3,25 +3,25 @@
 {
 
   _module.args = {
-    isDarwin  = true;
-    isLinux   = false;
+    isDarwin  = false;
+    isLinux   = true;
     isWSL     = false;
     isAndroid = false;
   };
 
   imports = [
-    ./virtmanager.nix
-    ./variables.nix
-    ./starship.nix
-    ./lazygit.nix
-    ./wezterm.nix
-    ./serpl.nix # tui find and replace tool, good for integratinng with terminal editors
-    ./btop.nix
-    ./git.nix
-    ./helix
-    ./shell
-    ./yazi
-    ./tmux
+    ./shared/virtmanager.nix
+    ./shared/variables.nix
+    ./shared/starship.nix
+    ./shared/lazygit.nix
+    ./shared/wezterm.nix
+    ./shared/serpl.nix # tui find and replace tool, good for integratinng with terminal editors
+    ./shared/btop.nix
+    ./shared/git.nix
+    ./shared/helix
+    ./shared/shell
+    ./shared/yazi
+    ./shared/tmux
 
     # ./zellij
   ];
