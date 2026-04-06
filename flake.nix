@@ -23,10 +23,10 @@
     systemConfigs            = mylibs.systemConfig;
     legacyPackages           = mylibs.legacyPackages; # applies overlays.default to nixpkgs.legacyPackages
 
-    nixosConfigurations      = import ./nixos      { inherit inputs; inherit (mylibs) mkConfigs; };
-    homeConfigurations       = import ./home       { inherit inputs; inherit (mylibs) mkConfigs; };
-    darwinConfigurations     = import ./darwin     { inherit inputs; inherit (mylibs) mkConfigs; };
-    nixOnDroidConfigurations = import ./android    { inherit inputs; inherit (mylibs) mkConfigs; }; # nix-on-droid switch --flake github:msalmanrafadhlih/flexinix
+    nixosConfigurations      = import ./nixosConfigurations.nix      { inherit inputs; inherit (mylibs) mkConfigs; };
+    homeConfigurations       = import ./homeConfigurations.nix       { inherit inputs; inherit (mylibs) mkConfigs; };
+    darwinConfigurations     = import ./darwinConfigurations.nix     { inherit inputs; inherit (mylibs) mkConfigs; };
+    nixOnDroidConfigurations = import ./androidConfigurations.nix    { inherit inputs; inherit (mylibs) mkConfigs; }; # nix-on-droid switch --flake github:msalmanrafadhlih/flexinix
   };
 
   inputs = {

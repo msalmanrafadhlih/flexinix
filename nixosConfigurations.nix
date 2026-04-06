@@ -7,7 +7,6 @@
     hostname     = "inbook-x1";
     username     = "tquilla";
     system       = "x86_64-linux";
-    extraModules = [];
   };
 
   wsl = mkConfigs.nixos "stable" {
