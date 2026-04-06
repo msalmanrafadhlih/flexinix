@@ -1,6 +1,6 @@
 # System Zsh Configuration
 { pkgs,  isLinux, isWSL, ... }: let
-  aliases = import ./aliases.nix { inherit isWSL isLinux ;};
+  aliases = import ./aliases.nix { inherit isWSL isLinux;};
 in {
 
 	users.defaultUserShell = pkgs.zsh;
