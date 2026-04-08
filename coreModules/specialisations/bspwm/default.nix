@@ -5,6 +5,10 @@
 	system,
 	hostname,
 	flakeRoot,
+	isLinux,
+	isDarwin,
+	isWSL,
+	isAndroid,
   ...
 }: let
 
@@ -49,7 +53,7 @@ in {
       useGlobalPkgs = true;
       useUserPackages = true;
       backupFileExtension = "backup";
-      extraSpecialArgs = { inherit system username hostname flakeRoot;
+      extraSpecialArgs = { inherit system username hostname flakeRoot isAndroid isWSL isLinux isDarwin;
         rootInputs = inputs;
         inputs = inputs.racooonfig.inputs;
       };
