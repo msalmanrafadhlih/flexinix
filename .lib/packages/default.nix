@@ -6,7 +6,7 @@ in forAllSystems (
     pkgs = import inputs.nixos-unstable {
       inherit system;
       config = (import ../nixpkgs { inherit inputs; }).config;
-      overlays = [ (import ./overlays.nix { inherit inputs; }).default ];
+      overlays = [ (import ../overlays { inherit inputs; }).default ];
     };
   in
 

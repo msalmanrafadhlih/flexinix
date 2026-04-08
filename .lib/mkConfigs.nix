@@ -69,8 +69,8 @@ in
 		in hmManager.lib.homeManagerConfiguration {
 			pkgs = import pkgsIn {
 				inherit system;
-				overlays = [ ( import ./overlays args ).default ];
-				config   = ( import ./nixpkgs args ).config;
+				overlays = [ ( import ./overlays { inherit inputs; }).default ];
+				config   = ( import ./nixpkgs { inherit inputs; }).config;
 			};
       extraSpecialArgs = { inherit system hostname username pkgsIn flakeRoot isAndroid isLinux isDarwin isWSL; 
         rootInputs = inputs;
@@ -95,8 +95,8 @@ in
 		in inputs.nix-on-droid.lib.nixOnDroidConfiguration {
 			pkgs = import pkgsIn {
 				inherit system;
-				overlays = [ ( import ./overlays args ).default inputs.nix-on-droid.overlays.default ];
-				config   = ( import ./nixpkgs args ).config;
+				overlays = [ ( import ./overlays { inherit inputs; }).default inputs.nix-on-droid.overlays.default ];
+				config   = ( import ./nixpkgs { inherit inputs; }).config;
 			};
 			extraSpecialArgs = { inherit inputs system pkgsIn flakeRoot isAndroid isLinux isDarwin isWSL; };
 			home-manager-path = hmManager.outPath;
