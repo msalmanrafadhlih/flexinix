@@ -4,7 +4,7 @@
   system.autoUpgrade = {
     enable = true;
 
-    flake = flakeRoot.outhPath;
+    flake = flakeRoot.outPath;
 
     flags = [
       "--update-input" "nixpkgs"
