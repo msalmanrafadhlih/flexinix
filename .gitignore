@@ -17,9 +17,6 @@
 # user/hardware-configuration.nix
 
 # ---- Ignore local configurations ----
-/bspwm/
-/niri/
-/hyprland/
 /development/
 
 # ---- System & Editor junk ----
