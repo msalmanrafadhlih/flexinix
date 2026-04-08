@@ -7,8 +7,8 @@
     modulePath: lib.genAttrs systems (system: let
       pkgs = import inputs.nixos-unstable {
         inherit system;
-        config = (import ../nixpkgs { inherit inputs; }).config;
-        overlays = [ (import ../overlays { inherit inputs; }).default ];
+        config = (import ./nixpkgs { inherit inputs; }).config;
+        overlays = [ (import ./overlays { inherit inputs; }).default ];
       };
     in 
     import modulePath { inherit pkgs; }
