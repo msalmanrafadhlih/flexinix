@@ -61,7 +61,7 @@ in {
         ${username} = {
         	imports = [
         		../../../homeModules
-        		inputs.racooonfig.default
+        		inputs.racooonfig.homeModules.default
         	];
         };
       };
