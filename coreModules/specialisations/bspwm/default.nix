@@ -7,7 +7,7 @@
 	flakeRoot,
   ...
 }: let
-	
+
 in {
 	specialisation.bspwm.configuration = {
 		imports = [
@@ -46,14 +46,14 @@ in {
 		};	
 
     home-manager = {
-      home-manager.useGlobalPkgs = true;
-      home-manager.useUserPackages = true;
-      home-manager.backupFileExtension = "backup";
-      home-manager.extraSpecialArgs = { inherit system username hostname flakeRoot;
+      useGlobalPkgs = true;
+      useUserPackages = true;
+      backupFileExtension = "backup";
+      extraSpecialArgs = { inherit system username hostname flakeRoot;
         rootInputs = inputs;
         inputs = inputs.racooonfig.inputs;
       };
-      home-manager.users = {
+      users = {
         ${username} = {
         	imports = [
         		../../../homeModules

@@ -5,8 +5,11 @@
   # Bagian yang menangani outputs.packages
   mkSystemPackages =
     modulePath: lib.genAttrs systems (system: let
-      basePkgs = inputs.nixos-unstable.legacyPackages.${system};
-      pkgs = basePkgs.extend (import ../overlays { inherit inputs; }).default;
+      pkgs = import inputs.nixos-unstable {
+        inherit system;
+        config = (import ../nixpkgs { inherit inputs; }).config;
+        overlays = [ (import ../overlays { inherit inputs; }).default ];
+      };
     in 
     import modulePath { inherit pkgs; }
   );
