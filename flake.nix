@@ -29,10 +29,10 @@
   };
 
   inputs = {
-    # # /// nixpkgs version ///////////////////////////////////////////////
-    # # /// take it from the registry /////////////////////////////////////
-    # # - `nix registry add nixpkgs github:NixOS/nixpkgs/<some-branch-version>`
-    # nixpkgs                  = { type = "indirect"; id = "nixpkgs"; };
+    # /// nixpkgs version ///////////////////////////////////////////////
+    # /// take it from the registry /////////////////////////////////////
+    # - `nix registry add nixpkgs github:NixOS/nixpkgs/<some-branch-version>`
+    nixpkgs                  = { type = "indirect"; id = "nixpkgs"; };
 
     # - nixos Stable
     nixos-stable.url         = "github:NixOS/nixpkgs/nixos-25.11";
