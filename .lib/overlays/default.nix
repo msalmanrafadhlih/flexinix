@@ -13,11 +13,11 @@
   all-channels = final: prev: {
     stable = import inputs.nixos-stable {
       system = prev.stdenv.hostPlatform.system;
-			config = ( import ../nixpkgs inputs ).config;
+			config = ( import ../nixpkgs { inherit inputs; } ).config;
     };
     unstable = import inputs.nixos-unstable {
       system = prev.stdenv.hostPlatform.system;
-			config = ( import ../nixpkgs inputs ).config;
+			config = ( import ../nixpkgs { inherit inputs; } ).config;
     };
   };
 

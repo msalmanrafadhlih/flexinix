@@ -5,8 +5,8 @@ in forAllSystems (
   system:
     import inputs.nixos-unstable {
       inherit system;
-      overlays = [ (import ./overlays inputs).default ];
-      config = (import ./nixpkgs inputs).config;
+      overlays = [ (import ./overlays { inherit inputs; }).default ];
+      config = (import ./nixpkgs { inherit inputs; }).config;
     }
   )
   
