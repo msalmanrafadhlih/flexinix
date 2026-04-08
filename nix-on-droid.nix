@@ -5,7 +5,7 @@
 
   default = mkConfigs.nixOnDroid "stable" {
     system           = "aarch64-linux";
-    extraModules     = [ ./android/1980 ];
+    extraModules     = [ ./hosts/And-1980/configuration.nix ];
     extraHomeModules = [];
   };
 }
