@@ -83,7 +83,6 @@
       inputs = {
         nixpkgs.follows        = "nixos-stable-lib";
         flake-compat.follows   = "flake-compat";
-        nixpkgs-stable.follows = "nixos-stable-lib";
       };  
     };
     
