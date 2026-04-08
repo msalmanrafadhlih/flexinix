@@ -5,7 +5,7 @@
 
 # prev:  = Use if you want to refer to the original package from nixpkgs before modification.
 
- inputs: rec {
+ { inputs, ... }: rec {
   # ... This one brings our custom packages from the 'pkgs' directory
   local-packages = (final: prev: import ../packages {pkgs = final; inherit inputs;});
 
