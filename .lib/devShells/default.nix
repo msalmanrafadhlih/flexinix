@@ -15,7 +15,7 @@ in lib.genAttrs
       inherit inputs pkgs;
       modules = [
         {
-          devenv.root = ../../. ;
+          devenv.root = builtins.toString ../../. ;
           languages.nix.enable = true;
           packages = with pkgs; [
             devenv
@@ -29,7 +29,7 @@ in lib.genAttrs
     flutter = inputs.devenv.lib.mkShell {
       inherit inputs pkgs;
       modules = [
-        { devenv.root = ../../. ; }
+        { devenv.root = builtins.toString ../../. ; }
         ./flutter.nix
       ];
     };
