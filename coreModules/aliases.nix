@@ -1,8 +1,13 @@
-
 # ./aliases.nix
-{ isWSL, isLinux }:
+{ isWSL, isLinux, isDarwin, isAndroid, ... }:
 
 let
+  #########
+  # DARWIN ONLY ALIASES
+  darwinOnly = if isDarwin then {
+
+  } else {};
+
   #########
   # WSL ONLY ALIASES
   wslOnly = if isWSL then {
@@ -10,8 +15,24 @@ let
   } else {};
 
   #########
+  # Android ONLY ALIASES
+  AndroidOnly = if isAndroid then {
+
+  } else {};
+
+  #########
   # LINUX ONLY ALIASES
   linuxOnly = if isLinux then {
+
+    tquilla = "colorscript -r";
+
+    SYSAPPS = "thunar /run/current-system/sw/share/applications";
+    TV = "nix run nixpkgs#television";
+
+    ## Xutils
+    CLASS = "xprop | grep CLASS";
+    NAME = "xprop | grep NAME";
+    WMINFO = "nix-shell -p xwininfo --run xwininfo";
 
     RUNNING = "systemctl --user list-units --state=running";
     SYSRUNNING = "systemctl list-units --state=running";
@@ -64,6 +85,16 @@ let
     MAKE = "make clean && make && make install PREFIX=$HOME/.local";
     SUCKLESS = "hx ~/.dotfiles/$XDG_CURRENT_DESKTOP/configs/suckless/default.nix";
 
+    ## Scripts
+    CAM = "~/.local/bin/opencam";
+    IMGCOMPRESS = "~/.local/bin/compress-images.sh";
+    DTAR = "~/.local/bin/tar.sh"; ## overwite folder to folder.tar.gz
+    XYZ = "~/.local/bin/xyz.sh";
+    MPG = "ffmpeg -i"; ## MPG <path/to/img.png> <overwrite/img/file-extension>
+    AISTUDIO = "cd ~/.config/aistudio";
+    yz = "yazi";
+    YZ = "yazi";
+
     # NIXOS Aliases
     PKG = "nix search nixpkgs";
     SRC = "fc-list | grep -i";
@@ -86,16 +117,6 @@ let
   #######
   # COMMON ALIASES
   common = {
-    tquilla = "colorscript -r";
-
-    SYSAPPS = "thunar /run/current-system/sw/share/applications";
-    TV = "nix run nixpkgs#television";
-
-    ## Xutils
-    CLASS = "xprop | grep CLASS";
-    NAME = "xprop | grep NAME";
-    WMINFO = "nix-shell -p xwininfo --run xwininfo";
-
     ## Tmux
     TMUXSAVE = "tmux source-file ~/.config/tmux/tmux.conf";
     TMUXDEL = "tmux kill-server";
@@ -105,15 +126,6 @@ let
     py = "python3";
     PY-SERVER = "python3 -m http.server";
 
-    ## Scripts
-    CAM = "~/.local/bin/opencam";
-    IMGCOMPRESS = "~/.local/bin/compress-images.sh";
-    DTAR = "~/.local/bin/tar.sh"; ## overwite folder to folder.tar.gz
-    XYZ = "~/.local/bin/xyz.sh";
-    MPG = "ffmpeg -i"; ## MPG <path/to/img.png> <overwrite/img/file-extension>
-    AISTUDIO = "cd ~/.config/aistudio";
-    yz = "yazi";
-    YZ = "yazi";
 
     # Others
     CLEAR = "clear";
@@ -124,4 +136,4 @@ let
     c = "clear";
 
   };
-in common // linuxOnly // wslOnly
+in common // linuxOnly // darwinOnly // wslOnly // AndroidOnly

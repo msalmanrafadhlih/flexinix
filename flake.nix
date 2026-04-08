@@ -20,29 +20,31 @@
     overlays                 = mylibs.overlays;       # overlays.default is the sum of all the overlays
     packages                 = mylibs.packages;       # custom packages built against nixpkgs
     devShells                = mylibs.devShells;
-    systemConfigs            = mylibs.systemConfig;
     legacyPackages           = mylibs.legacyPackages; # applies overlays.default to nixpkgs.legacyPackages
 
-    nixosConfigurations      = import ./nixosConfigurations.nix      { inherit inputs; inherit (mylibs) mkConfigs; };
-    homeConfigurations       = import ./homeConfigurations.nix       { inherit inputs; inherit (mylibs) mkConfigs; };
-    darwinConfigurations     = import ./darwinConfigurations.nix     { inherit inputs; inherit (mylibs) mkConfigs; };
-    nixOnDroidConfigurations = import ./androidConfigurations.nix    { inherit inputs; inherit (mylibs) mkConfigs; }; # nix-on-droid switch --flake github:msalmanrafadhlih/flexinix
+    nixosConfigurations      = import ./hosts/nixos.nix      { inherit inputs; inherit (mylibs) mkConfigs; };
+    homeConfigurations       = import ./hosts/home.nix       { inherit inputs; inherit (mylibs) mkConfigs; };
+    darwinConfigurations     = import ./hosts/darwin.nix     { inherit inputs; inherit (mylibs) mkConfigs; };
+    nixOnDroidConfigurations = import ./hosts/android.nix    { inherit inputs; inherit (mylibs) mkConfigs; }; # nix-on-droid switch --flake github:msalmanrafadhlih/flexinix
   };
 
   inputs = {
-    # /// nixpkgs version ///////////////////////////////////////////////
-    # /// take it from the registry /////////////////////////////////////
-    # - `nix registry add nixpkgs github:NixOS/nixpkgs/<some-branch-version>`
-    nixpkgs                  = { type = "indirect"; id = "nixpkgs"; };
+    # # /// nixpkgs version ///////////////////////////////////////////////
+    # # /// take it from the registry /////////////////////////////////////
+    # # - `nix registry add nixpkgs github:NixOS/nixpkgs/<some-branch-version>`
+    # nixpkgs                  = { type = "indirect"; id = "nixpkgs"; };
+
     # - nixos Stable
     nixos-stable.url         = "github:NixOS/nixpkgs/nixos-25.11";
     nixos-stable-lib.url     = "github:NixOS/nixpkgs/nixos-25.11?dir=lib"; # "github:nix-community/nixpkgs.lib" doesn't work
     nixos-stable-small.url   = "github:NixOS/nixpkgs/nixos-25.11-small";
+    darwin-stable.url        = "github:NixOS/nixpkgs/nixpkgs-25.11-darwin";
     # - nixos Unstable
     master.url               = "github:NixOS/nixpkgs/master";
     nixos-unstable.url       = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-unstable-lib.url   = "github:NixOS/nixpkgs/nixos-unstable?dir=lib";
     nixos-unstable-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    darwin-unstable.url      = "github:NixOS/nixpkgs/nixpkgs-unstable"; # darwin-unstable for now (https://github.com/NixOS/nixpkgs/issues/107466)
 
     # /// system-manager ////////////////////////////////////////////////
     # - Home-Manager
@@ -50,10 +52,10 @@
     home-manager-unstable    = { url = "github:nix-community/home-manager"; inputs.nixpkgs.follows = "nixos-unstable-lib"; };
     # - Nix-Darwin
     nix-darwin               = { url = "github:nix-darwin/nix-darwin/master"; inputs.nixpkgs.follows = "nixos-stable-lib"; };
-    darwin-stable.url        = "github:NixOS/nixpkgs/nixpkgs-25.11-darwin";
-    darwin-unstable.url      = "github:NixOS/nixpkgs/nixpkgs-unstable"; # darwin-unstable for now (https://github.com/NixOS/nixpkgs/issues/107466)
     # - Nix-WSL
-    nixos-wsl                = { url = "github:nix-community/NixOS-WSL"; inputs.nixpkgs.follows = "nixos-stable-lib"; };
+    nixos-wsl                = { url = "github:nix-community/NixOS-WSL";
+      inputs.nixpkgs.follows = "nixos-stable-lib";
+    };
     # - Nix-on-Droid
     nix-on-droid             = { url = "github:nix-community/nix-on-droid/master";
       inputs                 = { nixpkgs.follows = "nixos-stable-lib";
@@ -67,7 +69,7 @@
     flake-compat             = { url = "github:edolstra/flake-compat"; flake = false; }; # tool = nonflake 
     flake-parts              = { url = "github:hercules-ci/flake-parts"; inputs.nixpkgs-lib.follows = "nixos-stable-lib"; }; # tool = Modular Flake 
     system-manager           = { url = "github:numtide/system-manager";
-      inputs.nixpkgs.follows = "nixos-stable";
+      inputs.nixpkgs.follows = "nixos-stable-lib";
     };   
 
     # /// development_tools ////////////////////////////////////////////
@@ -77,7 +79,14 @@
         git-hooks.follows    = "git-hooks";
       };
     };
-
+    git-hooks = { url = "github:cachix/git-hooks.nix";
+      inputs = {
+        nixpkgs.follows        = "nixos-stable-lib";
+        flake-compat.follows   = "flake-compat";
+        nixpkgs-stable.follows = "nixos-stable-lib";
+      };  
+    };
+    
     # /// security/secret_tools ////////////////////////////////////////
     sops-nix.url             = "github:Mic92/sops-nix";
 

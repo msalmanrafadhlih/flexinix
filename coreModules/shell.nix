@@ -1,6 +1,6 @@
 # System Zsh Configuration
-{ pkgs,  isLinux, isWSL, ... }: let
-  aliases = import ./aliases.nix { inherit isWSL isLinux;};
+{ pkgs, isDarwin, isLinux, isWSL, isAndroid, ... }: let
+  aliases = import ./aliases.nix { inherit isWSL isLinux isDarwin isAndroid;};
 in {
 
 	users.defaultUserShell = pkgs.zsh;
@@ -16,6 +16,11 @@ in {
   	  shellAliases = aliases;
   	  syntaxHighlighting.enable = true;
     };
-  };
 
+	} // (if isDarwin then {
+    programs.fish = {
+      enable = true;
+      shellAliases = aliases;
+    };
+  } else {});
 }

@@ -11,8 +11,8 @@
 
   wsl = mkConfigs.nixos "stable" {
     hostname = "wsl";
-    system   = "x86_64-linux";
     username = "tquilla";
+    system   = "x86_64-linux";
     wsl      = true;
   };
 }

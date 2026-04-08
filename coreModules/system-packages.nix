@@ -1,12 +1,21 @@
-
 # ./modules/programs.nix
 # programs & system packages
-{ pkgs, ... }:
+{ isWSL, pkgs, lib, isDarwin, isLinux, ... }:
 
 {
-  programs.git.enable = true;
+  programs = {
+    git.enable = true;
+
+  } // (if isLinux then {
+    # firefox.enable = true;
+    thunderbird.enable = true;
+  } else {});
+
 
   environment.systemPackages = with pkgs; [
+
+    # User-facing stuff that you really really want to have
+    helix # or some other editor, e.g. nano or neovim
 
     # ======= CLI TOOLS (portable)
     gh            # GitHub CLI
@@ -29,8 +38,6 @@
 
     # ======= UTILITIES
     nixpkgs-fmt   # Nix formatter
-    cachix        # Nix binary cache client
-    gettext       # GNU gettext utilities (often missing on macOS)
 
     # ======= NETWORKING (portable)
     curl          # Transfer data via URL
@@ -47,5 +54,51 @@
     luajit        # High-performance Lua implementation
     python3       # Python interpreter
 
-  ];
+  ] ++ (lib.optionals isDarwin [
+
+    # ======= macOS ONLY
+    cachix        # Nix binary cache client
+    gettext       # GNU gettext utilities (often missing on macOS)
+
+  ]) ++ (lib.optionals isWSL [
+
+    # ======= wsl only
+    jujutsu # Smart Git
+
+  ]) ++ (lib.optionals isAndroid [
+
+    # Some common stuff that people expect to have
+    procps
+    killall
+    diffutils
+    findutils
+    utillinux
+    tzdata
+    hostname
+    man
+    gnugrep
+    gnupg
+    gnused
+    gnutar
+    bzip2
+    gzip
+    xz
+    zip
+    unzip
+
+  ]) ++ (lib.optionals (isLinux && !isWSL) [
+
+    # ======= LINUX ONLY
+    acpi          # Show battery / ACPI power information
+    psmisc        # Process utilities (killall, pstree)
+    inetutils     # Networking utilities (telnet, ftp, etc)
+    iputils       # Network utilities (ping, arping)
+
+    # ======= ARCHIVES
+    gnutar        # GNU tar archiver
+    p7zip         # 7z compression utility
+    unzip         # Extract .zip archives
+    xz            # XZ compression tools
+    zip           # Create .zip archives
+  ]);
 }

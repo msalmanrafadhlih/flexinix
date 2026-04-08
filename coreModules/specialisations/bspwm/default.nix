@@ -56,7 +56,7 @@ in {
       home-manager.users = {
         ${username} = {
         	imports = [
-        		../../../../home/shared/nixos.nix
+        		../../../homeModules
         		inputs.racooonfig.default
         	];
         };

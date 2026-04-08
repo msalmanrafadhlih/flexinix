@@ -18,9 +18,9 @@ in
     ./hardware-configuration.nix
 
     # My Specialisation config use `nixos-rebuild --specialisation (bspwm / hyprland / niri)`
-    ../shared/specialisations/bspwm
-    ../shared/specialisations/hyprland
-    ../shared/specialisations/niri
+    ../../coreModules/specialisations/bspwm
+    ../../coreModules/specialisations/hyprland
+    ../../coreModules/specialisations/niri
   ];
 
   nix = {

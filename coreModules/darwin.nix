@@ -1,16 +1,6 @@
-# ./configuration.nix
-{ username, pkgs, flakeRoot, ... }:
+{ flakeRoot, username, pkgs, ... }:
 
 {
-  imports = [
-    # ./nginx.nix
-    ./system-packages.nix
-    ./devenv.nix
-    ./shell.nix
-    ./users.nix
-    ./openssh.nix
-  ];
-
   homebrew = {
     enable = true;
     casks  = [
@@ -45,8 +35,7 @@
 
   # Required for some settings like homebrew to know what user to apply to.
   system = {
-    primaryUser = username;
     stateVersion = flakeRoot.stateVersion.darwin;
+    primaryUser = username;
   };
-
 }
