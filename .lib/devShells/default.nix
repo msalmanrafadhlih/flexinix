@@ -10,7 +10,7 @@ in lib.genAttrs
     };
   in {
     
-    # Defaul
+    # Default
     default = inputs.devenv.lib.mkShell {
       inherit inputs pkgs;
       modules = [
