@@ -27,10 +27,5 @@
     ./nix-ld.nix
     ./fonts.nix
     ./sudo.nix
-
-    # My Specialisation config use `nixos-rebuild --specialisation (bspwm / hyprland / niri)`
-    ../specialisations/bspwm
-    ../specialisations/hyprland
-    ../specialisations/niri
   ];
 }
