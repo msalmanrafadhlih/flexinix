@@ -1,6 +1,6 @@
 # ./modules/programs.nix
 # programs & system packages
-{ isWSL, pkgs, lib, isDarwin, isLinux, ... }:
+{ isWSL, pkgs, lib, isDarwin, isLinux, isAndroid, ... }:
 
 {
   programs = {
@@ -86,7 +86,7 @@
     zip
     unzip
 
-  ]) ++ (lib.optionals (isLinux && !isWSL) [
+  ]) ++ (lib.optionals isLinux [
 
     # ======= LINUX ONLY
     acpi          # Show battery / ACPI power information

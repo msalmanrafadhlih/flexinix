@@ -16,7 +16,7 @@
   ] ++ lib.optionals isAndroid [
     ./android.nix
 
-  ] ++ lib.optionals (isLinux && !isWSL) [
+  ] ++ lib.optionals isLinux [
     # ./kanata.nix
     ./users.nix
     ./nixos.nix
