@@ -1,4 +1,4 @@
-inputs: let 
+{ inputs, ... }: let 
   lib = inputs.nixos-stable.lib;
 in lib.genAttrs
   lib.systems.flakeExposed
