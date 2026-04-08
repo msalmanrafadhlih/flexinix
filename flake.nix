@@ -22,10 +22,10 @@
     devShells                = mylibs.devShells;
     legacyPackages           = mylibs.legacyPackages; # applies overlays.default to nixpkgs.legacyPackages
 
-    nixosConfigurations      = import ./hosts/nixos.nix      { inherit inputs; inherit (mylibs) mkConfigs; };
-    homeConfigurations       = import ./hosts/home.nix       { inherit inputs; inherit (mylibs) mkConfigs; };
-    darwinConfigurations     = import ./hosts/darwin.nix     { inherit inputs; inherit (mylibs) mkConfigs; };
-    nixOnDroidConfigurations = import ./hosts/android.nix    { inherit inputs; inherit (mylibs) mkConfigs; }; # nix-on-droid switch --flake github:msalmanrafadhlih/flexinix
+    nixosConfigurations      = import ./nixos-configuration.nix { inherit inputs; inherit (mylibs) mkConfigs; };
+    homeConfigurations       = import ./home-manager.nix        { inherit inputs; inherit (mylibs) mkConfigs; };
+    darwinConfigurations     = import ./nix-darwin.nix          { inherit inputs; inherit (mylibs) mkConfigs; };
+    nixOnDroidConfigurations = import ./nix-on-droid.nix        { inherit inputs; inherit (mylibs) mkConfigs; }; # nix-on-droid switch --flake github:msalmanrafadhlih/flexinix
   };
 
   inputs = {

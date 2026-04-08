@@ -5,7 +5,7 @@
   environment.etcBackupExtension = ".bak";
 
   # Read the changelog before changing this value
-  system.stateVersion = flakeRoot.outputs.stateVersion;
+  system.stateVersion = flakeRoot.stateVersion.linux;
 
   # set your time zone
   time.timeZone = flakeRoot.outputs.timezone;

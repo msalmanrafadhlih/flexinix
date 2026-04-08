@@ -1,4 +1,4 @@
-{ system, ... }:
+{ system, flakeRoot, ... }:
 {
 
   environment.pathsToLink = [ 
@@ -16,5 +16,5 @@
   security.rtkit.enable = true;
 
 
-  system.stateVersion = "25.11";
+  system.stateVersion = flakeRoot.stateVersion.linux;
 }
