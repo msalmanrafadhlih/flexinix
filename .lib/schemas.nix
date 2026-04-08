@@ -1,1 +1,1 @@
-inputs: inputs.flake-schemas.schemas
+{inputs, ...}: inputs.flake-schemas.schemas
