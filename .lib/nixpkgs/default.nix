@@ -1,3 +1,5 @@
+{ inouts, ... }:
+
 {
   config = {
     allowUnfree = true;
