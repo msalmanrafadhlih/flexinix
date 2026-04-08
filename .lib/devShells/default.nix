@@ -3,7 +3,7 @@ inputs: let
 in lib.genAttrs
   lib.systems.flakeExposed
   (system: let 
-    pkgs = import inputs.nixpkgs {
+    pkgs = import inputs.nixos-unstable {
       inherit system;
       config = (import ../nixpkgs inputs).config;
       overlays = [ (import ../overlays inputs).default ];

@@ -3,7 +3,7 @@
   forAllSystems = lib.genAttrs lib.systems.flakeExposed;
 in forAllSystems (
   system:
-    import inputs.nixpkgs {
+    import inputs.nixos-unstable {
       inherit system;
       overlays = [ (import ./overlays inputs).default ];
       config = (import ./nixpkgs inputs).config;
