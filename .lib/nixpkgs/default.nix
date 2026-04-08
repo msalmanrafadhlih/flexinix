@@ -1,4 +1,4 @@
-{ inouts, ... }:
+{ inputs, ... }:
 
 {
   config = {
