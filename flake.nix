@@ -97,7 +97,7 @@
     racooonfig = {
       url = "github:msalmanrafadhlih/racooonfig";
       # url = "path:./development"; # for local testing
-      inputs.nixpkgs.follows = "nixos-stable-lib";
+      inputs.nixpkgs.follows = "nixos-unstable";
     };
   };
 }
