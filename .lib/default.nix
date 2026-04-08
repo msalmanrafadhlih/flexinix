@@ -1,12 +1,21 @@
-{ ... }@args: let
+{ inputs, ... }@args: let
 
-  mkConfigs                = import ./mkConfigs.nix       args;
+  lib = inputs.nixos-stable.lib;
+  systems = lib.systems.flakeExposed;
+  # Bagian yang menangani outputs.packages
+  mkSystemPackages =
+    modulePath: lib.genAttrs systems (system: let
+      basePkgs = inputs.nixos-unstable.legacyPackages.${system};
+      pkgs = basePkgs.extend (import ../overlays { inherit inputs; }).default;
+    in 
+    import modulePath { inherit pkgs; }
+  );
 
-  overlays                 = import ./overlays            args; 
-  packages                 = import ./packages            args; 
-  devShells                = import ./devShells           args;
-  schemas                  = import ./schemas.nix         args; 
-  legacyPackages           = import ./legacyPackages.nix  args; 
+  mkConfigs                = import   ./mkConfigs.nix       args;
+  overlays                 = import   ./overlays            args; 
+  devShells                = import   ./devShells           args;
+  schemas                  = import   ./schemas.nix         args; 
+  legacyPackages           = import   ./legacyPackages.nix  args; 
   # systemConfig             = import ./systemConfigs       args; 
 
   nixpkgs                  = import ./nixpkgs             args;
@@ -16,9 +25,10 @@ in {
     nixpkgs
     mkConfigs
     overlays
-    packages
     devShells
     schemas
     legacyPackages
     ;
+
+  packages = mkSystemPackages ./packages ;
 }

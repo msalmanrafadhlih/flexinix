@@ -7,7 +7,10 @@
 
  { inputs, ... }: rec {
   # ... This one brings our custom packages from the 'pkgs' directory
-  local-packages = (final: prev: import ../packages {pkgs = final; inherit inputs;});
+  local-packages = ( final: prev: import ../packages {
+    inherit inputs;
+    pkgs = final;
+  });
 
   # Overlay for 'pkgs.stable' 'pkgs.unstable'
   all-channels = final: prev: {
