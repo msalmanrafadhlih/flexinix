@@ -11,7 +11,7 @@ pkgs.rustPlatform.buildRustPackage {
     owner = "cesarferreira";
     repo = "rip";
     rev = "83f0260229489cd3db2f60316bf2a9939b87c4a6"; 
-    sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; 
+    sha256 = "sha256-5Qa6IKSjPTp3grntbn2A7b91FG7C2nEpBZYy5BCI6Co="; 
   };
   
   # Menggunakan file lock dari source:
