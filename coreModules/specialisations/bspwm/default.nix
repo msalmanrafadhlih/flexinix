@@ -59,10 +59,9 @@ in {
     # Tambahkan paket tema dan dependensi QML yang wajib
     environment.systemPackages = [
       pkgs.qylock-sddm-theme
-      pkgs.libsForQt5.qt5.qtgraphicaleffects
-      pkgs.libsForQt5.qt5.qtquickcontrols2
-      pkgs.libsForQt5.qt5.qtsvg
-      pkgs.libsForQt5.qtmultimedia # Penting untuk background video (.mp4)
+      pkgs.kdePackages.qtmultimedia
+      pkgs.kdePackages.qt5compat # Ini yang menyediakan Qt5Compat.GraphicalEffects
+      pkgs.kdePackages.qtsvg
     ];
 
     environment.sessionVariables = {
