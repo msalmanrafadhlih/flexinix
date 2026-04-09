@@ -25,11 +25,12 @@ set-option -g command-alias[104] 'launch=display-menu -T "#[align=centre] ^ Laun
   "Scratchpad L"       3  "scratchpad" \
   "Scratchpad XL"      4  "scratchpad2" \
   "Youtube Downloader" 5  "xytz" \
-  "Process Manager"    6  "rip" \
-  "LazyGit"            7  "lazygit" \
+  "Desktopify"         6  "/etc/nixos/result/bin/desktopify-lite" \
+  "Process Manager"    7  "rip" \
+  "LazyGit"            8  "lazygit" \
   "-"                  -  "" \
-  "GeminiAI"           8  "gemini" \
-  "AI-mate"            9  "mate" \
+  "GeminiAI"           g  "gemini" \
+  "AI-mate"            a  "mate" \
   "-"                  -  "" \
   "↩ Back"             b  "main-menu"'
 

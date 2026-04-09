@@ -43,14 +43,14 @@ let
 
     ## SYSTEM CONFIGURATIONS
     NIXOS = "cd /etc/nixos && ls";
-    USER = "hx /etc/nixos/modules/core/users.nix";
-    ALIAS = "hx /etc/nixos/modules/core/aliases.nix";
-    SYSINSTALL = "hx /etc/nixos/modules/core/system-packages.nix";
-    NIX = "hx /etc/nixos/nixos/$HOST/configuration.nix";
-    HNIX = "bat /etc/nixos/nixos/$HOST/hardware-configuration.nix";
+    USER = "hx /etc/nixos/coreModules/users.nix";
+    ALIAS = "hx /etc/nixos/coreModules/aliases.nix";
+    SYSINSTALL = "hx /etc/nixos/coreModules/system-packages.nix";
+    NIX = "hx /etc/nixos/hosts/Nix-$HOST/configuration.nix";
+    HNIX = "bat /etc/nixos/hosts/Nix-$HOST/hardware-configuration.nix";
     FLAKE = "hx /etc/nixos/flake.nix";
     LOCK = "bat /etc/nixos/flake.lock";
-    SYSMDL = "yazi /etc/nixos/modules";
+    SYSMDL = "yazi /etc/nixos/coreModules";
 
     ## USER CONFIGURATIONS {EDIT}
     HOME = "cd ~/.dotfiles/$XDG_CURRENT_DESKTOP && ls";
