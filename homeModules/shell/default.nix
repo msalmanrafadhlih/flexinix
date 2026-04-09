@@ -22,6 +22,7 @@
     options = [ "--cmd cd" ];
   };
 
+  # better ls
   programs.eza = {
     enable = true;
     icons = "auto";

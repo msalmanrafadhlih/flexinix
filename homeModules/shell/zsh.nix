@@ -1,8 +1,8 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   programs.zsh = {
     enable = true;
-    dotDir = ".config/zsh";
+    dotDir = "${config.xdg.configHome}/zsh";
     initContent = ''
         source ${./init-zsh.zsh}
       '';
@@ -17,7 +17,7 @@
     plugins = [
       {
         name = "fzf-tab";
-        src = pkgs.zsh-fzf-tab;
+        src = "${pkgs.zsh-fzf-tab}/share/fzf-tab";
       }
     ];
 
