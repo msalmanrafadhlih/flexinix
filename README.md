@@ -1,17 +1,13 @@
-<samp>
+# <p align="center"> <img src="https://i.imgur.com/X5zKxvp.png" width="200px"> </p>
+
+<h1 align="center">Flexinix</h1>
 
 <p align="center">
-  <img src="https://i.imgur.com/X5zKxvp.png" width="200px">
-</p>
-
-<h1 align="center">.dotfiles</h1>
-
-<p align="center">
-  <strong>A declarative life management system built with NixOS & Home Manager</strong>
+  <strong>A declarative, modular NixOS & Home Manager configuration factory.</strong>
 </p>
 
 <p align="center">
-  <a href="https://nixos.org"><img src="https://img.shields.io/badge/NixOS-Unstable-blue?style=for-the-badge&logo=NixOS&logoColor=white&labelColor=303446" alt="NixOS Unstable"></a>
+  <a href="https://nixos.org"><img src="https://img.shields.io/badge/NixOS-Stable/Unstable-blue?style=for-the-badge&logo=NixOS&logoColor=white&labelColor=303446" alt="NixOS"></a>
   <a href="https://github.com/nix-community/home-manager"><img src="https://img.shields.io/badge/Home--Manager-Enabled-green?style=for-the-badge&logo=nixos&logoColor=white&labelColor=303446" alt="Home Manager"></a>
   <a href="https://nixos.wiki/wiki/Flakes"><img src="https://img.shields.io/badge/Nix--Flakes-Enabled-9cf?style=for-the-badge&logo=nixos&logoColor=white&labelColor=303446" alt="Flakes"></a>
 </p>
@@ -22,94 +18,100 @@
 
 > "This is not merely a NixOS configuration. It is a declaration of how I choose to transform chaos into order — reproducible, intentional, and version-controlled."
 
-Life management is essential. Like an operating system, it should not run randomly or without structure—it must be declared. NixOS teaches that the best systems are built upon clear, conscious, and reproducible configurations.
-
-Just as NixOS provides generations and rollback capabilities, life itself should allow room for evaluation and refinement without sacrificing stability. We do not erase the past; we preserve it as a reference to build improved versions of ourselves.
+Flexinix is built on the principle of **systemic reproducibility**. It treats infrastructure as a factory (`mkConfigs`) where systems are defined by their intent (stability, platform, and purpose) rather than manual imperative steps.
 
 ---
 
 ## 🌌 System Architecture
 
-This repository manages multiple environments using a modular Flake-based approach. It separates system-level concerns from user-level applications and development workflows.
+Flexinix uses a highly modular "Factory" approach. Instead of hardcoded configurations, it uses a custom library to generate system profiles based on stability levels (`stable` or `unstable`) and platform types.
 
-### 🖥️ Target Hosts
+### 🏗️ The `mkConfigs` Factory
 
-| Hostname       | Platform   | Role                             | Architecture     |
-| :------------- | :--------- | :------------------------------- | :--------------- |
-| **infinix**    | NixOS      | Primary Laptop (Inbook X1)       | `x86_64-linux`   |
-| **macbook**    | nix-darwin | Workstation (macOS)              | `aarch64-darwin` |
-| **wsl**        | NixOS-WSL  | Development on Windows           | `x86_64-linux`   |
-| **vm-aarch64** | NixOS      | Virtual Machines (Parallels/UTM) | `aarch64-linux`  |
+Located in `.lib/mkConfigs.nix`, this factory handles the complexity of:
+
+- **Stability Selection**: Easily switch between `nixos-stable` and `nixos-unstable` per host.
+- **Platform Agnosticism**: Unified logic for NixOS, nix-darwin, Nix-on-Droid, and standalone Home Manager.
+- **Auto-Mapping**: Maps hostnames to `hosts/${platform}-${hostname}/configuration.nix`.
 
 ### 📂 Directory Structure
 
 ```bash
 .
-├── flake.nix             # Main entry point
-├── lib/                  # Custom library functions (mksystem.nix)
-├── nixos/                # Host-specific hardware/system configs
-├── modules/              # Shared NixOS/Darwin system modules
-└── development/          # Sub-flake for Home Manager & User configs
-    ├── configs/          # Raw application dotfiles (Alacritty, BSPWM, etc.)
-    ├── modules/          # User-level Nix modules & Custom Scripts
-    └── users/            # User-specific profiles (bspwm, niri, hyprland)
+├── hosts/                  # Host-specific hardware and overrides
+├── homeModules/            # Global user-level Home Manager modules (Zsh, Tmux, Helix)
+├── coreModules/            # Global system-level NixOS modules (Users, Locale, Services, specialisations)
+├── flake.nix               # Entry point & Inputs
+└── .lib/                   # Core logic, factory (mkConfigs), overlays & custom packages
+     ├── packages           # custom packages built against nixpkgs
+     ├── devShells
+     ├── overlays           # overlays.default is the sum of all the overlays
+     ├── legacyPackages.nix # applies overlays.default to nixpkgs.legacyPackages
+     ├── mkConfigs.nix
+     └── schemas.nix
 ```
+
+---
+
+## 🖥️ Target Hosts
+
+| Name        | Hostname    | OS / Platform      | Stability | Role                |
+| :---------- | :---------- | :----------------- | :-------- | :------------------ |
+| **infinix** | `inbook-x1` | NixOS (x86_64)     | Unstable  | Primary Laptop      |
+| **wsl**     | `wsl`       | NixOS-WSL (x86_64) | Stable    | Windows Development |
+| **macbook** | `darwin`    | nix-darwin (ARM)   | Stable    | Workstation (macOS) |
+| **android** | `And-1980`  | Nix-on-Droid (ARM) | Stable    | Mobile Environment  |
 
 ---
 
 ## 🚀 Key Features
 
-### 🎨 Desktop Environments
+### 🎨 Desktop & Specialisations
 
-- **BSPWM**: A tiling window manager that represents my core workflow.
-- **Hyprland/Niri**: Modern Wayland-based alternatives for fluid experiences.
-- **Stylix**: Unified system-wide theming for consistent aesthetics.
+Flexinix supports **Specialisations**, allowing you to switch your entire desktop environment on the fly:
 
-### 🛠️ Development & Tooling
+- **BSPWM**: Classic X11 tiling window manager.
+- **Hyprland**: Modern Wayland compositor with eye-candy.
+- **Niri**: Scrollable tiling Wayland compositor.
+- Use `sudo nixos-rebuild --specialisation (bspwm|hyprland|niri)` to switch.
 
-- **Terminals**: Alacritty, Kitty, Ghostty, and a custom `st-flexipatch`.
-- **Editors**: VS Code, Zed Editor, and Geany.
-- **Shell**: Zsh managed via Home Manager with Starship prompt.
-- **Browsers**: Firefox, Zen Browser, Vivaldi, and Chromium.
+### 🛠️ Tooling & Integrations
 
-### 📜 Custom Automation
-
-Managed under `development/modules/scripts/`, these scripts power my daily productivity:
-
-- `01chat`: Integrated LLM/Chat interactions.
-- `img-compress`: Automated image optimization.
-- `github-repos`: Repository management and automation.
-- `battery` / `brightness` / `volume`: Hardware control utilities.
+- **Home Manager**: Deeply integrated for shell (Fish/Zsh), terminals (WezTerm), and editors (Helix).
+- **Custom Library**: Includes custom packages like `desktopify-lite`, `process-manager`, and `bloodrage-plymouth`.
+- **Overlays**: Global access to `pkgs.stable` and `pkgs.unstable` across all configurations.
+- **External Configs**: Integrates external flakes like `racooonfig` for personal dotfiles.
 
 ---
 
-## 🔧 Installation & Deployment
+## 🔧 Usage & Deployment
 
-### Prerequisites
-
-- Nix with Flakes enabled.
-- Git for cloning the repository.
-
-### Initial Setup
+### Apply NixOS Configuration
 
 ```bash
-# Clone the repository
-git clone https://github.com/msalmanrafadhlih/Dotfiles.git ~/.dotfiles
+# For Infinix (Laptop)
+sudo nixos-rebuild switch --flake .#infinix
 
-# Apply NixOS configuration (replace <hostname> with infinix, wsl, or vm)
-sudo nixos-rebuild switch --flake .#<hostname>
+# For WSL
+sudo nixos-rebuild switch --flake .#wsl
+```
 
-# Apply Darwin configuration (macOS)
+### Apply Home Manager (Standalone)
+
+```bash
+home-manager switch --flake .#infinix@tquilla
+```
+
+### Apply Darwin (macOS)
+
+```bash
 darwin-rebuild switch --flake .#macbook
 ```
 
-### Local Development
-
-The `development/` directory is a standalone sub-flake. You can test user-level changes without rebuilding the whole system:
+### Apply Nix-on-Droid (Android)
 
 ```bash
-cd development
-home-manager switch --flake .#bspwm
+nix-on-droid switch --flake .#default
 ```
 
 ---
@@ -118,19 +120,18 @@ home-manager switch --flake .#bspwm
 
 This system leverages powerful community inputs:
 
+- **NUR**: Nix User Repository integration.
 - **Nix-WSL**: Seamless Linux integration on Windows.
 - **Nix-Snapd**: Access to Snap packages on NixOS.
-- **Spicetify-nix**: Fully customized Spotify experience.
-- **Bloodrage-Plymouth**: Custom boot animations.
+- **Devenv**: Reproducible development environments.
+- **Sops-nix**: Secret management (SOPS).
 
 ---
 
 ## 🤝 Credits & Acknowledgements
 
-This configuration is a result of standing on the shoulders of giants in the Nix community. Special thanks to the contributors of Nixpkgs, Home Manager, and the various flakes integrated into this system.
+Flexinix is a synthesis of various Nix community patterns. Special thanks to the contributors of Nixpkgs, Home Manager, and the creators of the various flakes integrated here.
 
 <p align="center">
   <i>This system is configured. So is the life behind it.</i>
 </p>
-
-</samp>
