@@ -30,7 +30,6 @@ in {
         autoRepeatInterval = 35;
         displayManager = {
           startx.enable = false; # disable if set lightdm to true
-
           # lightdm
           lightdm = {
             enable = false;
@@ -39,16 +38,18 @@ in {
               sha256 = "sha256-VZp1wy2N0GApt48ILRY+pIAhAjCt02GmqmxHRTWAEoA=";
             };
           };
+        };
+      };
 
-          # SDDM
-          sddm = {
-            enable = true;
-            theme = "R1999_2";
-            settings = {
-              Theme = {
-                # Pastikan SDDM mencari di folder yang benar
-                ThemeDir = "/run/current-system/sw/share/sddm/themes";
-              };
+      displayManager = {
+        # SDDM
+        sddm = {
+          enable = true;
+          theme = "R1999_2";
+          settings = {
+            Theme = {
+              # Pastikan SDDM mencari di folder yang benar
+              ThemeDir = "/run/current-system/sw/share/sddm/themes";
             };
           };
         };

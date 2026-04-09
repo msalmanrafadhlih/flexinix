@@ -11,7 +11,7 @@ stdenv.mkDerivation {
     owner = "TQ-See";
     repo = "qylock";
     rev = "main";
-    sha256 = ""; # Ingat: Biarkan kosong dulu, build, lalu masukkan hash aslinya!
+    sha256 = "sha256-7BRVt43Dx5zTC7nbOwZXMK2yfwyhtwlNoyEP+F4ha/8="; 
   };
 
   installPhase = ''
