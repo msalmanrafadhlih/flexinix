@@ -64,24 +64,6 @@ set-option -g command-alias[103] 'notes=display-menu -T "#[align=centre] 📌 No
   "NodeJS Learning"    n "new-window -n NodeJS -c ~/.repos/Learning/NodeJS \"hx .\"" \
   "↩ Back"             b "main-menu"' 
 
-##### rip : Process kill #####
-set-option -g command-alias[110] 'rip=display-menu -T "#[align=centre] 󰍜 RIP: Process Management " -x C -y C \
-  "-"                  -  "" \
-  "1    HANG UP"     1  "hangup" \
-  "2    INTERRUPT"   2  "interrupt" \
-  "3    QUIT"        3  "signal-quit" \
-  "9    KILL"        4  "signal-kill" \
-  "10   USR1"        5  "usr1" \
-  "12   USR2"        6  "usr2" \
-  "15   TERMINATE"   7  "terminate" \
-  "18   CONTINUE"    8  "signal-continue" \
-  "19   STOP"        9  "signal-stop" \
-  "-"                -  "" \
-  "PORTS"            p  "display-popup -w 65 -h 10 -y 100% -x C -B -T \" PORTS \" -E \"rip --ports --live\"" \
-  "BTOP ++"          b  "display-popup -w 100 -h 35 -T \" Btop ++ \" -E \"btop -p 1\"" \
-  "-"                -  "" \
-  "↩ Quit"           q  ""'
-
   bind m main-menu
   '';
 }
