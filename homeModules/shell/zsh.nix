@@ -1,10 +1,11 @@
-{ config, ... }:
+{ pkgs, ... }:
 {
   programs.zsh = {
     enable = true;
-    dotDir = config.home.homeDirectory;
+    dotDir = ".config/zsh";
     initContent = ''
         source ${./init-zsh.zsh}
+        source ${pkgs.zsh-fzf-tab}/share/zsh-fzf-tab/fzf-tab.plugin.zsh
       '';
 
     # vim mode (helix mode plugins did not work for me)
@@ -13,12 +14,6 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     enableCompletion = false;
-
-    history = {
-      append = true;
-      findNoDups = true;
-      ignoreSpace = true;
-    };
 
 	  setOptions = [
 		"APPEND_HISTORY"

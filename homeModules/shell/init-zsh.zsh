@@ -60,6 +60,9 @@ HISTFILE="$HOME/.config/zsh/.zsh_history"
 _comp_options+=(globdots)
 precmd_functions+=(vcs_info)
 
+zstyle ':completion:*' completer _complete _ignored _approximate
+zstyle ':completion:*' menu no
+
 zstyle ':completion:*' menu select
 zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
@@ -87,6 +90,7 @@ zstyle ':fzf-tab:complete:eza:*' fzf-preview 'eza -1 --icons=always --color=alwa
 zstyle ':fzf-tab:complete:bat:*' fzf-preview 'bat --color=always --theme=base16 $realpath'
 zstyle ':fzf-tab:*' fzf-bindings 'space:accept'
 zstyle ':fzf-tab:*' accept-line enter
+zstyle ':fzf-tab:*' switch-group ',' '.'
 
 # ==========================================================
 # Completion UI helper
@@ -97,7 +101,7 @@ expand-or-complete-with-dots() {
     zle redisplay
 }
 zle -N expand-or-complete-with-dots
-bindkey '^I' expand-or-complete-with-dots
+# bindkey '^I' expand-or-complete-with-dots
 
 # ==========================================================
 # Prompt
