@@ -15,7 +15,7 @@ pkgs.rustPlatform.buildRustPackage {
   };
   
   # Menggunakan file lock dari source:
-  cargoHash = "sha256-BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB="; 
+  cargoHash = "sha256-xmLscmA8kcY2vDkFijIpIcct8MczMOGnVNEJFEyYd7c="; 
 
   nativeBuildInputs = with pkgs; [ pkg-config ];
 
