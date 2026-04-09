@@ -45,7 +45,7 @@
       # ==========================================================
       # LOAD BLE.SH (autosuggest + syntax highlight)
       # ==========================================================
-      source ${pkgs.ble-sh}/share/blesh/ble.sh
+      source ${pkgs.blesh}/share/blesh/ble.sh
 
       # --- BLE CONFIG ---
       bleopt complete_auto_history=1
@@ -68,6 +68,6 @@
 
   home.packages = with pkgs; [
     bash-completion
-    ble-sh
+    blesh
   ];
 }
