@@ -50,7 +50,6 @@ in {
           # PENTING: SDDM butuh ini agar module QML terbaca oleh greeter
           # Tambahkan paket tema dan dependensi QML yang wajib
           extraPackages = [
-            pkgs.qylock-sddm-theme
             pkgs.kdePackages.qtmultimedia
             pkgs.kdePackages.qt5compat
             pkgs.kdePackages.qtsvg
@@ -63,13 +62,6 @@ in {
             pkgs.gst_all_1.gst-plugins-ugly
             pkgs.gst_all_1.gst-libav
           ];
-
-          settings = {
-            Theme = {
-              # Pastikan SDDM mencari di folder yang benar
-              ThemeDir = "/run/current-system/sw/share/sddm/themes";
-            };
-          };
         };
       };
     };
@@ -79,6 +71,10 @@ in {
       XDG_SESSION_TYPE = "x11";
     };
 
+    environment.systemPackages = [
+      pkgs.qylock-sddm-theme  
+    ];
+    
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
