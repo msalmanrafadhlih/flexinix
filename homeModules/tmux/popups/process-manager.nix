@@ -1,6 +1,6 @@
-{ self, system, ... }:
+{ flakeRoot, system, ... }:
 let
-  rip = "${self.packages.${system}.rip}/bin/rip";
+  rip = "${flakeRoot.packages.${system}.rip}/bin/rip";
 in
 {
   programs.tmux.extraConfig = ''
