@@ -20,6 +20,7 @@ jobs:
               with:
                   extra_nix_config: |
                       experimental-features = nix-command flakes
+                      allow-import-from-derivation = true
 
             - uses: cachix/cachix-action@v14
               with:
