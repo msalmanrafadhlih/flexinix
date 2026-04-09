@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   programs.bash = {
     enable = true;
@@ -65,7 +66,7 @@
     '';
   };
 
-  environment.systemPackages = with pkgs; [
+  home.packages = with pkgs; [
     bash-completion
     ble-sh
   ];
