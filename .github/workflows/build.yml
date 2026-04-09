@@ -1,13 +1,16 @@
 name: Push Binaries
 
 on:
-    push:
-        branches: [main]
+    schedule:
+        - cron: "0 0 * * 2,4,6"
+
+    # On manual run
     workflow_dispatch:
 
 jobs:
     build:
         runs-on: ubuntu-latest
+
         strategy:
             matrix:
                 system: [x86_64-linux, aarch64-linux]
@@ -31,10 +34,7 @@ jobs:
                   name: racoonfig
                   authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
-            # 🔥 Tips: Cachix action v14 sudah otomatis push hasil build,
-            # tapi watch-store tetap bagus untuk dependencies yang ikut ter-build.
             - run: cachix watch-store racoonfig &
 
             - name: Build All Packages
-              run: |
-                  nix build .#all --print-build-logs --impure
+              run: nix build .#all --print-build-logs --impure
