@@ -10,7 +10,7 @@ let
       "--jsx-single-quote=false"
       "--trailing-comma=all"
       "--semi=true"
-      "--tab-width=4"
+      "--tab-width=2"
       "--use-tabs=false"
       "--print-width=80"
     ];

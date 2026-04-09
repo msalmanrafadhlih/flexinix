@@ -8,7 +8,6 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
-
         strategy:
             matrix:
                 system: [x86_64-linux, aarch64-linux]
@@ -16,22 +15,26 @@ jobs:
         steps:
             - uses: actions/checkout@v4
 
+            - name: Set up QEMU
+              if: matrix.system == 'aarch64-linux'
+              uses: docker/setup-qemu-action@v3
+
             - uses: cachix/install-nix-action@v25
               with:
                   extra_nix_config: |
                       experimental-features = nix-command flakes
                       allow-import-from-derivation = true
+                      extra-platforms = aarch64-linux
 
             - uses: cachix/cachix-action@v14
               with:
                   name: racoonfig
                   authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
-            # 🔥 WAJIB: biar semua hasil build ke-push
+            # 🔥 Tips: Cachix action v14 sudah otomatis push hasil build,
+            # tapi watch-store tetap bagus untuk dependencies yang ikut ter-build.
             - run: cachix watch-store racoonfig &
 
-            # Optional debug
-            - run: nix flake show
-
-            # 🔥 BUILD SEMUA PACKAGES PER SYSTEM
-            - run: nix build .#packages.${{ matrix.system }} --print-build-logs
+            - name: Build All Packages
+              run: |
+                  nix build .#all --print-build-logs --impure
