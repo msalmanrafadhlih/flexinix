@@ -34,7 +34,7 @@
     btop          # Resource monitor
     tree          # Directory tree viewer
     tmux          # Terminal multiplexer
-    atuin      # smart command shell histories
+    atuin         # smart command shell histories
 
     # ======= UTILITIES
     nixpkgs-fmt   # Nix formatter
@@ -63,7 +63,7 @@
   ]) ++ (lib.optionals isWSL [
 
     # ======= wsl only
-    jujutsu # Smart Git
+    jujutsu       # Smart Git
 
   ]) ++ (lib.optionals isAndroid [
 
