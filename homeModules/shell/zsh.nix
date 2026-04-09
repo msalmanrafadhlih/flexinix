@@ -5,7 +5,6 @@
     dotDir = ".config/zsh";
     initContent = ''
         source ${./init-zsh.zsh}
-        source ${pkgs.zsh-fzf-tab}/share/zsh-fzf-tab/fzf-tab.plugin.zsh
       '';
 
     # vim mode (helix mode plugins did not work for me)
@@ -14,6 +13,13 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     enableCompletion = false;
+
+    plugins = [
+      {
+        name = "fzf-tab";
+        src = pkgs.zsh-fzf-tab;
+      }
+    ];
 
 	  setOptions = [
 		"APPEND_HISTORY"

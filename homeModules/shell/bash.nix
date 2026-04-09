@@ -52,8 +52,8 @@
       bleopt complete_auto_complete=1
       bleopt complete_auto_delay=200
 
-      bleopt prompt_ps1_final='yes'
-      bleopt exec_errexit_mark='[ERR]'
+      # bleopt prompt_ps1_final='yes'
+      # bleopt exec_errexit_mark='[ERR]'
 
       # ==========================================================
       # CUSTOM PROMPT (AMAN UNTUK BLE.SH)
