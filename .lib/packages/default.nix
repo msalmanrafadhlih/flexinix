@@ -1,4 +1,4 @@
-# ../packages/default.nix
+# ./default.nix
 { pkgs, ... }: 
 
 let
@@ -8,12 +8,14 @@ let
 
   # overlay-packages
   bloodrage-plymouth = pkgs.callPackage ./bloodrage-plymouth.nix {};
+  qylock-sddm-theme = pkgs.callPackage ./qylock-sddm-theme.nix {};
 in
 {
   # Ekspos paket individual (for spesifik packages ex. 'nix build .#desktopify-lite')
   inherit
     desktopify-lite
     bloodrage-plymouth
+    qylock-sddm-theme
     rip
     ;
 

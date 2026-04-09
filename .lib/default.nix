@@ -38,5 +38,5 @@ in
     legacyPackages
     ;
 
-  packages = mkSystemPackages ./packages;
+  packages = mkSystemPackages ./packages ;
 }
