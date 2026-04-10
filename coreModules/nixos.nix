@@ -11,7 +11,7 @@
   environment.localBinInPath = true;
 
   # External pkgs Manager
-  # services.nix-snapd = false;
+  # services.nix-snapd = true;
   nixpkgs.hostPlatform = system;
   security.rtkit.enable = true;
 

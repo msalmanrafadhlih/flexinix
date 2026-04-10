@@ -23,7 +23,7 @@
     ];
 
     # trusted-public-keys = [  ];
-    # auto-optimise-store = true;
+    auto-optimise-store = true;
     warn-dirty = false;
     
     # disable keep-derivations kecuali memang butuh debugging source

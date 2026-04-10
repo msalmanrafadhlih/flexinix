@@ -8,7 +8,8 @@ let
 
   # overlay-packages
   bloodrage-plymouth = pkgs.callPackage ./bloodrage-plymouth.nix {};
-  qylock-sddm-theme = pkgs.callPackage ./qylock-sddm-theme.nix {};
+  qylock-sddm-theme  = pkgs.callPackage ./qylock-sddm-theme.nix {};
+  my-grub-theme      = pkgs.callPackage ./my-grub-theme.nix {};
 in
 {
   # Ekspos paket individual (for spesifik packages ex. 'nix build .#desktopify-lite')
@@ -16,6 +17,7 @@ in
     desktopify-lite
     bloodrage-plymouth
     qylock-sddm-theme
+    my-grub-theme
     rip
     ;
 

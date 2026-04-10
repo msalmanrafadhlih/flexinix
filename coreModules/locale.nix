@@ -1,18 +1,18 @@
-{ ... }:
+{ flakeRoot, ... }:
 {
-  time.timeZone = "Asia/Jakarta";
+  time.timeZone = flakeRoot.timezone;
 
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.defaultLocale = flakeRoot.locale;
 
   i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
+    LC_ADDRESS = flakeRoot.locale;
+    LC_IDENTIFICATION = flakeRoot.locale;
+    LC_MEASUREMENT = flakeRoot.locale;
+    LC_MONETARY = flakeRoot.locale;
+    LC_NAME = flakeRoot.locale;
+    LC_NUMERIC = flakeRoot.locale;
+    LC_PAPER = flakeRoot.locale;
+    LC_TELEPHONE = flakeRoot.locale;
+    LC_TIME = flakeRoot.locale;
   };
 }
