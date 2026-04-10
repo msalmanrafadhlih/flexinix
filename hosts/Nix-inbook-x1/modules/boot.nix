@@ -24,7 +24,6 @@ in {
 
     plymouth = {
       enable = true;
-      wait = true;
       theme = myTheme;
       themePackages = [
         (pkgs.adi1090x-plymouth-themes.override {
