@@ -9,7 +9,7 @@ stdenv.mkDerivation {
     owner = "TQ-See";
     repo = "MyGrubThemes";
     rev = "main";
-    sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"; 
+    sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; 
   };
 
   installPhase = ''
