@@ -36,7 +36,7 @@ in {
 
   kernelParams = [
     "quiet"
-    "splash"
+    # "splash"
     "boot.shell_on_fail"
     "loglevel=3"
     "rd.systemd.show_status=0"
@@ -48,11 +48,11 @@ in {
 		initrd = {
 			verbose = false; # matikan output initrd
 			# systemd.enable = true;
-			# kernelModules = [
-			# 	"i915" # intel
-			# 	# "amdgpu" # amd
-			# 	# "nvidia-drm.modeset=1" # nvidia
-			# ];
+			kernelModules = [
+				"i915" # intel
+				# "amdgpu" # amd
+				# "nvidia-drm.modeset=1" # nvidia
+			];
 		};
   };
 }
