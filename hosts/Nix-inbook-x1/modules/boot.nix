@@ -42,7 +42,7 @@ in {
     "rd.systemd.show_status=0"
     "vt.global_cursor_default=0"
     "rd.udev.log_level=0"
-    "plymouth.delay=5"
+    "plymouth.delay=10"
   ];
 
 		initrd = {
