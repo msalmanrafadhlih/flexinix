@@ -1,4 +1,5 @@
-{ stdenv, fetchFromGitHub }: let
+{ stdenv, fetchFromGitHub }:
+let
   # selectedTheme = "MathTheme";
 in
 stdenv.mkDerivation {
@@ -9,11 +10,11 @@ stdenv.mkDerivation {
     owner = "TQ-See";
     repo = "MyGrubThemes";
     rev = "main";
-    sha256 = ""; 
+    sha256 = "sha256-Ad4DYmCGoQxXCEDpg/u86TucKGVoTaRjqmsubXv3+T8=";
   };
 
   installPhase = ''
-      mkdir -p $out
-      cp -r ./* $out/
+    mkdir -p $out
+    cp -r ./* $out/
   '';
 }
