@@ -1,5 +1,5 @@
 { stdenv, fetchFromGitHub }: let
-  selectedTheme = "MathTheme";
+  # selectedTheme = "MathTheme";
 in
 stdenv.mkDerivation {
   pname = "my-custom-grub-theme";

@@ -2,9 +2,6 @@
 let
   myTheme = "cuts";
 in {
-  environment.systemPackages = [
-    pkgs.my-grub-theme  
-  ];
 
   boot = {
     loader = {
@@ -12,7 +9,7 @@ in {
 
       grub = {
         enable = true;
-        theme = "MathThemes";
+        theme = pkgs.my-grub-theme;
         efiSupport = true;
         device = "nodev"; # untuk UEFI
         useOSProber = true; # detect OS lain (optional)
