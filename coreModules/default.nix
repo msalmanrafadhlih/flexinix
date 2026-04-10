@@ -1,5 +1,12 @@
 # ./configuration.nix
-{ isWSL, isLinux, isDarwin, isAndroid, lib, ... }:
+{
+  isWSL,
+  isLinux,
+  isDarwin,
+  isAndroid,
+  lib,
+  ...
+}:
 {
   imports = [
     # ./nginx.nix
@@ -7,22 +14,26 @@
     ./devenv.nix
     ./shell.nix
     ./openssh.nix
+    ./settings.nix
 
-  ] ++ lib.optionals isDarwin [
+  ]
+  ++ lib.optionals isDarwin [
     ./darwin.nix
 
-  ] ++ lib.optionals isWSL [
+  ]
+  ++ lib.optionals isWSL [
 
-  ] ++ lib.optionals isAndroid [
+  ]
+  ++ lib.optionals isAndroid [
     ./android.nix
 
-  ] ++ lib.optionals isLinux [
+  ]
+  ++ lib.optionals isLinux [
     # ./kanata.nix
     ./users.nix
     ./nixos.nix
     ./virtualisation.nix
     ./locale.nix
-    ./settings.nix
     ./thunar.nix
     ./nix-ld.nix
     ./fonts.nix
