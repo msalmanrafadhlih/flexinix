@@ -9,7 +9,7 @@ stdenv.mkDerivation {
   src = fetchFromGitHub {
     owner = "TQ-See";
     repo = "MyGrubThemes";
-    rev = "main";
+    rev = "ab2bbd9f784c5db6875474b90aadf723b3b5048f";
 
     # WAJIB: Tambahkan ini agar Nix hanya mengambil folder tema tersebut
     sparseCheckout = [ selectedTheme ];

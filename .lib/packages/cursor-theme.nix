@@ -9,12 +9,12 @@ stdenv.mkDerivation {
   src = fetchFromGitHub {
     owner = "TQ-See";
     repo = "Cursors-memes";
-    rev = "main";
+    rev = "14b8b34646244d34d56f43757e56fb190d396b2b";
 
     # WAJIB: Tambahkan ini agar Nix hanya mengambil folder tema tersebut
     sparseCheckout = [ selectedTheme ];
 
-    sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+    sha256 = "";
   };
 
   installPhase = ''
