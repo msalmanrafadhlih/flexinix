@@ -10,6 +10,7 @@ in {
       grub = {
         enable = true;
         theme = pkgs.my-grub-theme;
+        splashImage = null;
         efiSupport = true;
         device = "nodev"; # untuk UEFI
         useOSProber = true; # detect OS lain (optional)
@@ -42,7 +43,7 @@ in {
     "rd.systemd.show_status=0"
     "vt.global_cursor_default=0"
     "rd.udev.log_level=0"
-    "plymouth.delay=3"
+    "plymouth.delay=0"
   ];
 
 		initrd = {
