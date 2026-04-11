@@ -1,6 +1,6 @@
 { stdenv, fetchFromGitHub }:
 let
-  # selectedTheme = "MathTheme";
+  selectedTheme = "Math-theme";
 in
 stdenv.mkDerivation {
   pname = "my-custom-grub-theme";
@@ -10,11 +10,15 @@ stdenv.mkDerivation {
     owner = "TQ-See";
     repo = "MyGrubThemes";
     rev = "main";
-    sha256 = "sha256-Ad4DYmCGoQxXCEDpg/u86TucKGVoTaRjqmsubXv3+T8=";
+
+    # WAJIB: Tambahkan ini agar Nix hanya mengambil folder tema tersebut
+    sparseCheckout = [ selectedTheme ];
+
+    sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
   };
 
   installPhase = ''
     mkdir -p $out
-    cp -r ./* $out/
+    cp -r ${selectedTheme}/* $out/
   '';
 }
