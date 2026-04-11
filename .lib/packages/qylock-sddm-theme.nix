@@ -2,6 +2,7 @@
 
 let
   selectedTheme = "R1999_2";
+  themeSubPath = "themes/${selectedTheme}";
 in
 stdenv.mkDerivation {
   pname = "qylock-sddm-theme-${selectedTheme}";
@@ -11,11 +12,17 @@ stdenv.mkDerivation {
     owner = "TQ-See";
     repo = "qylock";
     rev = "main";
-    sha256 = "sha256-7BRVt43Dx5zTC7nbOwZXMK2yfwyhtwlNoyEP+F4ha/8="; 
+    sparseCheckout = [ themeSubPath ];
+    sha256 = "sha256-0000000000000000000000000000000000000000000=";
   };
 
+  # SDDM theme biasanya butuh struktur folder yang spesifik
   installPhase = ''
+    runHook preInstall
+
     mkdir -p $out/share/sddm/themes/${selectedTheme}
-    cp -r themes/${selectedTheme}/* $out/share/sddm/themes/${selectedTheme}/
+    cp -r ${themeSubPath}/* $out/share/sddm/themes/${selectedTheme}/
+
+    runHook postInstall
   '';
 }
