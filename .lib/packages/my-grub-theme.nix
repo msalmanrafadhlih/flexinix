@@ -14,7 +14,7 @@ stdenv.mkDerivation {
     # WAJIB: Tambahkan ini agar Nix hanya mengambil folder tema tersebut
     sparseCheckout = [ selectedTheme ];
 
-    sha256 = "sha256-BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=";
+    sha256 = "sha256-sDH/HYUpNbz4J+0/vPCssAnRKVtD5jAmjmKN2VtC0+U=";
   };
 
   installPhase = ''
