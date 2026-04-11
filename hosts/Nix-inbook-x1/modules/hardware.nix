@@ -19,6 +19,7 @@
 	# KEYBOARD SETTINGS
 	###################
 	console = {
+		earlySetup = true; # Sangat penting untuk initrd systemd
 		font = "Lat2-Terminus16";
 		keyMap = "us";
 	};

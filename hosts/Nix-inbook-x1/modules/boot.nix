@@ -45,6 +45,7 @@ in
       "vt.global_cursor_default=0"
       "rd.udev.log_level=0"
       "plymouth.delay=0"
+      "fbcon=nodefer" 
     ];
 
     initrd = {
