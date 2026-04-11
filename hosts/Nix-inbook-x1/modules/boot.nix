@@ -14,7 +14,7 @@ in
         splashImage = null;
         efiSupport = true;
         device = "nodev"; # untuk UEFI
-        useOSProber = true; # detect OS lain (optional)
+        useOSProber = false; # detect OS lain (optional)
         configurationLimit = 10; # limit generation
 
         gfxmodeEfi = "auto";
