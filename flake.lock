@@ -1725,7 +1725,6 @@
         "nixpkgs": [
           "nixos-unstable"
         ],
-        "rip": "rip",
         "spicetify-nix": "spicetify-nix",
         "st-nix": "st-nix",
         "stylix": "stylix",
@@ -1737,37 +1736,16 @@
         "zjstatus": "zjstatus"
       },
       "locked": {
-        "lastModified": 1774278040,
-        "narHash": "sha256-fEZiDG+eYX3NBZ2z5PjF2JabVC+qb0GYz1cYyOgzOfQ=",
+        "lastModified": 1775897318,
+        "narHash": "sha256-tZOnDdKfHmnz0EXbFcUtAhZdL1nxMcYT1rp5LJ6em0c=",
         "owner": "msalmanrafadhlih",
         "repo": "racooonfig",
-        "rev": "e97b70bd97291744f97164e884c8e9ebab94696d",
+        "rev": "c4f4fd34d93290f08e53d44c01f93800f17b61b5",
         "type": "github"
       },
       "original": {
         "owner": "msalmanrafadhlih",
         "repo": "racooonfig",
-        "type": "github"
-      }
-    },
-    "rip": {
-      "inputs": {
-        "nixpkgs": [
-          "racooonfig",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1773128226,
-        "narHash": "sha256-QnAv2KZV0k4PfFK4rNasSB97C6Y5+anY4DZLlNqZHsY=",
-        "owner": "TQ-See",
-        "repo": "process-manager",
-        "rev": "1ada0ad3b5a42b1d8ebf7366e4ccb8eea49502a2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "TQ-See",
-        "repo": "process-manager",
         "type": "github"
       }
     },
