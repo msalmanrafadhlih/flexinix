@@ -13,7 +13,7 @@ stdenv.mkDerivation {
     repo = "qylock";
     rev = "b8260cb043df9a2a0175a0a04027d42cf7283239";
     sparseCheckout = [ themeSubPath ];
-    sha256 = "sha256-0000000000000000000000000000000000000000000=";
+    sha256 = "sha256-qYhW5tgGGnhRsrRQAt/nsfG5ezNIaN2Dge1sLFEmw/g=";
   };
 
   # SDDM theme biasanya butuh struktur folder yang spesifik
