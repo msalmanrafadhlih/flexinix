@@ -8,6 +8,7 @@
     ./modules/network.nix
     ./modules/hardware.nix
     ./modules/services.nix
+    ./modules/stylix.nix
     # ./modules/power.nix
     ./modules/touchpad.nix
     ./modules/fileSystems.nix
