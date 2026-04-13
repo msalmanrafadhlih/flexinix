@@ -1,4 +1,4 @@
-# export from ../default.nix (system environtment)
+# export from ../flake.nix (system environtment)
 {
   inputs,
   username,
@@ -18,6 +18,8 @@ in {
       ./packages.nix
       ./services.nix
       ./xdg-portal.nix
+
+      inputs.racooonfig.nixosModules.bspwm-themes
     ];
 
     services = {
