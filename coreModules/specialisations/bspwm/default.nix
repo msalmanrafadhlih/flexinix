@@ -19,7 +19,7 @@ in {
       ./services.nix
       ./xdg-portal.nix
 
-      inputs.racooonfig.nixosModules.bspwm-themes { inputs = inputs.racooonfig.inputs; }
+      inputs.racooonfig.nixosModules.bspwm-themes
     ];
 
     services = {
