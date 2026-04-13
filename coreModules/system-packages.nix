@@ -38,6 +38,8 @@
 
     # ======= UTILITIES
     nixpkgs-fmt   # Nix formatter
+    matugen # Material you Color generator
+    wallust # better Pywal : Color generator
 
     # ======= NETWORKING (portable)
     curl          # Transfer data via URL
