@@ -104,7 +104,7 @@ in
 				sharedConfigs
 				{
 				  home-manager = {
-				    useGlobalPkgs = true;
+				    useGlobalPkgs = false;
 				    useUserPackages = true;
 				    backupFileExtension = "hm-bak";
 				    config = { imports = userHMConfig; };
