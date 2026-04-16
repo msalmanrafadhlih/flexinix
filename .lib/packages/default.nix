@@ -4,7 +4,7 @@
 let
   # Definisikan paket individual agar bisa dipanggil secara mandiri
   desktopify-lite = pkgs.callPackage ./desktopify-lite.nix {};
-  rip = pkgs.callPackage ./process-manager.nix {};
+  rip             = pkgs.callPackage ./process-manager.nix {};
 
   # overlay-packages
   bloodrage-plymouth = pkgs.callPackage ./bloodrage-plymouth.nix {};
