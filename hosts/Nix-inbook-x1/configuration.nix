@@ -15,9 +15,9 @@
     ./hardware-configuration.nix
 
     # My Specialisation config use `nixos-rebuild --specialisation (bspwm / hyprland / niri)`
-    ../../coreModules/specialisations/bspwm
-    ../../coreModules/specialisations/hyprland
-    ../../coreModules/specialisations/niri
+    ../../coreModules/specialisations/bspwm.nix
+    ../../coreModules/specialisations/hyprland.nix
+    ../../coreModules/specialisations/niri.nix
   ];
 
 }
