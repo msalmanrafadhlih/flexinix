@@ -13,7 +13,7 @@
 }: let
 in {
   specialisation.bspwm.configuration = {
-    imports = [ inputs.racooonfig.nixosModules.bspwm-themes ];
+    imports = [ inputs.racooonfig.nixosModules.bspwm-core ];
    
     home-manager = {
       useGlobalPkgs = true;
