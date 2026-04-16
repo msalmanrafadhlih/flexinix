@@ -35,11 +35,10 @@
     tree          # Directory tree viewer
     tmux          # Terminal multiplexer
     atuin         # smart command shell histories
+    jujutsu       # Smart Git
 
     # ======= UTILITIES
     nixpkgs-fmt   # Nix formatter
-    matugen # Material you Color generator
-    wallust # better Pywal : Color generator
 
     # ======= NETWORKING (portable)
     curl          # Transfer data via URL
@@ -65,7 +64,6 @@
   ]) ++ (lib.optionals isWSL [
 
     # ======= wsl only
-    jujutsu       # Smart Git
 
   ]) ++ (lib.optionals isAndroid [
 
