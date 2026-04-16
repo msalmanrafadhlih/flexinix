@@ -34,7 +34,6 @@
     ./nixos.nix
     ./virtualisation.nix
     ./locale.nix
-    ./thunar.nix
     ./nix-ld.nix
     ./fonts.nix
     ./sudo.nix
