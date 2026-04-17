@@ -5,7 +5,7 @@ in
 {
 
 	console = {
-		# earlySetup = true; # Sangat penting untuk initrd systemd
+		earlySetup = true; # Sangat penting untuk initrd systemd
 		font = "JetBrainsMono Nerd Font";
 		keyMap = "us";
 	};
@@ -56,7 +56,7 @@ in
 
     initrd = {
       verbose = false; # matikan output initrd
-      # systemd.enable = true;
+      systemd.enable = true;
       kernelModules = [
         "i915" # intel
         # "amdgpu" # amd
