@@ -1,12 +1,11 @@
 { pkgs, ... }:
 let
-  # myTheme = "cuts";
+  myTheme = "cuts";
 in
 {
 
 	console = {
-		earlySetup = true; # Sangat penting untuk initrd systemd
-		font = "JetBrainsMono Nerd Font";
+		earlySetup = false; # setup console dilakukan di initrd
 		keyMap = "us";
 	};
 
@@ -30,28 +29,26 @@ in
       efi.canTouchEfiVariables = true;
     };
 
-    # plymouth = {
-    #   enable = true;
-    #   theme = myTheme;
-    #   themePackages = [
-    #     (pkgs.adi1090x-plymouth-themes.override {
-    #       selected_themes = [ myTheme ];
-    #     })
-    #   ];
-    # };
+    plymouth = {
+      enable = true;
+      theme = myTheme;
+      themePackages = [
+        (pkgs.adi1090x-plymouth-themes.override {
+          selected_themes = [ myTheme ];
+        })
+      ];
+    };
 
     consoleLogLevel = 0;
 
     kernelParams = [
       "quiet"
-      "splash"
-      "boot.shell_on_fail"
       "loglevel=3"
       "rd.systemd.show_status=0"
-      "vt.global_cursor_default=0"
       "rd.udev.log_level=0"
-      "plymouth.delay=0"
-      "fbcon=nodefer" 
+      "vt.global_cursor_default=0"
+      "i915.fastboot=1"
+      # "fbcon=nodefer" # ramebuffer console load lebih awal
     ];
 
     initrd = {
