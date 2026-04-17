@@ -1,8 +1,14 @@
 { pkgs, ... }:
 let
-  myTheme = "cuts";
+  # myTheme = "cuts";
 in
 {
+
+	console = {
+		# earlySetup = true; # Sangat penting untuk initrd systemd
+		font = "JetBrainsMono Nerd Font";
+		keyMap = "us";
+	};
 
   boot = {
     loader = {
@@ -24,15 +30,15 @@ in
       efi.canTouchEfiVariables = true;
     };
 
-    plymouth = {
-      enable = true;
-      theme = myTheme;
-      themePackages = [
-        (pkgs.adi1090x-plymouth-themes.override {
-          selected_themes = [ myTheme ];
-        })
-      ];
-    };
+    # plymouth = {
+    #   enable = true;
+    #   theme = myTheme;
+    #   themePackages = [
+    #     (pkgs.adi1090x-plymouth-themes.override {
+    #       selected_themes = [ myTheme ];
+    #     })
+    #   ];
+    # };
 
     consoleLogLevel = 0;
 
@@ -50,7 +56,7 @@ in
 
     initrd = {
       verbose = false; # matikan output initrd
-      systemd.enable = true;
+      # systemd.enable = true;
       kernelModules = [
         "i915" # intel
         # "amdgpu" # amd
