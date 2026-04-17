@@ -6,7 +6,7 @@
     defaultEditor = true;
 
     settings = {
-      theme = lib.mkForce "helix";
+      theme = lib.mkForce "racooon";
       editor = {
         auto-save = false;
         # scrollPastEnd = true;
