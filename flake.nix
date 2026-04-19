@@ -1,29 +1,31 @@
 {
-  description = "flexinix";
+  description = "flexinix - All in one Configurations";
 
   outputs =
     { self, ... }@inputs:
     let
+      # set your default variables here!
+      var = {
+        editor = "hx"; # hx / nvim,
+        locale = "en_US.UTF-8";
+        timezone = "Asia/Jakarta";
 
-      # custom libraries
-      mylibs = import ./.lib {
-        inherit inputs self;
+        stateVersion = {
+          linux = "25.11";
+          darwin = 4;
+        };
       };
+
+      # custom lib
+      mylibs = import ./.lib { inherit inputs self; };
     in
     {
-      # set your profile systems here!
-      timezone = "Asia/Jakarta";
-      locale = "en_US.UTF-8";
-      stateVersion = {
-        linux = "25.11";
-        darwin = 4;
-      };
-
-      schemas = mylibs.schemas; # not merged yet: https://github.com/NixOS/nix/pull/8892
+      inherit var;
+      legacyPackages = mylibs.legacyPackages; # applies overlays.default to nixpkgs.legacyPackages
+      devShells = mylibs.devShells;
       overlays = mylibs.overlays; # overlays.default is the sum of all the overlays
       packages = mylibs.packages; # custom packages built against nixpkgs
-      devShells = mylibs.devShells;
-      legacyPackages = mylibs.legacyPackages; # applies overlays.default to nixpkgs.legacyPackages
+      schemas = mylibs.schemas; # not merged yet: https://github.com/NixOS/nix/pull/8892
 
       nixosConfigurations = import ./hosts/nixosConfigurations.nix {
         inherit inputs;
