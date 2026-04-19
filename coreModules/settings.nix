@@ -21,6 +21,8 @@
         "flakes"
       ];
 
+      trusted-users = [ "root" "@wheel" ];
+
       # pastikan sama seperti di nixConfig
       extra-substituters = [
         "https://cache.nixos.org"
