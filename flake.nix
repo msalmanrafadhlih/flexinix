@@ -6,7 +6,7 @@
     let
       # set your default variables here!
       var = {
-        editor = "hx"; # hx / nvim,
+        editor = "hx"; # hx / nvim / vi,
         locale = "en_US.UTF-8";
         timezone = "Asia/Jakarta";
 
@@ -20,7 +20,7 @@
       mylibs = import ./.lib { inherit inputs self; };
     in
     {
-      inherit var;
+      inherit (var) editor local timezone stateVersion;
       legacyPackages = mylibs.legacyPackages; # applies overlays.default to nixpkgs.legacyPackages
       devShells = mylibs.devShells;
       overlays = mylibs.overlays; # overlays.default is the sum of all the overlays
