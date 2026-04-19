@@ -20,7 +20,7 @@
       mylibs = import ./.lib { inherit inputs self; };
     in
     {
-      inherit (var) editor local timezone stateVersion;
+      inherit (var) editor locale timezone stateVersion;
       legacyPackages = mylibs.legacyPackages; # applies overlays.default to nixpkgs.legacyPackages
       devShells = mylibs.devShells;
       overlays = mylibs.overlays; # overlays.default is the sum of all the overlays
