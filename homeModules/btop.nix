@@ -2,10 +2,9 @@
 {
   programs.btop = {
     enable = true;
-    # themes = {};
     package = pkgs.btop;
     settings = {
-      # color_theme = "dracula";
+      color_theme = "racooon";
       truecolor = true;
       force_tty = false;
       
