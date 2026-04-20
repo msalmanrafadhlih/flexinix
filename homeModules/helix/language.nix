@@ -139,7 +139,7 @@ in
       name = "rust";
       scope = "source.rust";
       file-types = [ "rs" ];
-      auto-format = true;
+      auto-format = false;
       formatter = {
         command = "rustfmt";
         args = [
@@ -156,7 +156,7 @@ in
         "c"
         "h"
       ];
-      auto-format = true;
+      auto-format = false;
       formatter = {
         command = "clang-format";
         args = [
@@ -179,7 +179,7 @@ in
         "hh"
         "h"
       ];
-      auto-format = true;
+      auto-format = false;
       formatter = {
         command = "clang-format";
         args = [
@@ -210,7 +210,7 @@ in
         "stylua.toml"
       ];
       file-types = [ "lua" ];
-      auto-format = true;
+      auto-format = false;
       formatter = {
         command = "stylua";
         args = [ "-" ];
@@ -244,7 +244,7 @@ in
         { glob = "SConstruct"; }
         { glob = "SConscript"; }
       ];
-      auto-format = true;
+      auto-format = false;
       formatter = {
         command = "ruff";
         args = [
@@ -282,7 +282,7 @@ in
         { glob = "bazelrc"; }
         { glob = ".bash_aliases"; }
       ];
-      auto-format = true;
+      auto-format = false;
       formatter = {
         command = "shfmt";
         args = [
@@ -304,7 +304,7 @@ in
         "Dockerfile"
         { glob = "Dockerfile"; }
       ];
-      auto-format = true;
+      auto-format = false;
       formatter = {
         command = "dockfmt";
         args = [ "fmt" ];
@@ -319,7 +319,7 @@ in
         "docker-compose.yml"
         "docker-compose.yaml"
       ];
-      auto-format = true;
+      auto-format = false;
       formatter = prettierFormatter "yaml";
       language-servers = [ "docker-compose-ls" ];
     }
@@ -328,7 +328,7 @@ in
       name = "javascript";
       scope = "source.js";
       file-types = [ "js" ];
-      auto-format = true;
+      auto-format = false;
       formatter = prettierFormatter "babel";
       language-servers = [
         "typescript-language-server"
@@ -340,7 +340,7 @@ in
       name = "typescript";
       scope = "source.ts";
       file-types = [ "ts" ];
-      auto-format = true;
+      auto-format = false;
       formatter = prettierFormatter "typescript";
       language-servers = [
         "typescript-language-server"
@@ -352,7 +352,7 @@ in
       name = "jsx";
       scope = "source.jsx";
       file-types = [ "jsx" ];
-      auto-format = true;
+      auto-format = false;
       formatter = prettierFormatter "babel";
       language-servers = [
         "typescript-language-server"
@@ -365,7 +365,7 @@ in
       name = "tsx";
       scope = "source.tsx";
       file-types = [ "tsx" ];
-      auto-format = true;
+      auto-format = false;
       formatter = prettierFormatter "typescript";
       language-servers = [
         "typescript-language-server"
@@ -378,7 +378,7 @@ in
       name = "json";
       scope = "source.json";
       file-types = [ "json" ];
-      auto-format = true;
+      auto-format = false;
       formatter = prettierFormatter "json";
     }
 
@@ -389,7 +389,7 @@ in
         "yaml"
         "yml"
       ];
-      auto-format = true;
+      auto-format = false;
       formatter = prettierFormatter "yaml";
       language-servers = [ "yaml-language-server" ];
     }
@@ -401,7 +401,7 @@ in
         "md"
         "markdown"
       ];
-      auto-format = true;
+      auto-format = false;
       formatter = prettierFormatter "markdown";
     }
 
@@ -409,7 +409,7 @@ in
       name = "html";
       scope = "text.html.basic";
       file-types = [ "html" ];
-      auto-format = true;
+      auto-format = false;
       formatter = prettierFormatter "html";
       language-servers = [
         "emmet-ls"
@@ -421,7 +421,7 @@ in
       name = "css";
       scope = "source.css";
       file-types = [ "css" ];
-      auto-format = true;
+      auto-format = false;
       formatter = prettierFormatter "css";
       language-servers = [
         "vscode-css-language-server"
@@ -437,7 +437,7 @@ in
         "scss"
         "rasi"
       ];
-      auto-format = true;
+      auto-format = false;
       formatter = prettierFormatter "scss";
       language-servers = [
         "vscode-css-language-server"
@@ -450,7 +450,7 @@ in
       name = "svelte";
       scope = "source.svelte";
       file-types = [ "svelte" ];
-      auto-format = true;
+      auto-format = false;
       formatter = prettierFormatter "svelte";
       language-servers = [
         "svelte-ls"
@@ -463,7 +463,7 @@ in
       name = "toml";
       scope = "source.toml";
       file-types = [ "toml" ];
-      auto-format = true;
+      auto-format = false;
       formatter = {
         command = "taplo";
         args = [
@@ -497,7 +497,7 @@ in
       formatter = {
         command = "typstyle";
       };
-      auto-format = true;
+      auto-format = false;
     }
   ];
 }
