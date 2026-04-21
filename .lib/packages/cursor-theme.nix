@@ -14,7 +14,7 @@ stdenv.mkDerivation {
       "Kafka"                           # red
       "Crelly-Cursor-Pack"              # green
       "Ju-Fufu"                         # yellow
-      "Kiana-(Herrscher-of-Flamescion)" # grey
+      "Kiana"                           # grey
       "Ellen-Joe"                       # black
       "Erika-Furudo"                    # blue
     ];
