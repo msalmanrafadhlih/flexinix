@@ -19,7 +19,7 @@ stdenv.mkDerivation {
       "Erika-Furudo"                    # blue
     ];
 
-    sha256 = "";
+    sha256 = "sha256-I+B+8v1g92lLXOjGx0SJEjnH/H6e+Qi7/g5ZnsP1xjg=";
   };
 
   installPhase = ''
