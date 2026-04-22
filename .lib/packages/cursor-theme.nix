@@ -21,7 +21,7 @@ stdenv.mkDerivation {
       "Skyrim-by-ru5tyshark-cursors"  
     ];
 
-    sha256 = "";
+    sha256 = "sha256-8V2m3xDEFKETM9FECoZvqNxU5BBz5v+gf23mx1Cqr8c=";
   };
 
   installPhase = ''
