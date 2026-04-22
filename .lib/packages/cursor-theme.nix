@@ -7,7 +7,7 @@ stdenv.mkDerivation {
   src = fetchFromGitHub {
     owner = "TQ-See";
     repo = "Cursors-memes";
-    rev = "3ec9c73870a036c7b3f8d8f3741554f9e70e9030";
+    rev = "15ccff6b20945cf5d71ad61a9cfe736be9b3aadf";
 
     # WAJIB: Tambahkan ini agar Nix hanya mengambil folder tema tersebut
     sparseCheckout = [
@@ -19,7 +19,7 @@ stdenv.mkDerivation {
       "Erika-Furudo"                    # blue
     ];
 
-    sha256 = "sha256-I+B+8v1g92lLXOjGx0SJEjnH/H6e+Qi7/g5ZnsP1xjg=";
+    sha256 = "sha256-/oC7Mu8iZjRrdHgtJARBGZsYZ5cHFcyBkvpdZX79XFs=";
   };
 
   installPhase = ''
