@@ -7,7 +7,7 @@ stdenv.mkDerivation {
   src = fetchFromGitHub {
     owner = "TQ-See";
     repo = "Cursors-memes";
-    rev = "dacec46c777667c54aa1e427d8d442ddef8cdb09";
+    rev = "83f7dabd8c12d2b4d5c45666ec6d39b602c23be2";
 
     # WAJIB: Tambahkan ini agar Nix hanya mengambil folder tema tersebut
     sparseCheckout = [
@@ -17,10 +17,11 @@ stdenv.mkDerivation {
       "Kiana"                           # grey
       "Ellen-Joe"                       # black
       "Erika-Furudo"                    # blue
-      "Tumi-Crystal"                    # default
+      "Bibata-Modern-Ice"             
+      "Skyrim-by-ru5tyshark-cursors"  
     ];
 
-    sha256 = "sha256-O+YTAFe+BR7jOmqOoV0biHO8Me71XcbPyeg6MzgfsxI=";
+    sha256 = "";
   };
 
   installPhase = ''
