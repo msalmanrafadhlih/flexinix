@@ -9,7 +9,6 @@
       theme = lib.mkForce "racooon";
       editor = {
         auto-save = false;
-        # scrollPastEnd = true;
         text-width = 80;
         true-color = true;
         auto-pairs = true;
@@ -89,8 +88,6 @@
     };
 
     languages = import ./language.nix { inherit pkgs; };
-
-    # themes = import ./theme.nix ;
 
     extraPackages = import ./extraPackages.nix { inherit pkgs; };
   };
