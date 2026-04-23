@@ -26,12 +26,10 @@
       p = ":sh fuser -k 6419/tcp 2>/dev/null; go-grip $(pwd)";
     };
 
-    # Shortcut Select All (m + w)
-    m = { w = "select_all"; };
-
     # --- SPACE MENU ---
     space = {
       # File management standar
+      m = "select_all";
       w = ":write";
       q = ":quit";
       x = ":buffer-close"; # Tambahan dari TOML
@@ -86,9 +84,9 @@
   select = {
     "{" = "goto_prev_paragraph";
     "}" = "goto_next_paragraph";
-    m = { w = "select_all"; };
     
     space = {
+      m = "select_all";
       u = "switch_to_lowercase";
       U = "switch_to_uppercase";
       t = {
