@@ -4,7 +4,7 @@
     enable = true;
     package = pkgs.btop;
     settings = {
-      color_theme = "racooon";
+      # color_theme = "racooon";
       truecolor = true;
       force_tty = false;
       
