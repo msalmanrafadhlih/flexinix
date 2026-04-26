@@ -33,7 +33,8 @@ let
     CLASS = "xprop | grep CLASS";
     NAME = "xprop | grep NAME";
     WMINFO = "nix-shell -p xwininfo --run xwininfo";
-
+    CROWN =  "chmod -R u+w"; # CROWN <path readonly>
+    
     RUNNING = "systemctl --user list-units --state=running";
     SYSRUNNING = "systemctl list-units --state=running";
     USAGELOG = "sudo journalctl --disk-usage";
