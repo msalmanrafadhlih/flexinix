@@ -24,12 +24,12 @@
 
     initLua = builtins.readFile ./init.lua;
 
-    # theme = {
-    #   flavor = {
-    #     light = "catppuccin-latte";
-    #     dark = "catppuccin-mocha";
-    #   };
-    # };
+    theme = {
+      flavor = {
+        light = "catppuccin-latte";
+        dark = "catppuccin-mocha";
+      };
+    };
 
     flavors =
       let
