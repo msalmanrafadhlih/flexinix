@@ -49,19 +49,21 @@
         success_symbol = "[](bold green) ";
         error_symbol = "[](bold red) ";
       };
+
       status = {
-        format = "[]($style)[$symbol]($style)";
+        format = "[]($style)$symbol";
+        symbol = "";
         map_symbol = true;
-        not_executable_symbol = " 🚫 FAILED ";
-        not_found_symbol = " 🔍 NOT FOUND ";
-        pipestatus = false;
+        style = "bold red";
+        success_style = "bold green";
+        success_symbol = "[ 🟢 SUCCESS ](bold green)";
+        not_executable_symbol = "[ 🚫 FAILED ](bold red)";
+        not_found_symbol = "[ 🔍 NOT FOUND ](bold yellow)";
+        signal_symbol = "[ ⚡SIGNAL's LOST ](bold yellow)";
+        pipestatus = true;
         pipestatus_format = "[$pipestatus] => [$symbol$common_meaning$signal_name$maybe_int]($style)";
         pipestatus_separator = "|";
         recognize_signal_code = true;
-        signal_symbol = " ⚡SIGNAL's LOST";
-        style = "bold red";
-        success_symbol = " 🟢 SUCCESS ";
-        symbol = "";
         disabled = false;
       };
 
