@@ -1392,22 +1392,6 @@
     },
     "nixpkgs_6": {
       "locked": {
-        "lastModified": 1777578337,
-        "narHash": "sha256-Ad49moKWeXtKBJNy2ebiTQUEgdLyvGmTeykAQ9xM+Z4=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "15f4ee454b1dce334612fa6843b3e05cf546efab",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_7": {
-      "locked": {
         "lastModified": 1775126147,
         "narHash": "sha256-J0dZU4atgcfo4QvM9D92uQ0Oe1eLTxBVXjJzdEMQpD0=",
         "owner": "NixOS",
@@ -1569,7 +1553,9 @@
       "inputs": {
         "home-manager": "home-manager",
         "matugen": "matugen",
-        "nixpkgs": "nixpkgs_6",
+        "nixpkgs": [
+          "nixos-unstable"
+        ],
         "spicetify-nix": "spicetify-nix",
         "st-nix": "st-nix",
         "textfox": "textfox",
@@ -1580,11 +1566,11 @@
         "zjstatus": "zjstatus"
       },
       "locked": {
-        "lastModified": 1777738084,
-        "narHash": "sha256-hnkgF9HTZAKTitmF9q8Dr0HpvkGDrC8NNGSJs/iO9bE=",
+        "lastModified": 1777739262,
+        "narHash": "sha256-PJMz9nJSWv0GarBCHYOF91crDlpoxPvHVFUWbfJvOA4=",
         "owner": "msalmanrafadhlih",
         "repo": "racooonfig",
-        "rev": "4f36351d0698b194e26e065f694186dcfa2f61b6",
+        "rev": "ba716d7b5e7dd0762147d34af237b84d3d8ca83c",
         "type": "github"
       },
       "original": {
@@ -1684,7 +1670,7 @@
     },
     "sops-nix": {
       "inputs": {
-        "nixpkgs": "nixpkgs_7"
+        "nixpkgs": "nixpkgs_6"
       },
       "locked": {
         "lastModified": 1775619836,
