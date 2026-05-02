@@ -8,7 +8,7 @@
       add_newline = true;
       command_timeout = 500;
       continuation_prompt = "[∙](bright-black) ";
-      format = "[  ](0x9A348E)$username" + "\${custom.dir_icon}" + "$shlvl$singularity$kubernetes$directory$vcsh$git_branch$line_break$cmd_duration$shell$character";
+      format = "[  ](0x9A348E)$username" + "\${custom.dir_icon}" + "$shlvl$singularity$kubernetes$directory$vcsh$git_branch$line_break$cmd_duration$shell$status$character";
       right_format = "$line_break$hg_branch$docker_context$package$buf$c$cmake$cobol$container$daml$dart$deno$dotnet$elixir$elm$erlang$golang$haskell$helm$java$julia$kotlin$lua$nim$nodejs$ocaml$perl$php$pulumi$purescript$python$rlang$red$ruby$rust$scala$swift$terraform$vlang$vagrant$zig$nix_shell$conda$spack$aws$gcloud$openstack$azure$env_var$crystal$sudo";
       scan_timeout = 30;
        
@@ -43,7 +43,7 @@
       };
 
       character = {
-        format = "$status$symbol";
+        format = "$symbol";
         vicmd_symbol = "[ vi ](bold yellow) ";
         disabled = false;
         success_symbol = "[](bold green) ";
@@ -157,6 +157,7 @@
           }
         ];
       };
+
       buf = {
         format = " [$symbol ($version)]($style)[]($style)";
         version_format = "v$raw";
