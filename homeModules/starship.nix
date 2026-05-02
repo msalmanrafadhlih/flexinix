@@ -8,7 +8,7 @@
       add_newline = true;
       command_timeout = 500;
       continuation_prompt = "[∙](bright-black) ";
-      format = "[  ](0x9A348E)$username" + "\${custom.dir_icon}" + "$shlvl$singularity$kubernetes$directory$vcsh$git_branch$line_break$cmd_duration$shell$status$character";
+      format = "[  ](0x9A348E)$username" + "\${custom.dir_icon}" + "$shlvl$singularity$kubernetes$directory$vcsh$git_branch$line_break$cmd_duration$shell$character";
       right_format = "$line_break$hg_branch$docker_context$package$buf$c$cmake$cobol$container$daml$dart$deno$dotnet$elixir$elm$erlang$golang$haskell$helm$java$julia$kotlin$lua$nim$nodejs$ocaml$perl$php$pulumi$purescript$python$rlang$red$ruby$rust$scala$swift$terraform$vlang$vagrant$zig$nix_shell$conda$spack$aws$gcloud$openstack$azure$env_var$crystal$sudo";
       scan_timeout = 30;
        
@@ -43,25 +43,23 @@
       };
 
       character = {
-        format = "$symbol";
-        vicmd_symbol = "[❮](bold green)";
+        format = "$status$symbol";
+        vicmd_symbol = "[ vi ](bold yellow) ";
         disabled = false;
         success_symbol = "[](bold green) ";
         error_symbol = "[](bold red) ";
       };
 
       status = {
-        format = "[]($style)$symbol";
-        symbol = "";
+        format = "$symbol";
+        symbol = "[](bold green)";
         map_symbol = true;
-        style = "bold red";
-        success_style = "bold green";
-        success_symbol = "[ 🟢 SUCCESS ](bold green)";
-        not_executable_symbol = "[ 🚫 FAILED ](bold red)";
-        not_found_symbol = "[ 🔍 NOT FOUND ](bold yellow)";
-        signal_symbol = "[ ⚡SIGNAL's LOST ](bold yellow)";
+        success_symbol = "[ 🟢 SUCCESS ](bold green)";
+        not_executable_symbol = "[ 🚫 FAILED ](bold red)";
+        not_found_symbol = "[ 🔍 NOT FOUND ](bold yellow)";
+        signal_symbol = "[ ⚡ SIGNAL's LOST ](bold yellow)";
         pipestatus = true;
-        pipestatus_format = "[$pipestatus] => [$symbol$common_meaning$signal_name$maybe_int]($style)";
+        pipestatus_format = "$pipestatus => $symbol$common_meaning$signal_name$maybe_int";
         pipestatus_separator = "|";
         recognize_signal_code = true;
         disabled = false;
