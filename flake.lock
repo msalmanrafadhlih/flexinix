@@ -988,6 +988,22 @@
         "type": "github"
       }
     },
+    "nix-flatpak": {
+      "locked": {
+        "lastModified": 1767983141,
+        "narHash": "sha256-7ZCulYUD9RmJIDULTRkGLSW1faMpDlPKcbWJLYHoXcs=",
+        "owner": "gmodena",
+        "repo": "nix-flatpak",
+        "rev": "440818969ac2cbd77bfe025e884d0aa528991374",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gmodena",
+        "ref": "latest",
+        "repo": "nix-flatpak",
+        "type": "github"
+      }
+    },
     "nix-formatter-pack": {
       "inputs": {
         "nixpkgs": [
@@ -1553,6 +1569,7 @@
       "inputs": {
         "home-manager": "home-manager",
         "matugen": "matugen",
+        "nix-flatpak": "nix-flatpak",
         "nixpkgs": [
           "nixos-unstable"
         ],
@@ -1566,11 +1583,11 @@
         "zjstatus": "zjstatus"
       },
       "locked": {
-        "lastModified": 1777811390,
-        "narHash": "sha256-Iiu22JSyk7O4K9lrr36nMeCmcHh4q8JfKUhaK6t6UDg=",
+        "lastModified": 1777816901,
+        "narHash": "sha256-F68ANjg27PZUk5PSEcRc0aN8oZuhZNY1TZ9W7rPkOKQ=",
         "owner": "msalmanrafadhlih",
         "repo": "racooonfig",
-        "rev": "55a821c4712dd02cf55b873e0a15eaaea124c95a",
+        "rev": "c117ca58ccf83188d2c4faa8406016d17349fe58",
         "type": "github"
       },
       "original": {
