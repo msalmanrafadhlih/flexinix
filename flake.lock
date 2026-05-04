@@ -1583,11 +1583,11 @@
         "zjstatus": "zjstatus"
       },
       "locked": {
-        "lastModified": 1777819796,
-        "narHash": "sha256-BIV3czB3/9+hkRODi5LD6y8HpCRr/0ZbXXlz3xu/DdA=",
+        "lastModified": 1777883597,
+        "narHash": "sha256-wDUhgRcJ5QIPtT23jYFmVmP46bgtj+sJCkHvIhs0VDo=",
         "owner": "msalmanrafadhlih",
         "repo": "racooonfig",
-        "rev": "e0c1aed586767faabb4fa98e95a5ffe10244c50b",
+        "rev": "c151a20a5c772c20d01a8863c35305e9581f6f87",
         "type": "github"
       },
       "original": {
