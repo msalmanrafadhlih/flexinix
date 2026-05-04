@@ -1478,6 +1478,27 @@
         "type": "github"
       }
     },
+    "plank-reloaded": {
+      "inputs": {
+        "nixpkgs": [
+          "racooonfig",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1776118724,
+        "narHash": "sha256-ZO+XJD+NeHWsCP9P+37Ql+JNFmsmVnUhPNqxVkVIuXk=",
+        "owner": "zquestz",
+        "repo": "plank-reloaded",
+        "rev": "95e1c4109131abf047286cb43ee554a610c2c022",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zquestz",
+        "repo": "plank-reloaded",
+        "type": "github"
+      }
+    },
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": [
@@ -1572,6 +1593,7 @@
         "nixpkgs": [
           "nixos-unstable"
         ],
+        "plank-reloaded": "plank-reloaded",
         "spicetify-nix": "spicetify-nix",
         "st-nix": "st-nix",
         "textfox": "textfox",
@@ -1582,11 +1604,11 @@
         "zjstatus": "zjstatus"
       },
       "locked": {
-        "lastModified": 1777899697,
-        "narHash": "sha256-2U68ZAPhAVRVmZmdwKMMI8ASZFs+SsbziMo5GVjggZI=",
+        "lastModified": 1777905815,
+        "narHash": "sha256-Hedaj9reDIJA71nXAbQaJnkVQR6KKHZjuAvix3jZ48E=",
         "owner": "msalmanrafadhlih",
         "repo": "racooonfig",
-        "rev": "66e1a3d6f355165a6bca893a6141733f2484832b",
+        "rev": "24bb88fe6722fce670bdb5a671ffd6651b01e361",
         "type": "github"
       },
       "original": {
