@@ -43,24 +43,27 @@
       };
 
       character = {
-        format = "$symbol";
-        vicmd_symbol = "[ vi ](bold yellow) ";
+        format = "[$symbol]($style) ";
+        vicmd_symbol = "[ vi ](yellow) ";
         disabled = false;
-        success_symbol = "[](bold green) ";
-        error_symbol = "[](bold red) ";
+        style = "bold green";
+        success_style = "bold green";
+        success_symbol = "";
+        error_symbol = "";
       };
 
       status = {
-        format = "$symbol";
+        format = "$symbol$status";
         symbol = "[](bold green)";
         map_symbol = true;
-        success_symbol = "[ 🟢 SUCCESS ](bold green)";
-        not_executable_symbol = "[ 🚫 FAILED ](bold red)";
-        not_found_symbol = "[ 🔍 NOT FOUND ](bold yellow)";
-        signal_symbol = "[ ⚡ SIGNAL's LOST ](bold yellow)";
+        success_symbol = " 🟢 SUCCESS (green)";
+        not_executable_symbol = " 🚫 FAILED (red)";
+        not_found_symbol = " 🔍 NOT FOUND (yellow)";
+        signal_symbol = " ⚡ SIGNAL's LOST (yellow)";
+        sigint_symbol = " !! INTERRUPT (yellow)";
         pipestatus = true;
-        pipestatus_format = "$pipestatus => $symbol$common_meaning$signal_name$maybe_int";
-        pipestatus_separator = "|";
+        pipestatus_format = "\\[$pipestatus\\] => $symbol$common_meaning$signal_name$maybe_int ";
+        pipestatus_separator = " | ";
         recognize_signal_code = true;
         disabled = false;
       };
@@ -93,7 +96,7 @@
         am = "AM";
         am_or_rebase = "AM/REBASE";
         bisect = "BISECTING";
-        cherry_pick = "🍒PICKING(bold red)";
+        cherry_pick = " 🍒 PICKING (bold red)";
         disabled = false;
         format = "([ $state( $progress_current/$progress_total)]($style))";
         merge = "MERGING";
