@@ -43,13 +43,11 @@
       };
 
       character = {
-        format = "[$symbol]($style) ";
+        format = "$symbol";
         vicmd_symbol = "[ vi ](yellow) ";
         disabled = false;
-        style = "bold green";
-        success_style = "bold green";
-        success_symbol = "";
-        error_symbol = "";
+        success_symbol = "(green) ";
+        error_symbol = "(red) ";
       };
 
       status = {
