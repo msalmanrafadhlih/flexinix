@@ -1604,11 +1604,11 @@
         "zjstatus": "zjstatus"
       },
       "locked": {
-        "lastModified": 1777905815,
-        "narHash": "sha256-Hedaj9reDIJA71nXAbQaJnkVQR6KKHZjuAvix3jZ48E=",
+        "lastModified": 1777925131,
+        "narHash": "sha256-2GsbfCCRRYV7IR0RH2GMC3MVb+M8EUS2SRvaO8hkDXs=",
         "owner": "msalmanrafadhlih",
         "repo": "racooonfig",
-        "rev": "24bb88fe6722fce670bdb5a671ffd6651b01e361",
+        "rev": "232dac320d78d5cd5c2a3ae1270bf40ba70b3855",
         "type": "github"
       },
       "original": {
