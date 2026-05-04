@@ -59,7 +59,7 @@
         not_found_symbol = "[ 🔍 NOT FOUND ](bold yellow)";
         signal_symbol = "[ ⚡ SIGNAL's LOST ](bold yellow)";
         sigint_symbol = "[ !! INTERRUPT ](bold yellow)";
-        pipestatus = true;
+        pipestatus = false;
         pipestatus_format = "\\[$pipestatus\\] => $symbol$common_meaning$signal_name$maybe_int ";
         pipestatus_separator = " | ";
         recognize_signal_code = true;
