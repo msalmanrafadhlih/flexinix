@@ -260,6 +260,7 @@ RACOOON() {
     echo "✅ Changes pushed to $target_branch dengan pesan: $sys_msg"
   else
     echo "⚡ Tidak ada perubahan di $dir."
+    git push origin "$target_branch"
   fi
 
   echo -n "\nLanjut rebuild system? (y/n) "
