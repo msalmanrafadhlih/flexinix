@@ -44,21 +44,21 @@
 
       character = {
         format = "$symbol";
-        vicmd_symbol = "[ vi ](yellow) ";
+        vicmd_symbol = "[ vi ](bold yellow) ";
         disabled = false;
-        success_symbol = "(green) ";
-        error_symbol = "(red) ";
+        success_symbol = "(bold green) ";
+        error_symbol = "(bold red) ";
       };
 
       status = {
         format = "$symbol$status";
         symbol = "[](bold green)";
         map_symbol = true;
-        success_symbol = " 🟢 SUCCESS (green)";
-        not_executable_symbol = " 🚫 FAILED (red)";
-        not_found_symbol = " 🔍 NOT FOUND (yellow)";
-        signal_symbol = " ⚡ SIGNAL's LOST (yellow)";
-        sigint_symbol = " !! INTERRUPT (yellow)";
+        success_symbol = " 🟢 SUCCESS (bold green)";
+        not_executable_symbol = " 🚫 FAILED (bold red)";
+        not_found_symbol = " 🔍 NOT FOUND (bold yellow)";
+        signal_symbol = " ⚡ SIGNAL's LOST (bold yellow)";
+        sigint_symbol = " !! INTERRUPT (bold yellow)";
         pipestatus = true;
         pipestatus_format = "\\[$pipestatus\\] => $symbol$common_meaning$signal_name$maybe_int ";
         pipestatus_separator = " | ";
@@ -106,14 +106,14 @@
       git_status = {
         style = "bold purple";
         format = "([ \\[$all_status$ahead_behind\\]]($style) )";
-        stashed = "[\${count}*](green)";
-        modified = "[\${count}+](yellow)";
-        deleted = "[\${count}-](red)";
-        conflicted = "[\${count}~](red)";
+        stashed = "[\${count}*](bold green)";
+        modified = "[\${count}+](bold yellow)";
+        deleted = "[\${count}-](bold red)";
+        conflicted = "[\${count}~](bold red)";
         ahead = "⇡\${count}";
         behind = "⇣\${count}";
-        untracked = "[\${count}?](blue)";
-        staged = "[\${count}+](green)";
+        untracked = "[\${count}?](bold blue)";
+        staged = "[\${count}+](bold green)";
       };
 
       aws = {
