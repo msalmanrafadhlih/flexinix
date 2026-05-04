@@ -51,7 +51,7 @@
       };
 
       status = {
-        format = "$symbol$status";
+        format = "$symbol";
         symbol = "[](bold green)";
         map_symbol = true;
         success_symbol = "[ 🟢 SUCCESS ](bold green)";
