@@ -21,7 +21,9 @@ stdenv.mkDerivation {
     runHook preInstall
 
     mkdir -p $out/share/sddm/themes/${selectedTheme}
-    cp -r ${themeSubPath}/* $out/share/sddm/themes/${selectedTheme}/
+    # cp -r ${themeSubPath}/* $out/share/sddm/themes/${selectedTheme}/
+    cp -r ${themeSubPath}/orbital/* $out/share/sddm/themes/orbital/
+    cp -r ${themeSubPath}/tape/* $out/share/sddm/themes/tape/
 
     runHook postInstall
   '';
