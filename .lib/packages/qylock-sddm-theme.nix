@@ -1,7 +1,7 @@
 { stdenv, fetchFromGitHub }:
 
 let
-  selectedTheme = "R1999_2";
+  selectedTheme = "clockwork";
   themeSubPath = "themes/${selectedTheme}";
 in
 stdenv.mkDerivation {
@@ -11,9 +11,9 @@ stdenv.mkDerivation {
   src = fetchFromGitHub {
     owner = "TQ-See";
     repo = "qylock";
-    rev = "b8260cb043df9a2a0175a0a04027d42cf7283239";
+    rev = "ca5bd56cbe587f4f115be439d4a120f2721224a6";
     sparseCheckout = [ themeSubPath ];
-    sha256 = "sha256-qYhW5tgGGnhRsrRQAt/nsfG5ezNIaN2Dge1sLFEmw/g=";
+    sha256 = "sha256-xcwn6SO3lfK9IhUTMcoPtWI1UW/xaiTyUpcE1Z+N/kY=";
   };
 
   # SDDM theme biasanya butuh struktur folder yang spesifik
