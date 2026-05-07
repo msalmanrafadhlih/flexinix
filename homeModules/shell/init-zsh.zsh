@@ -255,11 +255,12 @@ RACOOON() {
     git diff --name-only | xargs -I{} sh -c "git add '{}' && git commit -m '$timestamp | $sys_msg: {}'"
     git add .
     git commit -m "$timestamp | $sys_msg"
-    sleep 0.3
+    sleep 0.1
     git push origin "$target_branch"
     echo "✅ Changes pushed to $target_branch dengan pesan: $sys_msg"
   else
     echo "⚡ Tidak ada perubahan di $dir."
+    sleep 0.1
     git push origin "$target_branch"
   fi
 
