@@ -9,12 +9,12 @@ stdenv.mkDerivation {
   src = fetchFromGitHub {
     owner = "TQ-See";
     repo = "MyGrubThemes";
-    rev = "0804a912251abc17fc0978408841f1cb204b277f";
+    rev = "41338c9dc899b14cef9bb4530ef9bd5560ae2b64";
 
     # WAJIB: Tambahkan ini agar Nix hanya mengambil folder tema tersebut
     sparseCheckout = [ selectedTheme ];
 
-    sha256 = "sha256-md7sSb/dHl30XMABvoVUaSWOTS4C6YFDXnfFmPMySGo=";
+    sha256 = "sha256-F2ehvobYRadrHIbS2et/N5uQvv9iIZiJ+x/ggRLrTE4=";
   };
 
   installPhase = ''
