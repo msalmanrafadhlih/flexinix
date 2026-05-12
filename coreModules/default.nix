@@ -35,7 +35,6 @@
     ./virtualisation.nix
     ./locale.nix
     ./nix-ld.nix
-    ./fonts.nix
     ./sudo.nix
   ];
 }
