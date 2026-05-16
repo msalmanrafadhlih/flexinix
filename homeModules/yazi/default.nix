@@ -26,8 +26,8 @@
 
     theme = {
       flavor = {
-        light = "catppuccin-latte";
-        dark = "catppuccin-mocha";
+        light = "catppuccin-frappe";
+        dark = "catppuccin-macchiato";
       };
     };
 
