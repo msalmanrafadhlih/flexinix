@@ -2,11 +2,11 @@
 let
   # For our MANPAGER env var
   # https://github.com/sharkdp/bat/issues/1145
-  manpager = (pkgs.writeShellScriptBin "manpager" (if isDarwin then ''
-    sh -c 'col -bx | bat -l man -p'
+  manpager = pkgs.writeShellScriptBin "manpager" (if isDarwin then ''
+      col -bx | bat -l man -p
     '' else ''
-    cat "$1" | col -bx | bat --language man --style plain
-  ''));
+      col -bx | bat --language man --style plain
+    '');
 in
 
 {
