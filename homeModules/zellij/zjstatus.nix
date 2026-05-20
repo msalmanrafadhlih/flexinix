@@ -1,7 +1,7 @@
-{ inputs, pkgs }: {
+{ inp, pkgs }: {
   _props = {
     location = "file:${
-        inputs.zjstatus.packages.${pkgs.stdenv.hostPlatform.system}.default
+        inp.zjstatus.packages.${pkgs.stdenv.hostPlatform.system}.default
       }/bin/zjstatus.wasm";
   };
   _children = [{
