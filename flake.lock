@@ -1,5 +1,32 @@
 {
   "nodes": {
+    "android-nixpkgs": {
+      "inputs": {
+        "devshell": [
+          "devshell"
+        ],
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixos-stable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1779225602,
+        "narHash": "sha256-mGkCQEmNl4h9tuTHgqs4lPOf3uHEHW+tZjj7I+dhUMs=",
+        "owner": "tadfisher",
+        "repo": "android-nixpkgs",
+        "rev": "a2af25bfbc7286303a09643f7b9843fc7fcb2236",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tadfisher",
+        "ref": "stable",
+        "repo": "android-nixpkgs",
+        "type": "github"
+      }
+    },
     "cachix": {
       "inputs": {
         "devenv": [
@@ -1619,6 +1646,7 @@
     },
     "root": {
       "inputs": {
+        "android-nixpkgs": "android-nixpkgs",
         "darwin-stable": "darwin-stable",
         "darwin-unstable": "darwin-unstable",
         "devenv": "devenv",

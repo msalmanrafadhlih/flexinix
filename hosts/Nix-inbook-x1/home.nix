@@ -10,11 +10,14 @@
   isWSL,
   isAndroid,
   ...
-}: let
-in {
+}:
+let
+in
+{
+  # My Specialisation config use `nixos-rebuild --specialisation (bspwm / hyprland / niri)`
   specialisation.bspwm.configuration = {
-    imports = [ inputs.racooonfig.nixosModules.bspwm-core ];
-   
+    imports = [ inputs.racooonfig.nixosModules.racooonfig ];
+
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
@@ -29,15 +32,14 @@ in {
           isWSL
           isLinux
           isDarwin
+          inputs
           ;
-        rootInputs = inputs;
-        inputs = inputs.racooonfig.inputs;
       };
       users = {
         ${username} = {
           imports = [
             ../../homeModules
-            inputs.racooonfig.homeModules.default
+            inputs.racooonfig.homeModules.racooonfig
           ];
         };
       };

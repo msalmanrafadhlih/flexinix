@@ -1,4 +1,4 @@
-{ flakeRoot, ... }:
+{ flakeRoot, username, ... }:
 let
   editor = {
     nvim = ./neovim;
@@ -7,6 +7,10 @@ let
   };
 in
 {
+  home.username = username;
+  home.homeDirectory = "/home/${username}";
+  programs.git.enable = true;
+
   imports = [
     ./variables.nix
     ./starship.nix

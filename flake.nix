@@ -21,11 +21,12 @@
     in
     {
       inherit (var) editor locale timezone stateVersion;
+
       legacyPackages = mylibs.legacyPackages; # applies overlays.default to nixpkgs.legacyPackages
-      devShells = mylibs.devShells;
-      overlays = mylibs.overlays; # overlays.default is the sum of all the overlays
-      packages = mylibs.packages; # custom packages built against nixpkgs
-      schemas = mylibs.schemas; # not merged yet: https://github.com/NixOS/nix/pull/8892
+      devShells      = mylibs.devShells;
+      overlays       = mylibs.overlays; # overlays.default is the sum of all the overlays
+      packages       = mylibs.packages; # custom packages built against nixpkgs
+      schemas        = mylibs.schemas; # not merged yet: https://github.com/NixOS/nix/pull/8892
 
       nixosConfigurations = import ./hosts/nixosConfigurations.nix {
         inherit inputs;
@@ -118,6 +119,14 @@
       inputs = {
         flake-compat.follows = "flake-compat";
         git-hooks.follows = "git-hooks";
+      };
+    };
+    android-nixpkgs = {
+      url = "github:tadfisher/android-nixpkgs/stable";
+      inputs = {
+        nixpkgs.follows = "nixos-stable";
+        devshell.follows = "devshell";
+        flake-utils.follows = "flake-utils";
       };
     };
     git-hooks = {
