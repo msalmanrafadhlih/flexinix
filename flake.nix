@@ -64,7 +64,6 @@
     nixos-unstable-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     darwin-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable"; # darwin-unstable for now (https://github.com/NixOS/nixpkgs/issues/107466)
 
-    # /// system-manager ////////////////////////////////////////////////
     # - Home-Manager
     home-manager-stable = {
       url = "github:nix-community/home-manager";
@@ -91,6 +90,12 @@
         nixpkgs.follows = "nixos-stable-lib";
         home-manager.follows = "home-manager-stable";
       };
+    };
+
+    # /// system-manager ////////////////////////////////////////////////
+    nix-snapd = {
+      url = "github:nix-community/nix-snapd";
+      inputs.nixpkgs.follows = "nixos-stable-lib";
     };
 
     # /// core_ecosystems ///////////////////////////////////////////////
@@ -139,13 +144,6 @@
 
     # /// security/secret_tools ////////////////////////////////////////
     sops-nix.url = "github:Mic92/sops-nix";
-
-    # /// package_managers /////////////////////////////////////////////
-    nur.url = "github:nix-community/NUR";
-    nix-snapd = {
-      url = "github:nix-community/nix-snapd";
-      inputs.nixpkgs.follows = "nixos-stable-lib";
-    };
 
     # home-manager configurations
     racooonfig = {
