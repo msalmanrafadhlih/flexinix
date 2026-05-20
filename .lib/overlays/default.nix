@@ -36,7 +36,5 @@ rec {
     local-packages
     all-channels
     devenv
-
-    inputs.nur.overlays.default
   ];
 }
