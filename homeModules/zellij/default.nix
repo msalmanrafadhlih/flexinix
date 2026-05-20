@@ -1,4 +1,6 @@
-{ lib, pkgs, inputs, ... }: {
+{ lib, pkgs, inputs, ... }: let
+  inp = inputs.racooonfig.inputs;
+in {
 
   programs.zellij = {
     enable = true;
@@ -20,7 +22,7 @@
       };
 
       plugins = {
-        zjstatus = import ./zjstatus.nix { inherit inputs pkgs; };
+        zjstatus = import ./zjstatus.nix { inherit inp pkgs; };
       };
 
     };
