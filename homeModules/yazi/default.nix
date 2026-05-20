@@ -1,4 +1,6 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, ... }: let
+  inp = inputs.racooonfig.inputs;
+in
 {
   home.packages = with pkgs; [
     trash-cli
@@ -19,7 +21,7 @@
       restore = restore;
       ouch = ouch;
       piper = piper;
-      compress = inputs.yazi-compress;
+      compress = inp.yazi-compress;
     };
 
     initLua = builtins.readFile ./init.lua;
@@ -33,7 +35,7 @@
 
     flavors =
       let
-        flav = inputs.yazi-flavors;
+        flav = inp.yazi-flavors;
       in
       {
         catppuccin-macchiato = "${flav}/catppuccin-macchiato.yazi";
