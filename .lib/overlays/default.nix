@@ -36,5 +36,7 @@ rec {
     local-packages
     all-channels
     devenv
+
+    inputs.racooonfig.overlays.default
   ];
 }
