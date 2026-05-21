@@ -5,17 +5,17 @@
 
 # prev:  = Use if you want to refer to the original package from nixpkgs before modification.
 
-{ inputs, ... }:
+{ inputs, self, ... }:
 rec {
   # Overlay for 'pkgs.stable' 'pkgs.unstable'
   all-channels = final: prev: {
     stable = import inputs.nixos-stable {
       system = prev.stdenv.hostPlatform.system;
-      config = (import ../nixpkgs { inherit inputs; }).config;
+      config = self.nixpkgs.config;
     };
     unstable = import inputs.nixos-unstable {
       system = prev.stdenv.hostPlatform.system;
-      config = (import ../nixpkgs { inherit inputs; }).config;
+      config = self.nixpkgs.config;
     };
   };
 
