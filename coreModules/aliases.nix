@@ -54,11 +54,11 @@ let
     SYSMDL = "yazi /etc/nixos/coreModules";
 
     ## USER CONFIGURATIONS {EDIT}
-    HOME = "cd ~/.dotfiles/$XDG_CURRENT_DESKTOP && ls";
-    DOTS = "yazi ~/.dotfiles/$XDG_CURRENT_DESKTOP/configs";
-    INSTALL = "hx ~/.dotfiles/$XDG_CURRENT_DESKTOP/users/$USER/packages.nix";
-    HOMEFLAKE = "cd ~/.dotfiles/$XDG_CURRENT_DESKTOP && ls && hx ~/.dotfiles/$XDG_CURRENT_DESKTOP/flake.nix";
-    MDL = "yazi ~/.dotfiles/$XDG_CURRENT_DESKTOP/scripts";
+    HOME = "cd ~/.dotfiles/racooonfig && ls";
+    DOTS = "yazi ~/.dotfiles/racooonfig/configs";
+    INSTALL = "hx ~/.dotfiles/racooonfig/users/$USER/packages.nix";
+    HOMEFLAKE = "cd ~/.dotfiles/racooonfig && ls && hx ~/.dotfiles/racooonfig/flake.nix";
+    MDL = "yazi ~/.dotfiles/racooonfig/scripts";
 
     ## USER CONFIGURATIONS {SAVE}
     BIN = "chmod +x ~/.local/bin/*.sh";
@@ -84,7 +84,7 @@ let
     CONFSAVE = "mv config.h config.h.bak";
     CONFDEL = "cp config.h.bak config.h";
     MAKE = "make clean && make && make install PREFIX=$HOME/.local";
-    SUCKLESS = "hx ~/.dotfiles/$XDG_CURRENT_DESKTOP/configs/suckless/default.nix";
+    SUCKLESS = "hx ~/.dotfiles/racooonfig/configs/suckless/default.nix";
 
     ## Scripts
     CAM = "~/.local/bin/opencam";
