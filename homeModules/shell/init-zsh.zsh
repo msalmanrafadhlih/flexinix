@@ -241,7 +241,7 @@ printf "%s" "$input" | fzf \
 }
 
 RACOOON() {
-  local dir="$HOME/.dotfiles/$XDG_CURRENT_DESKTOP"
+  local dir="$HOME/.dotfiles/racooonfig"
   local timestamp=$(date "+%Y-%m-%d %H:%M")
   
   local sys_msg="${1:-"Update via SAVEFLAKE"}"
@@ -283,9 +283,7 @@ RACOOON() {
 
     # === specialisation ===
     local spec=$(tmux_fzf "$(printf "%s\n" \
-      "bspwm" \
-      "niri" \
-      "hyprland")" \
+      "bspwm")" \
       "Specialisation (ctrl-c to cancel): ")
 
     [[ "$spec" == "none" ]] && spec=""
