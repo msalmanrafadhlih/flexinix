@@ -3362,11 +3362,11 @@
         "zjstatus": "zjstatus_2"
       },
       "locked": {
-        "lastModified": 1779355316,
-        "narHash": "sha256-wZtCXhBcTaWT64mmaH13v3NcjGeip3yxqwAWTDzkJwA=",
+        "lastModified": 1779356268,
+        "narHash": "sha256-tzZD7Nsn07bzEC1qOxiukBArPGNPgAiixNTGL2IXx10=",
         "owner": "msalmanrafadhlih",
         "repo": "racooonfig",
-        "rev": "70ef539df05403fc22951e94029a69a4398210cc",
+        "rev": "e6dfa1671fdd4e24ae7c2b96b4ea7f8eb0b792aa",
         "type": "github"
       },
       "original": {
