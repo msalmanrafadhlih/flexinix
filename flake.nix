@@ -31,7 +31,7 @@
 
       nixosConfigurations = import ./hosts/nixosConfigurations.nix {
         inherit inputs;
-        inherit (mylibs.mkConfigs) nixOnDroid;
+        inherit (mylibs.mkConfigs) nixos;
       };
       homeConfigurations = import ./hosts/homeConfigurations.nix {
         inherit inputs;
@@ -43,7 +43,7 @@
       };
       nixOnDroidConfigurations = import ./hosts/nixOnDroidConfigurations.nix {
         inherit inputs;
-        inherit (mylibs.mkConfigs) nixos;
+        inherit (mylibs.mkConfigs) nixOnDroid;
       }; # nix-on-droid switch --flake github:msalmanrafadhlih/flexinix
     };
 
