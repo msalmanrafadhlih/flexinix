@@ -1,6 +1,6 @@
-{ flakeRoot, system, ... }:
+{ inputs, system, ... }:
 let
-  rip = "${flakeRoot.packages.${system}.rip}/bin/rip";
+  rip = "${inputs.racooonfig.packages.${system}.rip}/bin/rip";
 in
 {
   programs.tmux.extraConfig = ''
