@@ -4,8 +4,11 @@ let
   flakeRoot = self;
 
   nixpkgs = {
-    nixpkgs.config = (import ./nixpkgs args).config;
-    nixpkgs.overlays = [ (import ./overlays args).default ];
+    nixpkgs.config = self.nixpkgs.default;
+    nixpkgs.overlays = [
+      (import ./overlays args).default
+      inputs.racooonfig.overlays.default
+    ];
   };
 in
 {
@@ -36,7 +39,7 @@ in
     in
     pkgsIn.lib.nixosSystem {
       specialArgs = {
-        inherit (self.mapping) mapFile mapDir mapAll; 
+        inherit (inputs.racooonfig.mapping) mapDir mapAll mapFile;
         inherit
           inputs
           system
@@ -87,7 +90,7 @@ in
     in
     inputs.nix-darwin.lib.darwinSystem {
       specialArgs = {
-        inherit (self.mapping) mapFile mapDir mapAll; 
+        inherit (inputs.racooonfig.mapping) mapDir mapAll mapFile;
         inherit
           inputs
           system
@@ -138,11 +141,18 @@ in
     hmManager.lib.homeManagerConfiguration {
       pkgs = import pkgsIn {
         inherit system;
-        overlays = [ (import ./overlays { inherit inputs; }).default ];
-        config = (import ./nixpkgs { inherit inputs; }).config;
+        overlays = [
+          (import ./overlays { inherit inputs; }).default
+          inputs.racooonfig.overlays.default
+        ];
+        config = self.nixpkgs.default;
       };
       extraSpecialArgs = {
-        inherit (self.mapping) mapFile mapDir mapAll; 
+        inherit (inputs.racooonfig.mapping)
+          mapDir
+          mapAll
+          mapFile
+          ;
         inherit
           system
           hostname
@@ -186,11 +196,12 @@ in
         overlays = [
           (import ./overlays { inherit inputs; }).default
           inputs.nix-on-droid.overlays.default
+          inputs.racooonfig.overlays.default
         ];
-        config = (import ./nixpkgs { inherit inputs; }).config;
+        config = self.nixpkgs.default;
       };
       extraSpecialArgs = {
-        inherit (self.mapping) mapFile mapDir mapAll; 
+        inherit (inputs.racooonfig.mapping) mapDir mapAll mapFile;
         inherit
           inputs
           system
