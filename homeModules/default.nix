@@ -16,7 +16,7 @@ in
     ./starship.nix
     ./lazygit.nix
     ./virtmanager
-    ./serpl.nix # tui find and replace tool, good for integratinng with terminal editors
+    ./serpl.nix # find and replace tui tool, good for integratinng with terminal editors
     ./btop.nix
     ./git.nix
     ./shell
