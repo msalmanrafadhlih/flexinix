@@ -7,15 +7,6 @@
 
 { inputs, ... }:
 rec {
-  # ... This one brings our custom packages from the 'pkgs' directory
-  local-packages = (
-    final: prev:
-    import ../packages {
-      inherit inputs;
-      pkgs = final;
-    }
-  );
-
   # Overlay for 'pkgs.stable' 'pkgs.unstable'
   all-channels = final: prev: {
     stable = import inputs.nixos-stable {
@@ -33,11 +24,7 @@ rec {
   );
 
   default = inputs.nixos-stable.lib.composeManyExtensions [
-    local-packages
     all-channels
     devenv
-
-    inputs.racooonfig.overlays
   ];
-  # ++ inputs.racooonfig.overlays;
 }
