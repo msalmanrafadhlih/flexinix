@@ -1,13 +1,13 @@
 { inputs, ... }@args:
 let
-  schemas        = inputs.flake-schemas.schemas;
-  nixpkgs        = inputs.racooonfig.configs;
-  packages       = inputs.racooonfig.packages;
+  schemas = inputs.flake-schemas.schemas;
+  nixpkgs = inputs.racooonfig.configs;
+  packages = inputs.racooonfig.packages;
   legacyPackages = inputs.racooonfig.legacyPackages;
 
-  mkConfigs      = import ./mkConfigs.nix      args;
-  overlays       = import ./overlays           args;
-  devShells      = import ./devShells          args;
+  mkConfigs = import ./mkConfigs.nix args;
+  overlays = import ./overlays args;
+  devShells = import ./devShells args;
   # systemConfig   = import ./systemConfigs      args;
 in
 {
@@ -18,6 +18,7 @@ in
     devShells
     schemas
     legacyPackages
-    packages
     ;
+
+  packages = packages;
 }
