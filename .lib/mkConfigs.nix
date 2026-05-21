@@ -36,6 +36,7 @@ in
     in
     pkgsIn.lib.nixosSystem {
       specialArgs = {
+        inherit (self.mapping) mapFile mapDir mapAll; 
         inherit
           inputs
           system
@@ -86,6 +87,7 @@ in
     in
     inputs.nix-darwin.lib.darwinSystem {
       specialArgs = {
+        inherit (self.mapping) mapFile mapDir mapAll; 
         inherit
           inputs
           system
@@ -140,6 +142,7 @@ in
         config = (import ./nixpkgs { inherit inputs; }).config;
       };
       extraSpecialArgs = {
+        inherit (self.mapping) mapFile mapDir mapAll; 
         inherit
           system
           hostname
@@ -187,6 +190,7 @@ in
         config = (import ./nixpkgs { inherit inputs; }).config;
       };
       extraSpecialArgs = {
+        inherit (self.mapping) mapFile mapDir mapAll; 
         inherit
           inputs
           system
