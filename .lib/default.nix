@@ -19,6 +19,7 @@ let
     );
 
   mkConfigs      = import ./mkConfigs.nix      args;
+  mapping        = import ./map-lib.nix        args;
   overlays       = import ./overlays           args;
   devShells      = import ./devShells          args;
   schemas        = import ./schemas.nix        args;
@@ -32,6 +33,7 @@ in
   inherit
     nixpkgs
     mkConfigs
+    mapping
     overlays
     devShells
     schemas
