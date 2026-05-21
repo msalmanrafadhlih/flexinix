@@ -1,7 +1,7 @@
 { inputs, ... }@args:
 let
   schemas        = inputs.flake-schemas.schemas;
-  nixpkgs        = inputs.racoonfig.configs;
+  nixpkgs        = inputs.racooonfig.configs;
   packages       = inputs.racooonfig.packages;
   legacyPackages = inputs.racooonfig.legacyPackages;
 
