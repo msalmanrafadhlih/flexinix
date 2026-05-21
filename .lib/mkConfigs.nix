@@ -4,11 +4,8 @@ let
   flakeRoot = self;
 
   nixpkgs = {
-    nixpkgs.overlays = [
-      (import ./overlays args).default
-      inputs.racooonfig.overlays.default
-    ];
     nixpkgs.config = (import ./nixpkgs args).config;
+    nixpkgs.overlays = [ (import ./overlays args).default ];
   };
 in
 {
