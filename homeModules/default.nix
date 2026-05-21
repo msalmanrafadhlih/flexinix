@@ -21,7 +21,6 @@ in
     ./git.nix
     ./shell
     ./yazi
-    ./tmux
 
     # ./zellij
     # ./wezterm
