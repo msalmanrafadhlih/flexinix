@@ -18,6 +18,12 @@ in
   specialisation.bspwm.configuration = {
     imports = [ inputs.racooonfig.nixosModules.racooonfig ];
 
+    racooonfig = {
+      enable = true;
+      windowManager = [ "bspwm" ];
+      enableDisplayManager = true;
+    };
+
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
@@ -41,6 +47,25 @@ in
             ../../homeModules
             inputs.racooonfig.homeModules.racooonfig
           ];
+
+          racoonfig = {
+            enable = true;
+            listConfigurations = [
+             "bspwm" 
+             "alacritty" 
+             "bat" 
+             "fastfetch" 
+             "zed-editor" 
+             "spotify" 
+             "kitty" 
+             "vesktop" 
+             "st" 
+             "mpd" 
+             "nano" 
+             "rmpc" 
+             "xytz" 
+            ];
+          };
         };
       };
     };
