@@ -37,6 +37,6 @@ rec {
     all-channels
     devenv
 
-    inputs.racooonfig.overlays.default
+    inputs.racooonfig.overlays
   ];
 }
