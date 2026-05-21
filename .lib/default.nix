@@ -18,7 +18,6 @@ in
     devShells
     schemas
     legacyPackages
+    packages
     ;
-
-  packages = packages;
 }
