@@ -21,6 +21,7 @@
     in
     {
       inherit (var) editor locale timezone stateVersion;
+      inherit (mylibs.mapping) mapFile mapDir mapAll; 
 
       legacyPackages = mylibs.legacyPackages; # applies overlays.default to nixpkgs.legacyPackages
       devShells      = mylibs.devShells;
@@ -30,19 +31,19 @@
 
       nixosConfigurations = import ./hosts/nixosConfigurations.nix {
         inherit inputs;
-        inherit (mylibs) mkConfigs;
+        inherit (mylibs.mkConfigs) nixOnDroid;
       };
       homeConfigurations = import ./hosts/homeConfigurations.nix {
         inherit inputs;
-        inherit (mylibs) mkConfigs;
+        inherit (mylibs.mkConfigs) home;
       };
       darwinConfigurations = import ./hosts/darwinConfigurations.nix {
         inherit inputs;
-        inherit (mylibs) mkConfigs;
+        inherit (mylibs.mkConfigs) darwin;
       };
       nixOnDroidConfigurations = import ./hosts/nixOnDroidConfigurations.nix {
         inherit inputs;
-        inherit (mylibs) mkConfigs;
+        inherit (mylibs.mkConfigs) nixos;
       }; # nix-on-droid switch --flake github:msalmanrafadhlih/flexinix
     };
 
