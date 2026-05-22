@@ -48,7 +48,7 @@ in
             inputs.racooonfig.homeModules.racooonfig
           ];
 
-          racoonfig = {
+          racooonfig = {
             enable = true;
             listConfigurations = [
              "bspwm" 
