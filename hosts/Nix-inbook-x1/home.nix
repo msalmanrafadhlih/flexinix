@@ -49,7 +49,7 @@ in
           ];
 
           racooonfig = {
-            enable = true;
+            homeManager = true;
             listConfigurations = [
              "bspwm" 
              "alacritty" 
