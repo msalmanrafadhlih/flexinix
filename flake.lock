@@ -1611,11 +1611,11 @@
         "zjstatus": "zjstatus"
       },
       "locked": {
-        "lastModified": 1779510693,
-        "narHash": "sha256-rP/KBiR4G3bzSboxQBi54MiexwyIA9A3xVTENol/qBw=",
+        "lastModified": 1779511174,
+        "narHash": "sha256-Nlu9b321kvBMDWwHw21cTXcjRJw2NzjTBUzkHq2/Hvs=",
         "owner": "msalmanrafadhlih",
         "repo": "racooonfig",
-        "rev": "4a0acc4a783dbd6370970434a48c93ec2649e044",
+        "rev": "068c61d8ac2086afecf4b6eb5eb68b344f4aad91",
         "type": "github"
       },
       "original": {
