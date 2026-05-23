@@ -15,11 +15,11 @@ in
   #---------------------------------------------------------------------
   home.sessionVariables = {
     EDITOR = flakeRoot.editor;
-    PAGER = "less -FirSwX";
-    MANPAGER = "${manpager}/bin/manpager";
     PATH="/etc/nixos/result/bin:$PATH";
   } // (if isDarwin then {
     # See: https://github.com/NixOS/nixpkgs/issues/390751
+    PAGER = "less -FirSwX";
     DISPLAY = "nixpkgs-390751";
+    MANPAGER = "${manpager}/bin/manpager";
   } else {});
 }
