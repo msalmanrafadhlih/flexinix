@@ -61,7 +61,6 @@ in
              "alacritty" 
              "bat" 
              "fastfetch" 
-             "flatpak"
              "zed-editor" 
              "kitty" 
              "vesktop" 
