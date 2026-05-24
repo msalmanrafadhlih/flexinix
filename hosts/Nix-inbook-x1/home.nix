@@ -23,6 +23,7 @@ in
       gamemode.enable = true;
       windowManager = [ "bspwm" "hyprland" ];
       displayManager = "sddm";
+      fileManager = "thunar";
     };
 
     home-manager = {
@@ -51,6 +52,7 @@ in
 
           racooonfig = {
             homeManager = true;
+            flatpak = true;
             listConfigurations = [
              "bspwm" 
              "alacritty" 
@@ -66,6 +68,7 @@ in
              "xytz" 
 
              "spotify-flatpak" 
+             "riff-flatpak"
             ];
           };
         };
