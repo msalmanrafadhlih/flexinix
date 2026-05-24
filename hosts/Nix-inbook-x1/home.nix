@@ -20,8 +20,9 @@ in
 
     racooonfig = {
       enable = true;
-      windowManager = [ "bspwm" ];
-      enableDisplayManager = true;
+      gamemode.enable = true;
+      windowManager = [ "bspwm" "hyprland" ];
+      displayManager = "sddm";
     };
 
     home-manager = {
@@ -56,7 +57,6 @@ in
              "bat" 
              "fastfetch" 
              "zed-editor" 
-             "spotify" 
              "kitty" 
              "vesktop" 
              "st" 
@@ -64,6 +64,8 @@ in
              "nano" 
              "rmpc" 
              "xytz" 
+
+             "spotify-flatpak" 
             ];
           };
         };
