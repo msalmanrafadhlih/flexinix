@@ -22,7 +22,7 @@ in
       enable = true;
       fileManager = "dolphin";
       displayManager = "sddm";
-      windowManager = [ "bspwm" "hyprland" ];
+      windowManager = [ "bspwm" ];
       gamemode = {
         enable = true;
         programs = [ "steam" ];
@@ -57,19 +57,22 @@ in
             homeManager = true;
             flatpak = true;
             listConfigurations = [
-             "bspwm" "hyprland" 
+             "bspwm"  
              "alacritty" 
              "bat" 
              "fastfetch" 
+             "flatpak"
              "zed-editor" 
              "kitty" 
              "vesktop" 
+             "gemini"
              "st" 
              "mpd" 
              "nano" 
              "cava"
              "rmpc" 
              "xytz" 
+             "zed-editor"
 
              "spotify-flatpak" 
              "zen-flatpak"
