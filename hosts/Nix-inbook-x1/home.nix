@@ -20,10 +20,13 @@ in
 
     racooonfig = {
       enable = true;
-      gamemode.enable = true;
-      windowManager = [ "bspwm" "hyprland" ];
+      fileManager = "dolphin";
       displayManager = "sddm";
-      fileManager = "thunar";
+      windowManager = [ "bspwm" "hyprland" ];
+      gamemode = {
+        enable = true;
+        programs = [ "steam" ];
+      };
     };
 
     home-manager = {
@@ -64,11 +67,12 @@ in
              "st" 
              "mpd" 
              "nano" 
+             "cava"
              "rmpc" 
              "xytz" 
 
              "spotify-flatpak" 
-             "riff-flatpak"
+             "zen-flatpak"
             ];
           };
         };
