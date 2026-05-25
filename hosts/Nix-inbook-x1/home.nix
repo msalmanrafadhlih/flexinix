@@ -22,7 +22,7 @@ in
       enable = true;
       fileManager = "dolphin";
       displayManager = "sddm";
-      windowManager = [ "bspwm" ];
+      windowManager = [ "bspwm" "hyprland" ];
       gamemode = {
         enable = true;
         programs = [ "steam" ];
@@ -57,7 +57,7 @@ in
             homeManager = true;
             flatpak = true;
             listConfigurations = [
-             "bspwm"  
+             "bspwm" "hyprland" 
              "alacritty" 
              "bat" 
              "fastfetch" 
