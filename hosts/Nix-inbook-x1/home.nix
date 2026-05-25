@@ -20,7 +20,7 @@ in
 
     racooonfig = {
       enable = true;
-      fileManager = "dolphin";
+      fileManager = "thunar";
       displayManager = "sddm";
       windowManager = [ "bspwm" "hyprland" ];
       gamemode = {
