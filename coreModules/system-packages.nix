@@ -52,10 +52,6 @@
     # ======= REMOTE ACCESS
     freerdp       # RDP client for remote desktop
 
-    # ======= LANGUAGE / COMPILER
-    luajit        # High-performance Lua implementation
-    python3       # Python interpreter
-
   ] ++ (lib.optionals isDarwin [
 
     # ======= macOS ONLY
