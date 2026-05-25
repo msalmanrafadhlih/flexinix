@@ -73,8 +73,8 @@ in
              "xytz" 
              "zed-editor"
 
-             "spotify-flatpak" 
-             "zen-flatpak"
+             # "spotify-flatpak" 
+             # "zen-flatpak"
             ];
           };
         };
