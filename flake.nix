@@ -11,7 +11,7 @@
         timezone = "Asia/Jakarta";
 
         stateVersion = {
-          linux = "25.11";
+          linux = "26.05";
           darwin = 4;
         };
       };
