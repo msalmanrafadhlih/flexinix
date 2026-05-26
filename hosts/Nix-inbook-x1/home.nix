@@ -59,14 +59,14 @@ in
           homeManager = true;
           flatpak = true;
           listConfigurations = [
-            "bspwm"
-            "hyprland"
+            "bspwm" "hyprland"
             "alacritty"
             "bat"
             "fastfetch"
             "zed-editor"
             "kitty"
             "vesktop"
+            "nix-search"
             "gemini"
             "st"
             "mpd"
