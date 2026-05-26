@@ -15,18 +15,18 @@ in
 
       systemd-boot.enable = true;
 
-      # grub = {
-      #   enable = true;
-      #   theme = pkgs.my-grub-theme;
-      #   splashImage = null;
-      #   efiSupport = true;
-      #   device = "nodev"; # untuk UEFI
-      #   useOSProber = false; # detect OS lain (optional)
-      #   configurationLimit = 10; # limit generation
+      grub = {
+        enable = false;
+        theme = pkgs.my-grub-theme;
+        splashImage = null;
+        efiSupport = true;
+        device = "nodev"; # untuk UEFI
+        useOSProber = false; # detect OS lain (optional)
+        configurationLimit = 10; # limit generation
 
-      #   gfxmodeEfi = "auto";
-      #   gfxpayloadEfi = "keep";
-      # };
+        gfxmodeEfi = "auto";
+        gfxpayloadEfi = "keep";
+      };
 
       efi.canTouchEfiVariables = true;
     };
