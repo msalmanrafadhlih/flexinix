@@ -13,18 +13,20 @@ in
     loader = {
       timeout = 50; # infinite timeout (nunggu user 50 detik)
 
-      grub = {
-        enable = true;
-        theme = pkgs.my-grub-theme;
-        splashImage = null;
-        efiSupport = true;
-        device = "nodev"; # untuk UEFI
-        useOSProber = false; # detect OS lain (optional)
-        configurationLimit = 10; # limit generation
+      systemd-boot.enable = true;
 
-        gfxmodeEfi = "auto";
-        gfxpayloadEfi = "keep";
-      };
+      # grub = {
+      #   enable = true;
+      #   theme = pkgs.my-grub-theme;
+      #   splashImage = null;
+      #   efiSupport = true;
+      #   device = "nodev"; # untuk UEFI
+      #   useOSProber = false; # detect OS lain (optional)
+      #   configurationLimit = 10; # limit generation
+
+      #   gfxmodeEfi = "auto";
+      #   gfxpayloadEfi = "keep";
+      # };
 
       efi.canTouchEfiVariables = true;
     };
