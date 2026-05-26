@@ -45,12 +45,12 @@
       # ==========================================================
       # LOAD BLE.SH (autosuggest + syntax highlight)
       # ==========================================================
-      source ${pkgs.blesh}/share/blesh/ble.sh
+      # source ''${pkgs.blesh}/share/blesh/ble.sh
 
       # --- BLE CONFIG ---
-      bleopt complete_auto_history=1
-      bleopt complete_auto_complete=1
-      bleopt complete_auto_delay=200
+      # bleopt complete_auto_history=1
+      # bleopt complete_auto_complete=1
+      # bleopt complete_auto_delay=200
 
       # bleopt prompt_ps1_final='yes'
       # bleopt exec_errexit_mark='[ERR]'
@@ -66,8 +66,8 @@
     '';
   };
 
-  home.packages = with pkgs; [
-    bash-completion
-    blesh
-  ];
+  # home.packages = with pkgs; [
+  #   bash-completion
+  #   blesh
+  # ];
 }
