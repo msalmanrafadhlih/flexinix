@@ -59,7 +59,7 @@ in
           homeManager = true;
           flatpak = true;
           listConfigurations = [
-            "bspwm" "hyprland"
+            "bspwm"
             "alacritty"
             "bat"
             "fastfetch"
