@@ -15,68 +15,70 @@ let
 in
 {
   # My Specialisation config use `nixos-rebuild --specialisation (bspwm / hyprland / niri)`
-  specialisation.bspwm.configuration = {
-    imports = [ inputs.racooonfig.nixosModules.racooonfig ];
+  imports = [ inputs.racooonfig.nixosModules.racooonfig ];
 
-    racooonfig = {
+  racooonfig = {
+    enable = true;
+    fileManager = "thunar";
+    displayManager = "sddm";
+    windowManager = [
+      "bspwm"
+      "hyprland"
+    ];
+    gamemode = {
       enable = true;
-      fileManager = "thunar";
-      displayManager = "sddm";
-      windowManager = [ "bspwm" "hyprland" ];
-      gamemode = {
-        enable = true;
-        programs = [ "steam" ];
-      };
+      programs = [ "steam" ];
     };
+  };
 
-    home-manager = {
-      useGlobalPkgs = true;
-      useUserPackages = true;
-      backupFileExtension = "backup";
-      extraSpecialArgs = {
-        inherit
-          system
-          username
-          hostname
-          flakeRoot
-          isAndroid
-          isWSL
-          isLinux
-          isDarwin
-          inputs
-          ;
-      };
-      users = {
-        ${username} = {
-          imports = [
-            ../../homeModules
-            inputs.racooonfig.homeModules.racooonfig
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    backupFileExtension = "backup";
+    extraSpecialArgs = {
+      inherit
+        system
+        username
+        hostname
+        flakeRoot
+        isAndroid
+        isWSL
+        isLinux
+        isDarwin
+        inputs
+        ;
+    };
+    users = {
+      ${username} = {
+        imports = [
+          ../../homeModules
+          inputs.racooonfig.homeModules.racooonfig
+        ];
+
+        racooonfig = {
+          homeManager = true;
+          flatpak = true;
+          listConfigurations = [
+            "bspwm"
+            "hyprland"
+            "alacritty"
+            "bat"
+            "fastfetch"
+            "zed-editor"
+            "kitty"
+            "vesktop"
+            "gemini"
+            "st"
+            "mpd"
+            "nano"
+            "cava"
+            "rmpc"
+            "xytz"
+            "zed-editor"
+
+            "spotify-flatpak"
+            # "zen-flatpak"
           ];
-
-          racooonfig = {
-            homeManager = true;
-            flatpak = true;
-            listConfigurations = [
-             "bspwm" "hyprland" 
-             "alacritty" 
-             "bat" 
-             "fastfetch" 
-             "zed-editor" 
-             "kitty" 
-             "vesktop" 
-             "gemini"
-             "st" 
-             "mpd" 
-             "nano" 
-             "cava"
-             "rmpc" 
-             "xytz" 
-             "zed-editor"
-
-             # "spotify-flatpak" 
-             # "zen-flatpak"
-            ];
-          };
         };
       };
     };
