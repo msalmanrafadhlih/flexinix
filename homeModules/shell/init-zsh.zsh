@@ -301,7 +301,7 @@ RACOOON() {
     if [[ -z "$spec" ]]; then
       sudo nixos-rebuild switch --flake .#"$host"
     else
-      sudo nixos-rebuild switch --flake .#"$host" # --specialisation "$spec"
+      sudo nixos-rebuild switch --flake .#"$host" --specialisation "$spec"
     fi
 
     echo "✅ System rebuild selesai!"
