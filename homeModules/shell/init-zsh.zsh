@@ -283,7 +283,8 @@ RACOOON() {
 
     # === specialisation ===
     local spec=$(tmux_fzf "$(printf "%s\n" \
-      "gamemode")" \
+      "gamemode" \
+      "none")" \
       "Specialisation (ctrl-c to cancel): ")
 
     [[ "$spec" == "none" ]] && spec=""
@@ -298,10 +299,12 @@ RACOOON() {
     fi
 
     echo "🚀 Rebuilding NixOS untuk $host..."
-    if [[ -z "$spec" ]]; then
+    if [[ "$spec"  == "none" ]]
       sudo nixos-rebuild switch --flake .#"$host"
-    else
+    elif [[ -z "$spec" ]]; then
       sudo nixos-rebuild switch --flake .#"$host" --specialisation "$spec"
+    else
+      sudo nixos-rebuild switch --flake .#"$host"
     fi
 
     echo "✅ System rebuild selesai!"
