@@ -75,7 +75,7 @@ in
             "xytz"
             "zed-editor"
 
-            # "spotify-flatpak"
+            "spotify-flatpak"
             # "zen-flatpak"
           ];
         };
