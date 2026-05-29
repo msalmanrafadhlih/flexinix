@@ -22,7 +22,7 @@ in
     fileManager = "thunar";
     displayManager = "sddm";
     windowManager = [
-      "bspwm"
+      "bspwm" "hyprland"
     ];
     gamemode = {
       enable = true;
