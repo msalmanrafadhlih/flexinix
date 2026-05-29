@@ -23,7 +23,6 @@ in
     displayManager = "sddm";
     windowManager = [
       "bspwm"
-      "hyprland"
     ];
     gamemode = {
       enable = true;
@@ -59,7 +58,7 @@ in
           homeManager = true;
           flatpak = true;
           listConfigurations = [
-            "bspwm"
+            "bspwm" "hyprland"
             "alacritty"
             "bat"
             "fastfetch"
