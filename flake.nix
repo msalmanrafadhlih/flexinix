@@ -54,10 +54,10 @@
     # nixpkgs                  = { type = "indirect"; id = "nixpkgs"; };
 
     # - nixos Stable
-    nixos-stable.url = "github:NixOS/nixpkgs/nixos-26.05";
-    nixos-stable-lib.url = "github:NixOS/nixpkgs/nixos-26.05?dir=lib"; # "github:nix-community/nixpkgs.lib" doesn't work
-    nixos-stable-small.url = "github:NixOS/nixpkgs/nixos-26.05-small";
-    darwin-stable.url = "github:NixOS/nixpkgs/nixpkgs-26.05-darwin";
+    nixos-stable.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixos-stable-lib.url = "github:NixOS/nixpkgs/nixos-25.11?dir=lib"; # "github:nix-community/nixpkgs.lib" doesn't work
+    nixos-stable-small.url = "github:NixOS/nixpkgs/nixos-25.11-small";
+    darwin-stable.url = "github:NixOS/nixpkgs/nixpkgs-25.11-darwin";
     # - nixos Unstable
     master.url = "github:NixOS/nixpkgs/master";
     nixos-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
