@@ -22,7 +22,7 @@ in
     fileManager = "thunar";
     displayManager = "sddm";
     windowManager = [
-      "bspwm" "hyprland"
+      "bspwm"
     ];
     gamemode = {
       enable = true;
@@ -58,7 +58,7 @@ in
           homeManager = true;
           flatpak = true;
           listConfigurations = [
-            "bspwm" "hyprland"
+            "bspwm"
             "alacritty"
             "bat"
             "fastfetch"
