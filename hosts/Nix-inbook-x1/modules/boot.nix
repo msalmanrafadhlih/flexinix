@@ -13,7 +13,11 @@ in
     loader = {
       timeout = 50; # infinite timeout (nunggu user 50 detik)
 
-      systemd-boot.enable = true;
+      systemd-boot = {
+        enable = true;
+        editor = false;
+        configurationLimit = 10;
+      };
 
       # grub = {
       #   enable = false;
