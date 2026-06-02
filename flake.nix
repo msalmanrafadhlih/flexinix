@@ -7,7 +7,7 @@
       # set your default variables here!
       var = {
         editor = "hx"; # hx / nvim / vi,
-        locale = "en_US.UTF-8";
+        locale = "id_ID.UTF-8";
         timezone = "Asia/Jakarta";
 
         stateVersion = {
