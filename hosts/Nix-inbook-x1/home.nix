@@ -21,9 +21,7 @@ in
     enable = true;
     fileManager = "thunar";
     displayManager = "sddm";
-    windowManager = [
-      "bspwm"
-    ];
+    desktopManager = [ "plasma" ];
     gamemode = {
       enable = true;
       programs = [ "steam" ];
@@ -58,25 +56,20 @@ in
           homeManager = true;
           flatpak = true;
           listConfigurations = [
-            "bspwm"
-            "alacritty"
+            # cli
             "bat"
             "fastfetch"
-            "zed-editor"
-            "kitty"
-            "vesktop"
             "nix-search"
             "gemini"
-            "st"
-            "mpd"
             "nano"
-            "cava"
-            "rmpc"
             "xytz"
+
+            # GUI app
+            "vesktop"
             "zed-editor"
 
             "spotify-flatpak"
-            # "zen-flatpak"
+            "zen-flatpak"
           ];
         };
       };
