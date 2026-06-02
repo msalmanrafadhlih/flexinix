@@ -31,6 +31,7 @@
         "https://spicetify-nix.cachix.org"
         "https://racoonfig.cachix.org"
         "https://hyprland.cachix.org"
+        "https://yazi.cachix.org"
       ];
 
       extra-trusted-public-keys = [
@@ -40,6 +41,7 @@
         "spicetify-nix.cachix.org-1:jjnwULkvMdu0E5KGBbtgrISEfDdJTGSZ4ATkiFzZn5I="
         "racoonfig.cachix.org-1:JSsJu+Dm6altv3ewOS75Ac9W15huK0t13H2H5pYEWBI="
         "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+        "yazi.cachix.org-1:Dcdz63NZKfvUCbDGngQDAZq6kOroIrFoyO064uvLh8k="
       ];
 
       # trusted-public-keys = [  ];
