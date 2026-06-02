@@ -1,0 +1,51 @@
+### ABOUT VIM
+
+Tips! :
+- 
+
+
+
+> ALL VIM COMMANDS
+ 	-
+	 
+
+
+> ALL VIM SHORTCUTS
+	- i(I),a(A) : INSERT MODE (before(beginning), after(end)) 
+	- o,O = insert a new line (below,above)
+	- h,j,k,l = Navigate
+	- w,e,b,ge = Navigate through Text (after,after,before,before)
+	- $num + (w,e,b) = Navigate to $num text after/before
+	- $num + i = insert text multiple times 
+	- f,F = find next(previous) character. 
+	- % = move between parenthess / brackets.
+	- 0,& = move to beginning(last) of the line
+	- *, '#' = pindah ke kata yang mirip (next, before)
+	- gg, G = beginning(end) of file,  
+	- $num + gg/G = move to spesific number of line  
+	- / = search, 'n' for next 'N' for prev
+	- x,X = delete the character (after,before)
+	- r = replace the  
+	- d + (w,e,b) = delete word (after and before), can add $num for multiple words
+	- . = repeat action 
+	- v,V,ctrl+v = visual mode(normal, entireline, block)
+	- u = undo 
+	- ctrl + r = redo
+	- zt,zz,zb = fix screen view(top, mid, bottom)
+	- H,M,L = move cursor(top, mid, bottom)
+	- '',`` = return to previous line place/line
+	- ^ = move to first char in line
+	- d,D = cut, cut to endline ('c' is the same as 'd', but change to insert mode after that)
+	- s,S = delete(char,line)
+> COPY PASTE
+	- y space = yank char
+	- yy = yank line
+	- $num + yy = yank $num lines
+	- y(w,e,b) = taulah yah
+	- y$ = yank to endline 
+	- "+yy = yank ke clibboard system 
+
+
+
+
+
