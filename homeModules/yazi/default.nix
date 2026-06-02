@@ -1,4 +1,5 @@
-{ pkgs, inputs, ... }: let
+{ pkgs, inputs, ... }:
+let
   inp = inputs.racooonfig.inputs;
 in
 {
@@ -46,7 +47,6 @@ in
 
     settings = {
       mgr = {
-        # 2/9 width for parent, 3/9 for main, 4/9 for preview
         ratio = [
           2
           3
@@ -64,7 +64,7 @@ in
       opener = {
         play = [
           {
-            run = "xdg-open '$@'";
+            run = "xdg-open %s"; # Fix: $@ → %s (Yazi format baru)
             orphan = true;
             desc = "open";
             for = "linux";
@@ -77,7 +77,8 @@ in
           # directory previewer
           {
             url = "*/";
-            run = "piper -- eza -TL=2 --color=always --icons=always --group-directories-first --no-quotes -a '$1'";
+            # Fix: single quotes '$1' → double quotes "$1" via Nix indented string
+            run = ''piper -- eza -TL=2 --color=always --icons=always --group-directories-first --no-quotes -a "$1"'';
           }
 
           # archive previewers
@@ -113,12 +114,14 @@ in
           # markdown with glow
           {
             url = "*.md";
-            run = "piper -- CLICOLOR_FORCE=1 COLORTERM=truecolor glow -w=$w -s=dark '$1'";
+            # Fix: '$1' → "$1"
+            run = ''piper -- CLICOLOR_FORCE=1 COLORTERM=truecolor glow -w=$w -s=dark "$1"'';
           }
 
           {
             url = "*.csv";
-            run = "piper -- bat -p --color=always '$1'";
+            # Fix: '$1' → "$1"
+            run = ''piper -- bat -p --color=always "$1"'';
           }
         ];
       };
