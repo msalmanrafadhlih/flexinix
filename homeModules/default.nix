@@ -24,7 +24,6 @@ in
     ./tmux
 
     # ./zellij
-    # ./wezterm
     editor.${flakeRoot.editor}
   ];
 
