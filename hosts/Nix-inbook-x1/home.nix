@@ -19,7 +19,7 @@ in
 
   racooonfig = {
     enable = true;
-    fileManager = "thunar";
+    # fileManager = "thunar";
     displayManager = "sddm";
     desktopManager = [ "plasma" ];
     gamemode = {
