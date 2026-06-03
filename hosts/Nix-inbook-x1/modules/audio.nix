@@ -11,7 +11,4 @@
 
     pulseaudio.enable = false;
   };
-
-  # Matikan PulseAudio agar tidak konflik dengan PipeWire
-  hardware.pulseaudio.enable = false;
 }
