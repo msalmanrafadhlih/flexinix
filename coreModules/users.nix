@@ -19,7 +19,7 @@ in
       shell = pkgs.zsh;
       hashedPassword = passwd;
       extraGroups = [
-        "wheel"           # sudo
+        "users" "wheel"   # sudo
         "networkmanager"  # Connection(Wifi) Manager
         "docker"          # Container Dev
         "libvirtd" "kvm"  # VM testing
