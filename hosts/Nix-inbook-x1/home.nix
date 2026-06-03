@@ -75,6 +75,7 @@ in
 
             "whatsapp-flatpak"
             "zen-flatpak"
+            "zoom-flatpak"
           ];
         };
       };
