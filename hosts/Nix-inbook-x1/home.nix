@@ -56,11 +56,16 @@ in
           homeManager = true;
           flatpak = true;
           listConfigurations = [
+            # desktop configuration (themes)
+            "macos-kdeplasma"
+            "macos-kdeplasma-apps"
+
             # cli
             "bat"
             "fastfetch"
             "nix-search"
             "gemini"
+            "cava"
             "nano"
             "xytz"
 
@@ -68,7 +73,7 @@ in
             "vesktop"
             "zed-editor"
 
-            "spotify-flatpak"
+            "whatsapp-flatpak"
             "zen-flatpak"
           ];
         };
