@@ -31,7 +31,7 @@ in
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    backupFileExtension = "backup";
+    backupFileExtension = "hm-bak";
     extraSpecialArgs = {
       inherit
         system
