@@ -73,7 +73,6 @@ in
             "vesktop"
             "zed-editor"
 
-            "whatsapp-flatpak"
             "zen-flatpak"
             "zoom-flatpak"
           ];
