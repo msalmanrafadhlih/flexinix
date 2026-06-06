@@ -58,7 +58,6 @@ in
           listConfigurations = [
             # desktop configuration (themes)
             "macos-kdeplasma"
-            "macos-kdeplasma-apps"
 
             # cli
             "bat"
@@ -75,6 +74,8 @@ in
 
             "zen-flatpak"
             "zoom-flatpak"
+            "motrix-flatpak"
+            "blanket-flatpak"
           ];
         };
       };
