@@ -64,6 +64,7 @@ in
             "fastfetch"
             "nix-search"
             "gemini"
+            "beets"
             "cava"
             "nano"
             "xytz"
