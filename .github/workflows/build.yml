@@ -2,7 +2,7 @@ name: Push Binaries
 
 on:
   schedule:
-    - cron: "0 0 * * 2,4,6"
+    - cron: "0 0 1 * *"
 
   # On manual run
   workflow_dispatch:
