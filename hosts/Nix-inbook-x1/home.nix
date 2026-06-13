@@ -65,6 +65,7 @@ in
             "nix-search"
             "gemini"
             "beets"
+            "kitty"
             "cava"
             "nano"
             "xytz"
