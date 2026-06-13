@@ -30,7 +30,6 @@
     procs         # Modern replacement for ps
     sd            # Intuitive sed replacement
     tokei         # Code statistics by language
-    yt-dlp        # Advanced YouTube/video downloader
     btop          # Resource monitor
     tree          # Directory tree viewer
     tmux          # Terminal multiplexer
