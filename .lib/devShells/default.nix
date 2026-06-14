@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, self,  ... }:
 let
   lib = inputs.nixos-stable.lib;
 in
@@ -7,8 +7,11 @@ lib.genAttrs lib.systems.flakeExposed (
   let
     pkgs = import inputs.nixos-unstable {
       inherit system;
-      config = (import ../nixpkgs { inherit inputs; }).config;
-      overlays = [ (import ../overlays { inherit inputs; }).default ];
+      config = self.nixpkgs.default;
+      overlays = [
+        self.overlays.default
+        inputs.racooonfig.overlays.default
+      ];
     };
   in
   {
