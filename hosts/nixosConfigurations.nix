@@ -10,10 +10,10 @@
     extraModules = [ ./Nix-inbook-x1/home.nix ];
   };
 
-  wsl = nixos "stable" {
-    hostname = "wsl";
-    username = "tquilla";
-    system   = "x86_64-linux";
-    wsl      = true;
-  };
+  # wsl = nixos "stable" {
+  #   hostname = "wsl";
+  #   username = "tquilla";
+  #   system   = "x86_64-linux";
+  #   wsl      = true;
+  # };
 }

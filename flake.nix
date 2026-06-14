@@ -37,14 +37,14 @@
         inherit inputs;
         inherit (mylibs.mkConfigs) home;
       };
-      darwinConfigurations = import ./hosts/darwinConfigurations.nix {
-        inherit inputs;
-        inherit (mylibs.mkConfigs) darwin;
-      };
-      nixOnDroidConfigurations = import ./hosts/nixOnDroidConfigurations.nix {
-        inherit inputs;
-        inherit (mylibs.mkConfigs) nixOnDroid;
-      }; # nix-on-droid switch --flake github:msalmanrafadhlih/flexinix
+      # darwinConfigurations = import ./hosts/darwinConfigurations.nix {
+      #   inherit inputs;
+      #   inherit (mylibs.mkConfigs) darwin;
+      # };
+      # nixOnDroidConfigurations = import ./hosts/nixOnDroidConfigurations.nix {
+      #   inherit inputs;
+      #   inherit (mylibs.mkConfigs) nixOnDroid;
+      # }; # nix-on-droid switch --flake github:msalmanrafadhlih/flexinix
     };
 
   inputs = {
