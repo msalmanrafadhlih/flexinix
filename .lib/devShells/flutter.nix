@@ -29,8 +29,8 @@ in {
     androidSdk
     flutter
 
-    androidStudioPackages.stable
-    #google-chrome
+    # androidStudioPackages.stable
+    # google-chrome
   ];
 
   languages.java = {
