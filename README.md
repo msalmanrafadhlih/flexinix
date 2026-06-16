@@ -128,6 +128,12 @@ This system leverages powerful community inputs:
 
 ---
 
+# Commit penting!
+
+- [b56c4e2](https://github.com/msalmanrafadhlih/flexinix/tree/b56c4e225282d962c59b14ff7f6b9d2a048970b3) : flake Update june 18, 2026
+
+---
+
 ## 🤝 Credits & Acknowledgements
 
 Flexinix is a synthesis of various Nix community patterns. Special thanks to the contributors of Nixpkgs, Home Manager, and the creators of the various flakes integrated here.
