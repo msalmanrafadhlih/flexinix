@@ -16,12 +16,11 @@ lib.genAttrs lib.systems.flakeExposed (
   in
   {
 
-    # Default
+    # Default : nix develop github:msalmanrafadhlih/flexinix#default 
     default = inputs.devenv.lib.mkShell {
       inherit inputs pkgs;
       modules = [
         {
-          devenv.root = builtins.toString ../../.;
           languages.nix.enable = true;
           packages = with pkgs; [
             devenv
@@ -31,11 +30,10 @@ lib.genAttrs lib.systems.flakeExposed (
       ];
     };
 
-    # Flutter
+    # Flutter : nix develop github:msalmanrafadhlih/flexinix#flutter 
     flutter = inputs.devenv.lib.mkShell {
       inherit inputs pkgs;
       modules = [
-        { devenv.root = builtins.toString ../../.; }
         ./flutter.nix
       ];
     };
