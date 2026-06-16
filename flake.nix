@@ -25,7 +25,6 @@
       
       packages       = mylibs.packages;
       legacyPackages = mylibs.legacyPackages; # applies overlays.default to nixpkgs.legacyPackages
-      devShells      = mylibs.devShells;
       overlays       = mylibs.overlays; # overlays.default is the sum of all the overlays
       schemas        = mylibs.schemas; # not merged yet: https://github.com/NixOS/nix/pull/8892
 
@@ -101,47 +100,47 @@
 
     # /// core_ecosystems ///////////////////////////////////////////////
     flake-schemas.url = "github:DeterminateSystems/flake-schemas"; # tool: validator scheme for flake > `nix flake check`
-    flake-utils.url = "github:numtide/flake-utils"; # MultiSystem helper
-    flake-compat = {
-      url = "github:edolstra/flake-compat";
-      flake = false;
-    }; # tool = nonflake
-    flake-parts = {
-      url = "github:hercules-ci/flake-parts";
-      inputs.nixpkgs-lib.follows = "nixos-stable-lib";
-    }; # tool = Modular Flake
-    system-manager = {
-      url = "github:numtide/system-manager";
-      inputs.nixpkgs.follows = "nixos-stable-lib";
-    };
+    # flake-utils.url = "github:numtide/flake-utils"; # MultiSystem helper
+    # flake-compat = {
+    #   url = "github:edolstra/flake-compat";
+    #   flake = false;
+    # }; # tool = nonflake
+    # flake-parts = {
+    #   url = "github:hercules-ci/flake-parts";
+    #   inputs.nixpkgs-lib.follows = "nixos-stable-lib";
+    # }; # tool = Modular Flake
+    # system-manager = {
+    #   url = "github:numtide/system-manager";
+    #   inputs.nixpkgs.follows = "nixos-stable-lib";
+    # };
 
-    # /// development_tools ////////////////////////////////////////////
-    devshell = {
-      url = "github:numtide/devshell";
-      inputs.nixpkgs.follows = "nixos-stable-lib";
-    };
-    devenv = {
-      url = "github:cachix/devenv";
-      inputs = {
-        flake-compat.follows = "flake-compat";
-        git-hooks.follows = "git-hooks";
-      };
-    };
-    android-nixpkgs = {
-      url = "github:tadfisher/android-nixpkgs/stable";
-      inputs = {
-        nixpkgs.follows = "nixos-stable";
-        devshell.follows = "devshell";
-        flake-utils.follows = "flake-utils";
-      };
-    };
-    git-hooks = {
-      url = "github:cachix/git-hooks.nix";
-      inputs = {
-        nixpkgs.follows = "nixos-stable-lib";
-        flake-compat.follows = "flake-compat";
-      };
-    };
+    # # /// development_tools ////////////////////////////////////////////
+    # devshell = {
+    #   url = "github:numtide/devshell";
+    #   inputs.nixpkgs.follows = "nixos-stable-lib";
+    # };
+    # devenv = {
+    #   url = "github:cachix/devenv";
+    #   inputs = {
+    #     flake-compat.follows = "flake-compat";
+    #     git-hooks.follows = "git-hooks";
+    #   };
+    # };
+    # android-nixpkgs = {
+    #   url = "github:tadfisher/android-nixpkgs/stable";
+    #   inputs = {
+    #     nixpkgs.follows = "nixos-stable";
+    #     devshell.follows = "devshell";
+    #     flake-utils.follows = "flake-utils";
+    #   };
+    # };
+    # git-hooks = {
+    #   url = "github:cachix/git-hooks.nix";
+    #   inputs = {
+    #     nixpkgs.follows = "nixos-stable-lib";
+    #     flake-compat.follows = "flake-compat";
+    #   };
+    # };
 
     # /// security/secret_tools ////////////////////////////////////////
     sops-nix.url = "github:Mic92/sops-nix";
