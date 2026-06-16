@@ -19,12 +19,7 @@ rec {
     };
   };
 
-  devenv = (
-    final: prev: { devenv = inputs.devenv.packages.${prev.stdenv.hostPlatform.system}.devenv; }
-  );
-
   default = inputs.nixos-stable.lib.composeManyExtensions [
     all-channels
-    devenv
   ];
 }
