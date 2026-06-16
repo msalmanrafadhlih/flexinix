@@ -122,14 +122,4 @@
 
     node_modules
   '';
-
-  # too short for moving to individual module
-  home.packages = with pkgs; [
-    nodejs_24
-    yarn
-    uv
-    docker-compose
-    powershell
-    typst
-  ];
 }
