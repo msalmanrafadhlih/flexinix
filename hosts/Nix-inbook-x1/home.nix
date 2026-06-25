@@ -75,10 +75,7 @@ in
 
             "zen-flatpak"
             "zoom-flatpak"
-            "motrix-flatpak"
             "blanket-flatpak"
-            "nocturne-flatpak"
-            "audiotube-flatpak"
           ];
         };
       };
