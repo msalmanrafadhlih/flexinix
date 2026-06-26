@@ -1,3 +1,3 @@
 {inputs, ...}: {
-  import = [ inputs.sops-nix.nixosModules.sops ];
+  imports = [ inputs.sops-nix.nixosModules.sops ];
 }
