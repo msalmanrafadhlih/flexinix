@@ -1,14 +1,19 @@
-{ inputs, pkgs, ... }:
-
-{
+{ inputs, pkgs, ... }: let
+  keyfile = "/srv/share/files/secrets/age/key.txt";
+in {
   imports = [
     inputs.sops-nix.nixosModules.sops
   ];
 
-  environment.systemPackages = with pkgs; [
-    age
-    sops
-  ];
+  environment = {
+    systemPackages = with pkgs; [
+      age
+      sops
+    ];
+    sessionVariables = {
+      SOPS_AGE_KEY_FILE = keyfile;
+    };
+  };
 
   sops = {
     # Default file yang dipakai seluruh secret.
@@ -37,7 +42,10 @@
     keepGenerations = 1;
 
     # Logging.
-    log = [ "keyImport" "secretChanges" ];
+    log = [
+      "keyImport"
+      "secretChanges"
+    ];
 
     # Package validasi.
     # package = pkgs.sops-install-secrets;
@@ -56,8 +64,8 @@
     # useSystemdActivation = true;
 
     age = {
-      keyFile     = "/srv/share/files/secrets/age/key.txt"; # Lokasi private age key.
-      generateKey = false;                                  # Generate key otomatis bila belum ada.
+      keyFile = keyfile; # Lokasi private age key.
+      generateKey = false; # Generate key otomatis bila belum ada.
 
       # Plugin age.
       plugins = [
@@ -91,8 +99,8 @@
       tquilla_password = {
 
         # Nama file di /run/secrets.
-        # Default: "tquilla_password"; 
-        # name = "password";
+        # Default: "tquilla_password";
+        # name = "";
 
         # Key di dalam secrets.yaml.
         # Default: nama secret.
