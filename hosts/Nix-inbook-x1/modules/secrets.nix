@@ -81,7 +81,6 @@ in {
     };
 
     gnupg = {
-
       # Direktori GPG home.
       # Jika memakai age, biasanya tidak perlu.
       # home = "/root/.gnupg";
@@ -98,58 +97,26 @@ in {
     secrets = {
       tquilla_password = {
 
-        # Nama file di /run/secrets.
-        # Default: "tquilla_password";
-        # name = "";
+        name     = "tquilla_password";      # Nama file di /run/secrets.
+        owner    = "tquilla";               # Owner file.
+        # key      = "password";              # Key di dalam secrets.yaml.
+        # path     = "/run/secrets/password"; # Default: /run/secrets/$name
+        # format   = "yaml";                  # Override format bila berbeda dengan default.
+        # mode     = "0400";                  # Permission.
+        # uid      = 1000;                    # Alternatif owner menggunakan UID.
+        # group    = "users";                 # Default mengikuti group owner.
+        # gid      = 100;                     # Alternatif group menggunakan GID.
+        sopsFile = ./production.yaml;       # Override file sops.
 
-        # Key di dalam secrets.yaml.
-        # Default: nama secret.
-        # key = "password";
-
-        # Path output.
-        # Default: /run/secrets/<name>
-        # path = "/run/secrets/password";
-
-        # Override format bila berbeda dengan default.
-        # format = "yaml";
-
-        # Permission.
-        # mode = "0400";
-
-        # Owner file.
-        owner = "tquilla";
-
-        # Alternatif owner menggunakan UID.
-        # uid = 1000;
-
-        # Group file.
-        # Default mengikuti group owner.
-        # group = "users";
-
-        # Alternatif group menggunakan GID.
-        # gid = 100;
-
-        # Override file sops.
-        # sopsFile = ./production.yaml;
-
-        # Restart service bila secret berubah.
-        restartUnits = [ "nginx.service" ];
-
-        # Reload service bila secret berubah.
-        # reloadUnits = [ "nginx.service" ];
+        restartUnits = [ "nginx.service" ]; # Restart service bila secret berubah.
+        reloadUnits  = [ "nginx.service" ]; # Reload service bila secret berubah.
 
         # Secret tersedia sebelum user dibuat.
         # Wajib untuk hashedPasswordFile.
         neededForUsers = true;
       };
 
-      # Secret kedua sebagai contoh.
-      #
-      # database = {
-      #   owner = "postgres";
-      #   group = "postgres";
-      #   mode = "0400";
-      # };
+      github_email = {};
     };
 
     # ==========================================================
