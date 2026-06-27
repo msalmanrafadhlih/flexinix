@@ -106,10 +106,10 @@ in {
         # uid      = 1000;                    # Alternatif owner menggunakan UID.
         # group    = "users";                 # Default mengikuti group owner.
         # gid      = 100;                     # Alternatif group menggunakan GID.
-        sopsFile = ./production.yaml;       # Override file sops.
+        # sopsFile = ./secrets.yaml;          # Override file sops.
 
         restartUnits = [ "nginx.service" ]; # Restart service bila secret berubah.
-        reloadUnits  = [ "nginx.service" ]; # Reload service bila secret berubah.
+        # reloadUnits  = [ "nginx.service" ]; # Reload service bila secret berubah.
 
         # Secret tersedia sebelum user dibuat.
         # Wajib untuk hashedPasswordFile.
