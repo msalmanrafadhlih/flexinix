@@ -1,28 +1,165 @@
-{ inputs, pkgs, ... }: {
-  environment = {
-    systemPackages = with pkgs; [
-      age
-      sops
-    ];
-  };
+{ inputs, pkgs, ... }:
 
-  imports = [ inputs.sops-nix.nixosModules.sops ];
+{
+  imports = [
+    inputs.sops-nix.nixosModules.sops
+  ];
+
+  environment.systemPackages = with pkgs; [
+    age
+    sops
+  ];
+
   sops = {
-    defaultSopsFormat = "yaml"; # json, binary, ini
-    defaultSopsFile = ../../../secrets.yaml;
+    # Default file yang dipakai seluruh secret.
+    defaultSopsFile = ../../../secrets/common.yaml;
+    defaultSopsFormat = "yaml"; # yaml, json, binary, dotenv, ini
+
+    # Default key yang dipakai untuk lookup secret.
+    # Jika null maka nama secret digunakan.
+    # Contoh:
+    #
+    # defaultSopsKey = "database";
+    # secrets.db.key = "password";
+    #
+    # akan membaca:
+    #
+    # database:
+    #   password: xxxx
+    #
+    # defaultSopsKey = null;
+
+    # Validasi seluruh file sops saat evaluation.
+    validateSopsFiles = true;
+
+    # Berapa generasi secret lama yang disimpan.
+    # 0 = jangan pernah prune.
+    keepGenerations = 1;
+
+    # Logging.
+    log = [ "keyImport" "secretChanges" ];
+
+    # Package validasi.
+    # package = pkgs.sops-install-secrets;
+    # validationPackage = pkgs.sops-install-secrets;
+
+    # Environment variable tambahan ketika menjalankan
+    # sops-install-secrets.
+    # environment = { AWS_PROFILE = "production"; };
+
+    # Gunakan tmpfs daripada ramfs.
+    # Default false demi keamanan swap.
+    useTmpfs = false;
+
+    # Gunakan systemd service daripada activation script.
+    # Biasanya biarkan default.
+    # useSystemdActivation = true;
+
     age = {
-      keyFile = "/srv/share/files/secrets/age/key.txt";
-      generateKey = false; # auto generate key.txt if file corrupt or missing
-      validateSopsFiles = true;
+      keyFile     = "/srv/share/files/secrets/age/key.txt"; # Lokasi private age key.
+      generateKey = false;                                  # Generate key otomatis bila belum ada.
+
+      # Plugin age.
+      plugins = [
+        # pkgs.age-plugin-yubikey
+      ];
+
+      # SSH key yang akan diimport menjadi age identity.
+      # Default: host key OpenSSH.
+      #
+      # sshKeyPaths = [
+      #   "/etc/ssh/ssh_host_ed25519_key"
+      # ];
     };
 
-    # secrets.tquilla_password = {
-    #   # path = "/srv/share/files/secret";
-    #   owner = "tquilla";
-    #   neededForUsers = true;
-    #   restartUnits = [
-    #     "nginx.service"
-    #   ];
-    # };
+    gnupg = {
+
+      # Direktori GPG home.
+      # Jika memakai age, biasanya tidak perlu.
+      # home = "/root/.gnupg";
+
+      # SSH RSA key yang akan diimport menjadi GPG key.
+      # sshKeyPaths = [
+      #   "/etc/ssh/ssh_host_rsa_key"
+      # ];
+
+      # Package GPG.
+      # package = pkgs.gnupg;
+    };
+
+    secrets = {
+      tquilla_password = {
+
+        # Nama file di /run/secrets.
+        # Default: "tquilla_password"; 
+        # name = "password";
+
+        # Key di dalam secrets.yaml.
+        # Default: nama secret.
+        # key = "password";
+
+        # Path output.
+        # Default: /run/secrets/<name>
+        # path = "/run/secrets/password";
+
+        # Override format bila berbeda dengan default.
+        # format = "yaml";
+
+        # Permission.
+        # mode = "0400";
+
+        # Owner file.
+        owner = "tquilla";
+
+        # Alternatif owner menggunakan UID.
+        # uid = 1000;
+
+        # Group file.
+        # Default mengikuti group owner.
+        # group = "users";
+
+        # Alternatif group menggunakan GID.
+        # gid = 100;
+
+        # Override file sops.
+        # sopsFile = ./production.yaml;
+
+        # Restart service bila secret berubah.
+        restartUnits = [ "nginx.service" ];
+
+        # Reload service bila secret berubah.
+        # reloadUnits = [ "nginx.service" ];
+
+        # Secret tersedia sebelum user dibuat.
+        # Wajib untuk hashedPasswordFile.
+        neededForUsers = true;
+      };
+
+      # Secret kedua sebagai contoh.
+      #
+      # database = {
+      #   owner = "postgres";
+      #   group = "postgres";
+      #   mode = "0400";
+      # };
+    };
+
+    # ==========================================================
+    # Templates
+    # ==========================================================
+    #
+    # Module ini juga mendukung template, misalnya
+    # membuat config dari beberapa secret.
+    #
+    # templates."app.env".content = ''
+    #   DATABASE_URL=${config.sops.placeholder.database_url}
+    #   API_KEY=${config.sops.placeholder.api_key}
+    # '';
+    #
+    # File akan muncul di:
+    #
+    #   config.sops.templates."app.env".path
+    #
+    # dan dapat dipakai oleh service.
   };
 }
