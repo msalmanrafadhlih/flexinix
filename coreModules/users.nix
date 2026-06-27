@@ -4,7 +4,9 @@ let
   # to get password hash = `mkpasswd -m sha-512` // sha-256
   # or use `openssl passwd -6`
   # passwd = "$6$4y45xddEerGmBn10$syHxREmf4Ky37ra6ULFwar.I9a/Bts/5k/OxztP3XWhDT.BQ3yEP0z3BUfLXeft4FJERy3RZo.AcaoL6L/H7i0";
-  passwd = config.sops.secrets.tquilla_password.path;
+  # github-email = builtins.readFile /run/secrets/github_email; 
+
+  passwd       = config.sops.secrets.tquilla_password.path;
   github-email = "141149698+msalmanrafadhlih@users.noreply.github.com"; 
 in
 {
