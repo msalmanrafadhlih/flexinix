@@ -1,10 +1,22 @@
 { config, pkgs, ... }:
 let
-  home = config.home.homeDirectory;
-  user = config.home.username;
+  home     = config.home.homeDirectory;
+  user     = config.home.username;
+  path     = ../../.lib/secrets/rclone.yaml;
+
+  sopsFile = name: {
+    "rclone/drive/directory1/${name}" = {
+      sopsFile = path;
+      owner = user;
+    };
+  };
 in
 
 {
+  sops.secrets = (sopsFile "client_id")
+              // (sopsFile "client_secret")
+              // (sopsFile "token");
+
   programs.rclone = {
     enable = true;
 
@@ -21,9 +33,9 @@ in
         };
 
         secrets = {
-          client_id = config.sops.secrets."rclone/drive/directory1/client_id".path;
+          client_id     = config.sops.secrets."rclone/drive/directory1/client_id".path;
           client_secret = config.sops.secrets."rclone/drive/directory1/client_secret".path;
-          token = config.sops.secrets."rclone/drive/directory1/token".path;
+          token         = config.sops.secrets."rclone/drive/directory1/token".path;
         };
 
         mounts = {
@@ -128,10 +140,5 @@ in
       # };
 
     };
-  };
-  sops.secrets = {
-    "rclone/drive/directory1/client_id" = { };
-    "rclone/drive/directory1/client_secret" = { };
-    "rclone/drive/directory1/token" = { };
   };
 }
