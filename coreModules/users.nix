@@ -39,5 +39,7 @@
     };
   };
 
-  sops.secrets."github/authorized_keys" = { };
+  sops.secrets."github/authorized_keys" = {
+    sopsFile = ../.lib/secrets/github.yaml ;
+  };
 }
