@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 let
   home     = config.home.homeDirectory;
   user     = config.home.username;
@@ -136,10 +136,7 @@ in
 
     };
   };
-
-  sops.secrets = {
-    "rclone/drive/directory1/client_id"     = { sopsFile = path; };
-    "rclone/drive/directory1/client_secret" = { sopsFile = path; };
-    "rclone/drive/directory1/token"         = { sopsFile = path; };
-  }; 
+  sops.secrets = (sopsFile "client_id")
+              // (sopsFile "client_secret")
+              // (sopsFile "token");
 }
