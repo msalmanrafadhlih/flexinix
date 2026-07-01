@@ -1,5 +1,7 @@
 {
   keyfile,
+  inputs,
+  pkgs,
   ...
 }:
 {
