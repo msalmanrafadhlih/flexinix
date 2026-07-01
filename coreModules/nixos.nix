@@ -8,4 +8,7 @@
   security.rtkit.enable = true;
 
   system.stateVersion = flakeRoot.stateVersion.linux;
+
+  # for mounting cloud storage
+  programs.fuse.userAllowOther = true;
 }
