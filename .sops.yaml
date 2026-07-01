@@ -1,3 +1,15 @@
+# ssh-to-age -i /etc/ssh/ssh_host_ed25519_key.pub # key defined by nixos option sops.age.sshKeyPaths and used on activation
+# age-keygen -o /root/.config/sops/age/key.txt && age-keygen -y /root/.config/sops/age/key.txt 
+# ssh-to-age -private-key -i /etc/ssh/ssh_host_ed25519_key -o /root/.config/sops/age/keys.txt # creates file used by sops command line tool
+# sops updatekeys secrets/*
+keys:
+  - &inbook-x1 age1wk4h6f7jcvtp497ufpwjtxfms6hf20tap8urv308k5f2myvswu4qg8uqre
+  - &recovery age1u8nslks4ppvhj9xzll7dhv9jj4smqdjlsrp0dhedxa9fc7ke4eps4mkwza 
+
 creation_rules:
-  - path_regex: ^secrets/.*\.yaml$
-    age: age1wk4h6f7jcvtp497ufpwjtxfms6hf20tap8urv308k5f2myvswu4qg8uqre
+  - path_regex: ^.lib/secrets/.*\.yaml$
+    key_groups:
+    - age:
+      - *inbook-x1
+      - *recovery
+
