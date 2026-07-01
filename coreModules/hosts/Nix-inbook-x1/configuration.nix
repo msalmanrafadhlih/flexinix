@@ -1,7 +1,7 @@
-{ mapFile, ... }:
+{ mapAll, ... }:
 {
   imports = [
     ./hardware-configuration.nix
   ]
-  ++ mapFile ./modules [ "secrets" ] { };
+  ++ mapAll ./modules [ "secrets" ] { };
 }
