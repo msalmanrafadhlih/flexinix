@@ -51,7 +51,9 @@ in
         imports = [
           ../../../homeModules
           inputs.racooonfig.homeModules.racooonfig
+
           inputs.sops-nix.homeModules.sops
+          ./modules/secrets.nix
         ];
 
         racooonfig = {
@@ -80,13 +82,6 @@ in
             "blanket-flatpak"
           ];
         };
-
-        sops = (
-          import ./modules/secrets.nix {
-            inherit inputs pkgs;
-            keyfile = "/srv/share/files/secrets/age/key.txt";
-          }
-        );
       };
     };
   };
