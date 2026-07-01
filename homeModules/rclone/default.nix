@@ -1,69 +1,137 @@
-{
-  config,
-  lib,
-  ...
-}:
+{ config, pkgs, ... }:
 let
   home = config.home.homeDirectory;
-  username = config.home.username;
-  mountdir = "${home}/mnt/gdrive";
-  # root_folder_id = "";
-  # client_id = "";
+  user = config.home.username;
 in
+
 {
   programs.rclone = {
     enable = true;
 
-    # remotes = {
-    #   gdrive = {
-    #     config = {
-    #       type = "drive";
-    #       scope = "drive";
-    #       # root_folder_id = root_folder_id;
-    #       # client_id = client_id;
-    #       config_is_local = true;
-    #       disable_http2 = true;
-    #     };
+    # Opsional: Tentukan service provisioner rahasia jika menggunakan selain agenix/sops
+    # requiresUnit = "sops-nix.service";
 
-    #     # # ----- use `rclone config` to login google if secrets is disabled!
-    #     #  secrets = {
-    #     #    client_secret = config.sops.secrets."rclone/client-secret".path;
-    #     #    token = config.sops.secrets."rclone/token".path;
-    #     #  };
+    remotes = {
 
-    #     mounts."gdrive" = {
-    #       enable = true;
-    #       mountPoint = mountdir;
-    #       options = {
-    #         allow-non-empty = true;
-    #         allow-other = true;
-    #         buffer-size = "32M";
-    #         cache-dir = "${home}/.cache/rclone";
-    #         vfs-cache-mode = "full"; # off - writes - full
-    #         vfs-read-chunk-size = "128M";
-    #         vfs-read-chunk-size-limit = "1G";
-    #         dir-cache-time = "720h";
-    #         poll-interval = "1m";
-    #         vfs-cache-max-age = "1h";
-    #         vfs-cache-max-size = "1G";
-    #         umask = "000";
-    #         gid = "100";
-    #       };
-    #     };
-    #   };
-    # };
+      gdrive = {
+        config = {
+          type = "drive";
+          scope = "drive";
+          use_trash = false;
+        };
+
+        secrets = {
+          client_id = config.sops.secrets."rclone/drive/directory1/client_id".path;
+          client_secret = config.sops.secrets."rclone/drive/directory1/client_secret".path;
+          token = config.sops.secrets."rclone/drive/directory1/token".path;
+        };
+
+        mounts = {
+          # Format key: "" -> root folder in google drive
+          "" = {
+            enable = true;
+            mountPoint = "/srv/share/files/gdrive";
+            autoMount = true;
+            logLevel = "INFO";
+            options = {
+              vfs-cache-mode = "full"; # off - writes - full
+              read-only = false;
+              fast-list = true;
+              no-checksum = true;
+              checker = "16";
+              transfers = "8";
+              # allow-non-empty = true;
+              allow-other = true;
+              buffer-size = "32M";
+              cache-dir = "${home}/.cache/rclone";
+              vfs-read-chunk-size = "128M";
+              vfs-read-chunk-size-limit = "1G";
+              dir-cache-time = "168h";
+              poll-interval = "10m";
+              vfs-cache-max-age = "1h";
+              vfs-cache-max-size = "4G";
+              umask = "000"; # 000, 002, 022
+              # gid = "100";
+            };
+          };
+        };
+      };
+
+      # ---------------------------------------------------------
+      # 2. Contoh Remote Backblaze B2 dengan Fitur Serve (HTTP)
+      # ---------------------------------------------------------
+      # b2_storage = {
+      #   config = {
+      #     type = "b2";
+      #     hard_delete = true;
+      #   };
+
+      #   secrets = {
+      #     account = "/run/secrets/b2_account_id";
+      #     key = "/run/secrets/b2_application_key";
+      #   };
+
+      #   serve = {
+      #     # Format key: "nama-bucket/path/folder"
+      #     "my-public-bucket/media" = {
+      #       enable = true;
+      #       protocol = "http";
+      #       autoStart = true;
+      #       logLevel = "NOTICE";
+      #       options = {
+      #         addr = "127.0.0.1:8080";
+      #         dir-cache-time = "5000h";
+      #         poll-interval = "10s";
+      #         vfs-cache-mode = "off"; # Matikan cache jika hanya untuk streaming ringan
+      #       };
+      #     };
+      #   };
+      # };
+
+      # ---------------------------------------------------------
+      # 3. Contoh Remote SFTP Lokal (Tanpa Secrets, memakai Key File)
+      # ---------------------------------------------------------
+      # nas_lokal = {
+      #   config = {
+      #     type = "sftp";
+      #     host = "192.168.1.100";
+      #     user = "admin";
+      #     port = 22;
+      #     key_file = "${config.home.homeDirectory}/.ssh/id_ed25519";
+      #     md5sum_command = "md5sum";
+      #     sha1sum_command = "sha1sum";
+      #   };
+
+      #   # Menggabungkan Mount dan Serve pada remote yang sama
+      #   mounts = {
+      #     "Data" = {
+      #       enable = true;
+      #       mountPoint = "${config.home.homeDirectory}/NAS_Data";
+      #       options = {
+      #         vfs-cache-mode = "minimal";
+      #         allow-other = true; # Catatan: Pastikan user_allow_other diset di /etc/fuse.conf
+      #       };
+      #     };
+      #   };
+
+      #   serve = {
+      #     "Public" = {
+      #       enable = true;
+      #       protocol = "webdav";
+      #       options = {
+      #         addr = "0.0.0.0:8081";
+      #         user = "guest";
+      #         pass = "guestpassword123";
+      #       };
+      #     };
+      #   };
+      # };
+
+    };
   };
-
-  # sops.secrets = {
-  #   "rclone/client-secret" = {};
-  #   "rclone/token" = {};
-  # };
-
-  # systemd.user = {
-  #   startServices = "sd-switch";
-
-  #   tmpfiles.rules = [
-  #     "d ${mountdir} 0755 ${username} users -"
-  #   ];
-  # };
+  sops.secrets = {
+    "rclone/drive/directory1/client_id" = { };
+    "rclone/drive/directory1/client_secret" = { };
+    "rclone/drive/directory1/token" = { };
+  };
 }
