@@ -33,7 +33,7 @@ in
       platform = if wsl then "Wsl" else "Nix";
 
       sharedConfigs = ../coreModules; # Global Configs for AllSystem.
-      userOSConfigs = ../hosts/${platform}-${hostname}/configuration.nix;
+      userOSConfigs = ../coreModules/hosts/${platform}-${hostname}/configuration.nix;
       checkPath = if builtins.pathExists userOSConfigs then userOSConfigs else { };
 
     in
@@ -84,7 +84,7 @@ in
       hmModules = selectFlake inputs.home-manager-stable.darwinModules.home-manager inputs.home-manager-unstable.darwinModules.home-manager;
 
       sharedConfigs = ../coreModules; # Global Configs for AllSystem.
-      userOSConfigs = ../hosts/Drw-${hostname}/configuration.nix;
+      userOSConfigs = ../coreModules/hosts/Drw-${hostname}/configuration.nix;
       checkPath = if builtins.pathExists userOSConfigs then userOSConfigs else { };
 
     in
