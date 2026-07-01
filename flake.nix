@@ -28,19 +28,19 @@
       overlays       = mylibs.overlays; # overlays.default is the sum of all the overlays
       schemas        = mylibs.schemas; # not merged yet: https://github.com/NixOS/nix/pull/8892
 
-      nixosConfigurations = import ./hosts/nixosConfigurations.nix {
+      nixosConfigurations = import ./coreModules/hosts/nixosConfigurations.nix {
         inherit inputs;
         inherit (mylibs.mkConfigs) nixos;
       };
-      homeConfigurations = import ./hosts/homeConfigurations.nix {
+      homeConfigurations = import ./coreModules/hosts/homeConfigurations.nix {
         inherit inputs;
         inherit (mylibs.mkConfigs) home;
       };
-      # darwinConfigurations = import ./hosts/darwinConfigurations.nix {
+      # darwinConfigurations = import ./coreModules/hosts/darwinConfigurations.nix {
       #   inherit inputs;
       #   inherit (mylibs.mkConfigs) darwin;
       # };
-      # nixOnDroidConfigurations = import ./hosts/nixOnDroidConfigurations.nix {
+      # nixOnDroidConfigurations = import ./coreModules/hosts/nixOnDroidConfigurations.nix {
       #   inherit inputs;
       #   inherit (mylibs.mkConfigs) nixOnDroid;
       # }; # nix-on-droid switch --flake github:msalmanrafadhlih/flexinix
