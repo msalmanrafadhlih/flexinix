@@ -1,13 +1,6 @@
 # ./modules/users.nix
 { pkgs, config, ... }:
 let
-  # to get password hash = `mkpasswd -m sha-512` // sha-256
-  # or use `openssl passwd -6`
-  # passwd = "$6$4y45xddEerGmBn10$syHxREmf4Ky37ra6ULFwar.I9a/Bts/5k/OxztP3XWhDT.BQ3yEP0z3BUfLXeft4FJERy3RZo.AcaoL6L/H7i0";
-  # github-email = builtins.readFile /run/secrets/github_email; 
-
-  passwd       = config.sops.secrets.tquilla_password.path;
-  github-email = "141149698+msalmanrafadhlih@users.noreply.github.com"; 
 in
 {
   # services.getty.autologinUser = "gamemode";
@@ -20,7 +13,9 @@ in
       isNormalUser = true;
       description = "Tquilla";
       shell = pkgs.zsh;
-      hashedPasswordFile = passwd;
+      # to get password hash = `mkpasswd -m sha-512` // sha-256
+      # or use `openssl passwd -6`
+      hashedPasswordFile = config.sops.secrets.tquilla_password.path; 
       extraGroups = [
         "users" "wheel"   # sudo
         "networkmanager"  # Connection(Wifi) Manager
@@ -32,9 +27,9 @@ in
         "input"           # keylogging keyboard, mouse
       ];
 
-      openssh.authorizedKeys.keys = [
-        # `ssh-keygen -t ed25519 && cat ~/.ssh/id_ed25519.pub` 
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIApkHQHsqIhDQVzN4Vn+mqU22C9NuZ6v/AI262lf5BH ${github-email}"
+      # `ssh-keygen -t ed25519 && cat ~/.ssh/id_ed25519.pub` 
+      openssh.authorizedKeys.keyFiles = [
+        config.sops.secrets."github/authorized_keys".path
       ];
     	# openssh.authorizedKeys.keyFiles = [
       #   # open `https://github.com/gituhb-username.keys`
@@ -45,4 +40,6 @@ in
     	# ];
     };
   };
+
+  sops.secrets."github/authorized_keys" = { };
 }
