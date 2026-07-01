@@ -3,5 +3,5 @@
   imports = [
     ./hardware-configuration.nix
   ]
-  ++ mapFile ./modules [ ] { };
+  ++ mapFile ./modules [ "secrets" ] { };
 }
