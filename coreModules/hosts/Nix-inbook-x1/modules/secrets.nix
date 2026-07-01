@@ -115,8 +115,6 @@ in {
         # Wajib untuk hashedPasswordFile.
         neededForUsers = true;
       };
-
-      github_email = {};
     };
 
     # ==========================================================
