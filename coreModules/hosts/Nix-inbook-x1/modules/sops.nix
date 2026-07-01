@@ -33,6 +33,10 @@ in
       "secretChanges"
     ];
 
+    # Gunakan tmpfs daripada ramfs.
+    # Default false demi keamanan swap.
+    useTmpfs = false;
+
     # Environment variable tambahan ketika menjalankan
     # sops-install-secrets.
     # environment = { AWS_PROFILE = "production"; };
