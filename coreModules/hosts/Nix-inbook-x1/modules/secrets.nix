@@ -29,10 +29,6 @@ in
     # package = pkgs.sops-install-secrets;
     # validationPackage = pkgs.sops-install-secrets;
 
-    # Gunakan tmpfs daripada ramfs.
-    # Default false demi keamanan swap.
-    useTmpfs = false;
-
     age = {
       keyFile = keyfile; # Lokasi private age key.
       generateKey = false; # Generate key otomatis bila belum ada.
