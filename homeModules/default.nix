@@ -19,6 +19,7 @@ in
     ./serpl.nix # find and replace tui tool, good for integratinng with terminal editors
     ./btop.nix
     ./git.nix
+    ./rclone
     ./shell
     ./yazi
     ./tmux
