@@ -7,7 +7,6 @@ let
   sopsFile = name: {
     "rclone/drive/directory1/${name}" = {
       sopsFile = path;
-      owner = user;
     };
   };
 in
