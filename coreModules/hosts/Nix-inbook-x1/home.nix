@@ -9,6 +9,7 @@
   isDarwin,
   isWSL,
   isAndroid,
+  pkgs,
   ...
 }:
 let
@@ -50,6 +51,7 @@ in
         imports = [
           ../../../homeModules
           inputs.racooonfig.homeModules.racooonfig
+          inputs.sops-nix.homeModules.sops
         ];
 
         racooonfig = {
@@ -78,6 +80,13 @@ in
             "blanket-flatpak"
           ];
         };
+
+        sops = (
+          import ./modules/secrets.nix {
+            inherit inputs pkgs;
+            keyfile = "/srv/share/files/secrets/age/key.txt";
+          }
+        );
       };
     };
   };
