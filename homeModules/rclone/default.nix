@@ -70,9 +70,9 @@ in
         };
 
         secrets = {
-          client_id     = config.sops.secrets."rclone/drive/musics/client_id".path;
-          client_secret = config.sops.secrets."rclone/drive/musics/client_secret".path;
-          token         = config.sops.secrets."rclone/drive/musics/token".path;
+          client_id     = config.sops.secrets."rclone/drive/music/client_id".path;
+          client_secret = config.sops.secrets."rclone/drive/music/client_secret".path;
+          token         = config.sops.secrets."rclone/drive/music/token".path;
         };
 
         mounts = {
