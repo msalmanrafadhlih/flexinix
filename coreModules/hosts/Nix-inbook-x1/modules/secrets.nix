@@ -1,6 +1,6 @@
 { ... }:
 let
-  keyfile = "/srv/share/files/secrets/age/key.txt";
+  keyfile = "/srv/share/Files/secrets/age/key.txt";
 in
 {
   sops = {
