@@ -20,7 +20,7 @@ in
 
     remotes = {
 
-      gdrive = {
+      Learning = {
         config = {
           type = "drive";
           scope = "drive";
@@ -35,7 +35,7 @@ in
 
         mounts = {
           # Format key: "" -> root folder in google drive
-          "" = {
+          "Study" = {
             enable = true;
             mountPoint = "/srv/share/files/gdrive";
             autoMount = true;
