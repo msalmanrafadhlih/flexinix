@@ -37,7 +37,7 @@ in
           # Format key: "" -> root folder in google drive
           "Study" = {
             enable = true;
-            mountPoint = "/srv/share/files/Learning";
+            mountPoint = "/srv/share/Files/Learning";
             autoMount = true;
             logLevel = "INFO";
             options = {
@@ -76,7 +76,7 @@ in
         };
 
         mounts = {
-          "" = {
+          "Musics" = {
             enable = true;
             mountPoint = "/srv/share/Musics";
             autoMount = true;
