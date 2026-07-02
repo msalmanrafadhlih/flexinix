@@ -4,8 +4,8 @@ let
   user     = config.home.username;
   path     = ../../.lib/secrets/rclone.yaml;
 
-  sopsFile = name: {
-    "rclone/drive/directory1/${name}" = {
+  sopsFile = category: {
+    "rclone/drive/${category}" = {
       sopsFile = path;
     };
   };
@@ -28,16 +28,57 @@ in
         };
 
         secrets = {
-          client_id     = config.sops.secrets."rclone/drive/directory1/client_id".path;
-          client_secret = config.sops.secrets."rclone/drive/directory1/client_secret".path;
-          token         = config.sops.secrets."rclone/drive/directory1/token".path;
+          client_id     = config.sops.secrets."rclone/drive/learning/client_id".path;
+          client_secret = config.sops.secrets."rclone/drive/learning/client_secret".path;
+          token         = config.sops.secrets."rclone/drive/learning/token".path;
         };
 
         mounts = {
           # Format key: "" -> root folder in google drive
           "Study" = {
             enable = true;
-            mountPoint = "/srv/share/files/gdrive";
+            mountPoint = "/srv/share/files/Learning";
+            autoMount = true;
+            logLevel = "INFO";
+            options = {
+              vfs-cache-mode = "full"; # off - writes - full
+              read-only = false;
+              fast-list = true;
+              no-checksum = true;
+              # allow-non-empty = true;
+              allow-other = true;
+              buffer-size = "32M";
+              cache-dir = "${home}/.cache/rclone";
+              vfs-read-chunk-size = "128M";
+              vfs-read-chunk-size-limit = "1G";
+              dir-cache-time = "168h";
+              poll-interval = "10m";
+              vfs-cache-max-age = "1h";
+              vfs-cache-max-size = "4G";
+              umask = "000"; # 000, 002, 022
+              # gid = "100";
+            };
+          };
+        };
+      };
+
+      Musics = {
+        config = {
+          type = "drive";
+          scope = "drive";
+          use_trash = false;
+        };
+
+        secrets = {
+          client_id     = config.sops.secrets."rclone/drive/musics/client_id".path;
+          client_secret = config.sops.secrets."rclone/drive/musics/client_secret".path;
+          token         = config.sops.secrets."rclone/drive/musics/token".path;
+        };
+
+        mounts = {
+          "" = {
+            enable = true;
+            mountPoint = "/srv/share/Musics";
             autoMount = true;
             logLevel = "INFO";
             options = {
@@ -134,7 +175,10 @@ in
 
     };
   };
-  sops.secrets = (sopsFile "client_id")
-              // (sopsFile "client_secret")
-              // (sopsFile "token");
+  sops.secrets = (sopsFile "learning/client_id")
+              // (sopsFile "learning/client_secret")
+              // (sopsFile "learning/token")
+              // (sopsFile "music/client_id")
+              // (sopsFile "music/client_secret")
+              // (sopsFile "music/token");
 }
