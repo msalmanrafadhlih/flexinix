@@ -45,8 +45,6 @@ in
               read-only = false;
               fast-list = true;
               no-checksum = true;
-              checker = "16";
-              transfers = "8";
               # allow-non-empty = true;
               allow-other = true;
               buffer-size = "32M";
