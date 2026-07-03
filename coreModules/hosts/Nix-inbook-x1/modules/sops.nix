@@ -1,6 +1,6 @@
 { inputs, pkgs, ... }:
 let
-  keyfile = "/srv/share/Files/secrets/age/key.txt";
+  keyfile = "/srv/share/files/secrets/age/key.txt";
 in
 {
   imports = [
