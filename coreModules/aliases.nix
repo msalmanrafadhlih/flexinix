@@ -54,11 +54,11 @@ let
     SYSMDL = "yazi /etc/nixos/coreModules";
 
     ## USER CONFIGURATIONS {EDIT}
-    HOME = "cd ~/.dotfiles/racooonfig && ls";
-    DOTS = "yazi ~/.dotfiles/racooonfig/configs";
-    INSTALL = "hx ~/.dotfiles/racooonfig/users/$USER/packages.nix";
-    HOMEFLAKE = "cd ~/.dotfiles/racooonfig && ls && hx ~/.dotfiles/racooonfig/flake.nix";
-    MDL = "yazi ~/.dotfiles/racooonfig/scripts";
+    HOME = "cd ~/.repos/racooonfig && ls";
+    DOTS = "yazi ~/.repos/racooonfig/configs";
+    INSTALL = "hx ~/.repos/racooonfig/users/$USER/packages.nix";
+    HOMEFLAKE = "cd ~/.repos/racooonfig && ls && hx ~/.repos/racooonfig/flake.nix";
+    MDL = "yazi ~/.repos/racooonfig/scripts";
 
     ## USER CONFIGURATIONS {SAVE}
     BIN = "chmod +x ~/.local/bin/*.sh";
@@ -84,7 +84,7 @@ let
     CONFSAVE = "mv config.h config.h.bak";
     CONFDEL = "cp config.h.bak config.h";
     MAKE = "make clean && make && make install PREFIX=$HOME/.local";
-    SUCKLESS = "hx ~/.dotfiles/racooonfig/configs/suckless/default.nix";
+    SUCKLESS = "hx ~/.repos/racooonfig/configs/suckless/default.nix";
 
     ## Scripts
     CAM = "~/.local/bin/opencam";
