@@ -1,4 +1,22 @@
-{ username, lib, ... }:
+{
+  username,
+  lib,
+  ...
+}:
+let
+  githubMeta = builtins.fromJSON (
+    builtins.readFile (
+      builtins.fetchurl {
+        url = "https://api.github.com/meta";
+        sha256 = "sha256-xXG8fAwTtS5QwFBwQMZAfmU8T17kB1UA2vTDXDgrSqA=";
+      }
+    )
+  );
+
+  githubSshEd25519 = lib.findFirst (
+    k: lib.hasPrefix "ssh-ed25519" k
+  ) (throw "GitHub meta: tidak ada ssh-ed25519 key, cek ulang JSON-nya") githubMeta.ssh_keys;
+in
 {
   # 2. Tailscale Tanpa Flag SSH (Gunakan OpenSSH saja)
   services.tailscale = {
@@ -13,7 +31,7 @@
   services.openssh = {
     enable = true;
     openFirewall = false; # Hanya lewat interface tailscale0 di atas
-    startWhenNeeded = true; 
+    startWhenNeeded = true;
 
     settings = {
       PasswordAuthentication = false;
@@ -25,6 +43,13 @@
       # Menjaga koneksi tetap hidup & membersihkan sesi mati
       ClientAliveInterval = 60;
       ClientAliveCountMax = 3;
+    };
+  };
+
+  programs.ssh.knownHosts = {
+    github-ed25519 = {
+      hostNames = [ "github.com" ];
+      publicKey = githubSshEd25519;
     };
   };
 
