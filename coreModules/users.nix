@@ -29,17 +29,13 @@
 
       # `ssh-keygen -t ed25519 && cat ~/.ssh/id_ed25519.pub`
       openssh.authorizedKeys.keyFiles = [
-        # config.sops.secrets."github/authorized_keys".path # Not worked
+        # config.sops.secrets."github/authorized_key".path # Not worked
         # open `https://github.com/gituhb-username.keys`
         (builtins.fetchurl {
           url = "https://github.com/msalmanrafadhlih.keys";
-          sha256 = "sha256-ZaJ76VzOkvSEQA8Tf2dco+3UapOw4yK4nWK1SV52/BM=";
+          sha256 = "sha256:1cbcnf5rf0dhqa36rycym6qfllz3xla2b9ab6d46rhg4i87j5m94";
         })
       ];
     };
-  };
-
-  sops.secrets."github/tquilla/authorized_keys" = {
-    sopsFile = ../.lib/secrets/github.yaml ;
   };
 }
