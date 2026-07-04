@@ -99,7 +99,7 @@ in
   programs.ssh = {
     enable = true;
 
-    matchBlocks = {
+    settings = {
       "github.com" = {
         addKeysToAgent = "yes"; 
         identityFile = config.sops.secrets."github/tquilla/private_key".path;
