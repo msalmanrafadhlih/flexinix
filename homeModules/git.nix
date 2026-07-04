@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, config, ... }:
 let
   path = ../.lib/secrets/github.yaml;
   sopsFile = target: mode: {
@@ -7,19 +7,6 @@ let
       mode = mode;
     };
   };
-
-  # Fetch + pin GitHub meta sekali (fixed-output derivation -> tetap reproducible).
-  # Kalau GitHub rotate ssh key mereka, build gagal dgn error hash mismatch,
-  # dan Nix kasih tau sha256 baru yg benar -> tinggal copy-paste ke sini.
-  githubMeta = builtins.fromJSON (builtins.readFile (builtins.fetchurl {
-    url = "https://api.github.com/meta";
-    sha256 = "sha256-xXG8fAwTtS5QwFBwQMZAfmU8T17kB1UA2vTDXDgrSqA=";
-  }));
-
-  githubSshEd25519 = lib.findFirst
-    (k: lib.hasPrefix "ssh-ed25519" k)
-    (throw "GitHub meta: tidak ada ssh-ed25519 key, cek ulang JSON-nya")
-    githubMeta.ssh_keys;
 in
 {
   sops.secrets = (sopsFile "tquilla/private_key"    "0600")
@@ -38,7 +25,7 @@ in
         name = ${config.sops.placeholder."github/tquilla/username"}
         email = ${config.sops.placeholder."github/tquilla/emailname"}
     [github]
-        user = ${config.sops.placeholder."github/tquilla/hostname"}
+        user = ${config.sops.placeholder."github/tquilla/username"}
   '';
 
   sops.templates."allowed_signers".content =
@@ -95,10 +82,10 @@ in
     };
   };
 
-  programs.ssh-agent.enable = true;
+  services.ssh-agent.enable = true;
+
   programs.ssh = {
     enable = true;
-
     settings = {
       "github.com" = {
         addKeysToAgent = "yes"; 
@@ -109,16 +96,7 @@ in
 
       "192.168.1.* nixos" = {
         addKeysToAgent = "yes";
-        extraOptions = {
-          StrictHostKeyChecking = "accept-new";
-        };
-      };
-    };
-
-    knownHosts = {
-      github-ed25519 = {
-        hostNames = [ "github.com" ];
-        publicKey = githubSshEd25519;
+        StrictHostKeyChecking = "accept-new";
       };
     };
   };
