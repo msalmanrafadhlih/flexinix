@@ -11,7 +11,7 @@ in
 {
   sops.secrets = (sopsFile "tquilla/private_key"    "0600")
               // (sopsFile "tquilla/token"          "0400")
-              // (sopsFile "tquilla/authorized_key" "0444") 
+              // (sopsFile "tquilla/authorized_key" "0400") 
               // (sopsFile "tquilla/username"       "0444") 
               // (sopsFile "tquilla/emailname"      "0444");
 
@@ -38,7 +38,7 @@ in
       # sops (runtime file asli), TIDAK perlu writeText. writeText itu untuk
       # data non-secret yang memang boleh masuk Nix store (world-readable),
       # bukan untuk konten secret apa pun.
-      key = config.sops.secrets."github/tquilla/authorized_key".path;
+      key = config.sops.secrets."github/tquilla/private_key".path;
       signByDefault = true;
       format = "ssh";
     };
