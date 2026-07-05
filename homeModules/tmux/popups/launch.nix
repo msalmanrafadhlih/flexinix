@@ -38,7 +38,7 @@
       -T "#[align=center] AI Agent " \
       -E "ai-chat"'
 
-    ###### Gemini
+    ###### Gemini (Antigravity)
     set-option -g command-alias[123] 'gemini=display-popup \
       -d "#{pane_current_path}" \
       -w 50% -h 90% \
