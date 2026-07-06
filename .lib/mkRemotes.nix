@@ -1,8 +1,4 @@
-{ inputs, ... }:
-let
-  lib = inputs.nixos-stable.lib;
-in
-{
+{ lib, ... }: {
   # --------------------------------------------------------
   # Google Drive
   # --------------------------------------------------------
@@ -10,7 +6,7 @@ in
     {
       trash ? false,
       secrets ? { },
-      mounts ? { }, 
+      mounts ? { },
       extraOptions ? { },
     }:
     {
@@ -64,9 +60,9 @@ in
   # --------------------------------------------------------
   remoteB2 =
     {
-      hardDelete ? false, 
+      hardDelete ? false,
       secrets ? { },
-      serve ? { }, 
+      serve ? { },
     }:
     {
       config = {
@@ -99,7 +95,7 @@ in
       host ? "192.168.1.100",
       port ? 22,
       key_file ? "",
-      mounts ? { }, 
+      mounts ? { },
       extraOptions ? { },
       serve ? { },
     }:
