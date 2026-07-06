@@ -19,11 +19,11 @@ in
     # requiresUnit = "sops-nix.service";
 
     remotes = import ./remotes.nix {
-      secrets = config.sops.secrets;
       inherit
         remoteDrive
         remoteB2
         remoteNas
+        config
         ;
     };
   };
