@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 let
   path = ../../.lib/secrets/rclone.yaml;
   sopsFile = category: {
@@ -8,7 +8,7 @@ let
   };
 
   # https://claude.ai/chat/2db25176-c50e-4a35-bc39-82ae58a3f24d
-  inherit (import ../../.lib/mkRemotes.nix) remoteDrive remoteB2 remoteNas;
+  inherit (import ../../.lib/mkRemotes.nix { inherit lib; }) remoteDrive remoteB2 remoteNas;
 in
 
 {
