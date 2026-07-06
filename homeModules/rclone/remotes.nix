@@ -1,13 +1,14 @@
 {
-  secrets,
   remoteDrive,
   remoteNas,
   remoteB2,
+  config,
   ...
 }:
 let
   home = config.home.homeDirectory;
   user = config.home.username;
+  secrets = config.sops.secrets;
 in
 {
 
