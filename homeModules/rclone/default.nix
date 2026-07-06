@@ -12,6 +12,17 @@ let
 in
 
 {
+  sops.secrets =
+    (sopsFile "learning/client_id")
+    // (sopsFile "learning/client_secret")
+    // (sopsFile "learning/token")
+    // (sopsFile "music/client_id")
+    // (sopsFile "music/client_secret")
+    // (sopsFile "music/token")
+    // (sopsFile "backup/client_id")
+    // (sopsFile "backup/client_secret")
+    // (sopsFile "backup/token");
+
   programs.rclone = {
     enable = true;
 
@@ -27,12 +38,4 @@ in
         ;
     };
   };
-
-  sops.secrets =
-    (sopsFile "learning/client_id")
-    // (sopsFile "learning/client_secret")
-    // (sopsFile "learning/token")
-    // (sopsFile "music/client_id")
-    // (sopsFile "music/client_secret")
-    // (sopsFile "music/token");
 }
