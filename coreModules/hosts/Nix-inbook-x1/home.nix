@@ -80,6 +80,7 @@ in
             "zen-flatpak"
             "zoom-flatpak"
             "blanket-flatpak"
+            "motrix-flatpak"
           ];
         };
       };
