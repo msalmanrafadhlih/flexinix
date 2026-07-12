@@ -25,6 +25,7 @@ in
     ./tmux
 
     # ./zellij
+    # ./jujutsu.nix
     editor.${flakeRoot.editor}
   ];
 
