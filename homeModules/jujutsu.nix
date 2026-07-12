@@ -10,21 +10,25 @@
     watchman
   ];
 
+  sops.templates."jj-identity".content = ''
+    [user]
+    name = "${config.sops.placeholder."github/tquilla/username"}"
+    email = "${config.sops.placeholder."github/tquilla/emailname"}"
+  '';
+
+  # Identitas commit (user.name/email) TIDAK auto-sync dari git config,
+  # sekalipun repo colocated -- jj wajib punya [user] sendiri. Reuse dari
+  # sops.templates."jj-identity" di git.nix (format TOML, BEDA dari
+  # "git-identity" yang formatnya git-ini). conf.d/*.toml di-load PALING
+  # akhir oleh jj (override config.toml utama di bawah), jadi aman
+  # dipisah dari `programs.jujutsu.settings`.
+  home.file."${config.xdg.configHome}/jj/conf.d/10-identity.toml".source =
+    config.sops.templates."jj-identity".path;
+
   programs.jujutsu = {
     enable = true;
 
-    # ediff (emacs merge tool) di-skip karena kamu gak pakai emacs.
-    # ediff = false; # <- default-nya udah ngikut config.programs.emacs.enable
-
     settings = {
-      # ------------------------------------------------------------------
-      # Identitas commit
-      # ------------------------------------------------------------------
-      # user = {
-      #   name = config.sops.placeholder."github/tquilla/username";
-      #   email = config.sops.placeholder."github/tquilla/emailname";
-      # };
-
       # ------------------------------------------------------------------
       # UI umum
       # ------------------------------------------------------------------
@@ -48,58 +52,41 @@
       };
 
       # ------------------------------------------------------------------
-      # Commit signing (SSH) — NILAI DI BAWAH INI MASIH DUMMY, WAJIB DIGANTI
+      # Commit signing (SSH) -- reuse identitas & allowed_signers dari
+      # git.nix, JANGAN declare ulang secretnya di sini.
       # ------------------------------------------------------------------
-      # signing = {
-      #   # Opsi behavior:
-      #   #   "own"   -> auto sign ulang commit YANG KAMU BUAT tiap kali
-      #   #              di-modify (rebase, edit description, dst). [dipilih]
-      #   #   "keep"  -> cuma re-sign kalau commit itu sebelumnya udah signed.
-      #   #   "drop"  -> gak auto-sign; commit yg tadinya signed jadi unsigned
-      #   #              setelah dimodifikasi (biasanya dipasangkan dengan
-      #   #              git.sign-on-push = true di bawah).
-      #   #   "force" -> sign SEMUA commit stelah dimodifikasi, sekalipun
-      #   #              bukan authored oleh kamu. Hati-hati pakai ini.
-      #   behavior = "own";
-      #   backend = "ssh";
+      signing = {
+        # Opsi behavior:
+        #   "own"   -> auto sign ulang commit YANG KAMU BUAT tiap kali
+        #              di-modify (rebase, edit description, dst). [dipilih]
+        #   "keep"  -> cuma re-sign kalau commit itu sebelumnya udah signed.
+        #   "drop"  -> gak auto-sign; commit yg tadinya signed jadi unsigned
+        #              setelah dimodifikasi (biasanya dipasangkan dengan
+        #              git.sign-on-push = true di bawah).
+        #   "force" -> sign SEMUA commit setelah dimodifikasi, sekalipun
+        #              bukan authored oleh kamu. Hati-hati pakai ini.
+        behavior = "own";
+        backend = "ssh";
 
-      #   # GANTI dengan PUBLIC KEY SSH yang sama persis dengan yang kamu
-      #   # pakai buat Git commit signing (gpg.format = ssh / user.signingKey
-      #   # di config Git kamu). Dua cara isi:
-      #   #
-      #   # 1) Tempel isi file .pub-nya langsung sebagai string:
-      #   #      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAA... user@host";
-      #   #
-      #   # 2) Atau kasih PATH ke file .pub-nya (lebih gampang buat declarative,
-      #   #    apalagi kalau key-nya di-manage lewat sops-nix):
-      #   key = config.sops.secrets."github/tquilla/private_key".path;
+        # Sama seperti programs.git.signing.key di git.nix: path ke private
+        # key, dipakai lewat ssh-agent buat generate signature. Test dulu
+        # pas commit pertama; kalau ssh-keygen komplain butuh public key,
+        # ganti ke path .pub-nya.
+        key = config.sops.secrets."github/tquilla/private_key".path;
 
-      #   backends.ssh = {
-      #     # File `allowed_signers` dipakai buat VERIFIKASI signature —
-      #     # baik punya kamu sendiri maupun punya kolaborator lain — pas
-      #     # `ui.show-cryptographic-signatures = true`. Format per baris
-      #     # (lihat man ssh-keygen(1), bagian ALLOWED SIGNERS):
-      #     #
-      #     #   <email> <jenis-key> <public-key>
-      #     #
-      #     # Contoh isi file:
-      #     #   141149698+msalmanrafadhlih@users.noreply.github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAA...
-      #     #
-      #     # Kamu bisa generate file ini secara declarative via `home.file`,
-      #     # misal:
-      #     #   home.file."${config.xdg.configHome}/jj/allowed_signers".text = ''
-      #     #     141149698+msalmanrafadhlih@users.noreply.github.com ssh-ed25519 AAAA...
-      #     #   '';
-      #     allowed-signers = "${config.xdg.configHome}/jj/allowed_signers"; # <-- GANTI/buat filenya
-      #   };
-      # };
+        backends.ssh = {
+          # Reuse langsung dari git.nix -- JANGAN bikin file allowed_signers
+          # baru, itu bakal jadi duplikat sumber data yang sama.
+          allowed-signers = config.sops.templates."allowed_signers".path;
+        };
+      };
 
-      # git = {
-      #   # Set true KALAU `signing.behavior = "drop"` di atas dan kamu mau
-      #   # baru sign pas `jj git push` aja (berguna kalau signing-nya butuh
-      #   # interaksi manual/lambat). Karena behavior di sini "own", biarkan false.
-      #   sign-on-push = false;
-      # };
+      git = {
+        # Set true KALAU `signing.behavior = "drop"` di atas dan kamu mau
+        # baru sign pas `jj git push` aja (berguna kalau signing-nya butuh
+        # interaksi manual/lambat). Karena behavior di sini "own", biarkan false.
+        sign-on-push = false;
+      };
 
       # ------------------------------------------------------------------
       # Filesystem monitor (biar snapshot working-copy lebih cepat)
