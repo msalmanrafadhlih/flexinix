@@ -14,7 +14,6 @@ in
   imports = [
     ./variables.nix
     ./starship.nix
-    ./jujutsu.nix
     ./lazygit.nix
     ./virtmanager
     ./serpl.nix # find and replace tui tool, good for integratinng with terminal editors
