@@ -13,7 +13,7 @@
     };
 
     udev = {
-      packages = [ pkgs.android-android-udev-rules ];
+      packages = [ pkgs.android-udev-rules ];
       extraRules = ''
         # Disable autosuspend for ROBOT KM3500 USB Receiver
         # `Bus 003 Device 004: ID 32c2:0066  2.4G Wireless`
