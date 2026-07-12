@@ -35,7 +35,6 @@
     tmux          # Terminal multiplexer
     atuin         # smart command shell histories
     jq           # json
-    jujutsu       # Smart Git
 
     # ======= UTILITIES
     nixpkgs-fmt   # Nix formatter
