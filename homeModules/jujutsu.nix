@@ -23,7 +23,8 @@
   # akhir oleh jj (override config.toml utama di bawah), jadi aman
   # dipisah dari `programs.jujutsu.settings`.
   home.file."${config.xdg.configHome}/jj/conf.d/10-identity.toml".source =
-    config.sops.templates."jj-identity".path;
+    config.lib.file.mkOutOfStoreSymlink
+      config.sops.templates."jj-identity".path;
 
   programs.jujutsu = {
     enable = true;
