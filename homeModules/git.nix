@@ -9,7 +9,6 @@ let
   };
 in
 {
-  imports = [ ./jujutsu.nix ];
   sops.secrets = (sopsFile "tquilla/private_key"    "0600")
               // (sopsFile "tquilla/token"          "0400")
               // (sopsFile "tquilla/authorized_key" "0400") 
