@@ -19,7 +19,7 @@ in
       token = secrets."rclone/drive/learning/token".path;
     };
     mounts = {
-      "Study" = "/srv/share/files/Learning";
+      "" = "/srv/share/files/Drive1";
     };
   };
 
@@ -30,8 +30,8 @@ in
       token = secrets."rclone/drive/music/token".path;
     };
     mounts = {
-      "Musics" = {
-        path = "/srv/share/files/Musics";
+      "" = {
+        path = "/srv/share/files/Drive2";
         extraOptions = {
           # allow-non-empty = true;
           # gid = "100";
@@ -47,7 +47,7 @@ in
       token = secrets."rclone/drive/backup/token".path;
     };
     mounts = {
-      "" = "/srv/share/files/Backup";
+      "" = "/srv/share/files/Drive3";
     };
   };
 
