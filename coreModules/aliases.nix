@@ -59,6 +59,7 @@ let
     INSTALL = "hx ~/.repos/racooonfig/users/$USER/packages.nix";
     HOMEFLAKE = "cd ~/.repos/racooonfig && ls && hx ~/.repos/racooonfig/flake.nix";
     MDL = "yazi ~/.repos/racooonfig/scripts";
+    REPOS = "cd ~/.repos";
 
     ## USER CONFIGURATIONS {SAVE}
     BIN = "chmod +x ~/.local/bin/*.sh";
