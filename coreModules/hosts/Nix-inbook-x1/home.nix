@@ -72,6 +72,7 @@ in
             "cava"
             "nano"
             "xytz"
+            "kitty"
 
             # GUI app
             "vesktop"
