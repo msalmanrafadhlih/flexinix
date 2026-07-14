@@ -12,26 +12,26 @@ let
 in
 {
 
-  Learning = remoteDrive {
+  Documents = remoteDrive {
     secrets = {
-      client_id = secrets."rclone/drive/learning/client_id".path;
-      client_secret = secrets."rclone/drive/learning/client_secret".path;
-      token = secrets."rclone/drive/learning/token".path;
+      client_id = secrets."rclone/drive/document/client_id".path;
+      client_secret = secrets."rclone/drive/document/client_secret".path;
+      token = secrets."rclone/drive/document/token".path;
     };
     mounts = {
-      "" = "/srv/share/files/Drive1";
+      "root" = "/srv/share/files/Documents";
     };
   };
 
-  Music = remoteDrive {
+  Media = remoteDrive {
     secrets = {
-      client_id = secrets."rclone/drive/music/client_id".path;
-      client_secret = secrets."rclone/drive/music/client_secret".path;
-      token = secrets."rclone/drive/music/token".path;
+      client_id = secrets."rclone/drive/media/client_id".path;
+      client_secret = secrets."rclone/drive/media/client_secret".path;
+      token = secrets."rclone/drive/media/token".path;
     };
     mounts = {
-      "" = {
-        path = "/srv/share/files/Drive2";
+      "root" = {
+        path = "/srv/share/files/Media";
         extraOptions = {
           # allow-non-empty = true;
           # gid = "100";
@@ -40,14 +40,14 @@ in
     };
   };
 
-  Backup = remoteDrive {
+  Backups = remoteDrive {
     secrets = {
       client_id = secrets."rclone/drive/backup/client_id".path;
       client_secret = secrets."rclone/drive/backup/client_secret".path;
       token = secrets."rclone/drive/backup/token".path;
     };
     mounts = {
-      "" = "/srv/share/files/Drive3";
+      "root" = "/srv/share/files/Backup";
     };
   };
 
