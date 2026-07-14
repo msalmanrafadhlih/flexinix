@@ -13,12 +13,12 @@ in
 
 {
   sops.secrets =
-    (sopsFile "learning/client_id")
-    // (sopsFile "learning/client_secret")
-    // (sopsFile "learning/token")
-    // (sopsFile "music/client_id")
-    // (sopsFile "music/client_secret")
-    // (sopsFile "music/token")
+    (sopsFile "document/client_id")
+    // (sopsFile "document/client_secret")
+    // (sopsFile "document/token")
+    // (sopsFile "media/client_id")
+    // (sopsFile "media/client_secret")
+    // (sopsFile "media/token")
     // (sopsFile "backup/client_id")
     // (sopsFile "backup/client_secret")
     // (sopsFile "backup/token");
