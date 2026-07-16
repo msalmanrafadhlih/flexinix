@@ -23,6 +23,7 @@ in
     ./shell
     ./yazi
     ./tmux
+    ./dev
 
     # ./zellij
     editor.${flakeRoot.editor}
