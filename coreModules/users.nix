@@ -33,9 +33,10 @@
         # open `https://github.com/gituhb-username.keys`
         (builtins.fetchurl {
           url = "https://github.com/msalmanrafadhlih.keys";
-          sha256 = "sha256:1qbpid8s17glw3y907iz0c5grqja767gfc1pgh8plkdczm94zlnr";
+          sha256 = "sha256:1zgxc75fh7lsrgzxgnxdhmgvawi5z0xq2iqxfs2qx06fxj5zxnz5";
         })
       ];
     };
   };
 }
+
