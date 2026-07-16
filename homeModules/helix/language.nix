@@ -327,7 +327,7 @@ in
     {
       name = "javascript";
       scope = "source.js";
-      file-types = [ "js" ];
+      file-types = [ "js" "cjs" "mjs" ];
       auto-format = false;
       formatter = prettierFormatter "babel";
       language-servers = [
@@ -339,7 +339,7 @@ in
     {
       name = "typescript";
       scope = "source.ts";
-      file-types = [ "ts" ];
+      file-types = [ "ts" "tsx" ];
       auto-format = false;
       formatter = prettierFormatter "typescript";
       language-servers = [
