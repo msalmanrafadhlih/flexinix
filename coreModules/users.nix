@@ -33,7 +33,7 @@
         # open `https://github.com/gituhb-username.keys`
         (builtins.fetchurl {
           url = "https://github.com/msalmanrafadhlih.keys";
-          sha256 = "sha256-5dv+i+zOgI6Fdh1HgTv4JXK1X4Wt29f/y5oe6Mph/f0=";
+          sha256 = "sha256:1qbpid8s17glw3y907iz0c5grqja767gfc1pgh8plkdczm94zlnr";
         })
       ];
     };
