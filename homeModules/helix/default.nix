@@ -6,7 +6,7 @@
     defaultEditor = true;
 
     settings = {
-      theme = lib.mkForce "racooon";
+      theme = lib.mkForce "dark-synthwave";
       editor = {
         auto-save = false;
         text-width = 80;
