@@ -18,9 +18,7 @@ in
       client_secret = secrets."rclone/drive/document/client_secret".path;
       token = secrets."rclone/drive/document/token".path;
     };
-    mounts = {
-      "root" = "/srv/share/files/Documents";
-    };
+    mounts = { };
   };
 
   Media = remoteDrive {
@@ -29,15 +27,7 @@ in
       client_secret = secrets."rclone/drive/media/client_secret".path;
       token = secrets."rclone/drive/media/token".path;
     };
-    mounts = {
-      "root" = {
-        path = "/srv/share/files/Media";
-        extraOptions = {
-          # allow-non-empty = true;
-          # gid = "100";
-        };
-      };
-    };
+    mounts = { };
   };
 
   Backups = remoteDrive {
@@ -47,7 +37,13 @@ in
       token = secrets."rclone/drive/backup/token".path;
     };
     mounts = {
-      "root" = "/srv/share/files/Backup";
+      "root" = {
+        path = "/srv/share/files/Backup";
+        extraOptions = {
+          # allow-non-empty = true;
+          # gid = "100";
+        };
+      };
     };
   };
 
