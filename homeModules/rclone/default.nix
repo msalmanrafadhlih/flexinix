@@ -12,6 +12,8 @@ let
 in
 
 {
+  imports = [ ./rclone-sync.nix ];
+
   sops.secrets =
     (sopsFile "document/client_id")
     // (sopsFile "document/client_secret")
