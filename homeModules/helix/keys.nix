@@ -84,12 +84,6 @@
   select = {
     "{" = "goto_prev_paragraph";
     "}" = "goto_next_paragraph";
-    
-    # Keybinding "Mash" untuk keluar ke normal mode dengan cepat (f+j atau j+f)
-    k = { j = "normal_mode"; };
-    j = { k = "normal_mode"; };
-    J = { K = "normal_mode"; };
-    K = { J = "normal_mode"; };
 
     space = {
       m = "select_all";
