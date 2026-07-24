@@ -84,7 +84,7 @@
         };
       };
 
-      keys = import ./keys.nix;
+      keys = import ./keys.nix ;
     };
 
     languages = import ./language.nix { inherit pkgs; };
