@@ -97,6 +97,7 @@ let
     AISTUDIO = "cd ~/.config/aistudio";
     yz = "yazi";
     YZ = "yazi";
+    z = "zoxide";
 
     # NIXOS Aliases
     PKG = "nix search nixpkgs";
