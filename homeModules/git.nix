@@ -76,10 +76,11 @@ in
       alias = {
         cleanup = "!git branch --merged | grep -v '\\*\\|master\\|develop' | xargs -n 1 -r git branch -d";
         prettylog = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(r) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative";
+        st = "git status";
         root = "rev-parse --show-toplevel";
         graph = "log --oneline --decorate --graph --all";
         ac = "!git add . && git commit -m";
-        clone = ''!f() { git clone --single-branch --depth 1 -b "''${1:-main}" "$2"; }; f'';
+        cl = ''!f() { git clone --single-branch --depth 1 -b "''${1:-main}" "$2"; }; f'';
         remove = "rm -r --cached";
       };
     };
