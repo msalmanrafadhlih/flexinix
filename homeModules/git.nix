@@ -82,6 +82,7 @@ in
         ac = "!git add . && git commit -m";
         cl = ''!f() { git clone --single-branch --depth 1 -b "''${1:-main}" "$2"; }; f'';
         remove = "rm -r --cached";
+        license = ''nix-shell -p license-cli --command "license text MIT > LICENSE"'';
       };
     };
   };
