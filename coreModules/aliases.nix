@@ -24,7 +24,9 @@ let
   # LINUX ONLY ALIASES
   linuxOnly = if isLinux then {
 
-    tquilla = "colorscript -r";
+    miku = "colorscript -r";
+    msalmanrafadhlih = "~/.config/Assets/asciiart/tquilla";
+    frieren = "~/.config/Assets/asciiart/frieren";
 
     SYSAPPS = "thunar /run/current-system/sw/share/applications";
     TV = "nix run nixpkgs#television";
