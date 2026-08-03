@@ -8,7 +8,7 @@ let
     builtins.readFile (
       builtins.fetchurl {
         url = "https://api.github.com/meta";
-        sha256 = "sha256:0ilvhbl91jfixy57i66g10k5ih4zx2mfwc50888bsmv4wx1zqcaa";
+        sha256 = "sha256:0aj5y252r7c7zk67ivmqha9rs5inlm3aj4gpbbsdlssy250n08mb";
       }
     )
   );
