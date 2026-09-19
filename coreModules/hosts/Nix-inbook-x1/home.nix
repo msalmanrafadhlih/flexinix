@@ -76,7 +76,8 @@ in
 
             # GUI app
             "vesktop"
-            "zed-editor"
+            # "zed-editor"
+            "vscode"
 
             "zen-flatpak"
             "zoom-flatpak"
