@@ -59,6 +59,10 @@ in
         racooonfig = {
           homeManager = true;
           flatpak = true;
+          vscode = {
+            enable = true;
+            mutable = true;
+          };
           listConfigurations = [
             # desktop configuration (themes)
             "macos-kdeplasma"
@@ -77,7 +81,6 @@ in
             # GUI app
             "vesktop"
             # "zed-editor"
-            "vscode"
 
             "zen-flatpak"
             "zoom-flatpak"
