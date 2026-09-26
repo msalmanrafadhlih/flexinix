@@ -13,7 +13,7 @@ in
     fsType = "ext4"; # Sesuaikan dengan format partisi nixos kamu
   };
 
-  # Jika kamu ingin bereksperimen dengan folder Steam (opsional)
+  # Jika ingin bereksperimen dengan folder Steam (opsional)
   # lib.mkIf (!isVM) memastikan ini TIDAK akan dijalankan saat build-vm
   fileSystems."/home/tquilla/.steam" = lib.mkIf (!isVM) {
     device = "/dev/disk/by-label/STEAM_DATA"; # Gunakan label agar lebih manusiawi
