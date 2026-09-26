@@ -25,7 +25,7 @@ in
     desktopManager = [ "plasma" ];
     gamemode = {
       enable = true;
-      programs = [ "steam" ];
+      programs = [ "steam" "waydroid" ];
     };
   };
 
